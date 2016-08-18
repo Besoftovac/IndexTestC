@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="Travel.ITravelService" CodeBehind="ITravelService.svc.cs" %>
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="Travel.WebServiceProviderResponse" CodeBehind="ITravelService.svc.cs" Factory="System.ServiceModel.Activation.WebServiceHostFactory" %>

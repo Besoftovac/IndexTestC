@@ -13,7 +13,7 @@ namespace Travel
         {
             Uri baseAddress = new Uri("http://localhost:8000/");
 
-            WebServiceHost svcHost = new WebServiceHost(typeof(Travel.ITravelService), baseAddress);
+            WebServiceHost svcHost = new WebServiceHost(typeof(Travel.ITravelService));
 
             try
             {
