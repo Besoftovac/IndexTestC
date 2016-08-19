@@ -11,9 +11,9 @@ namespace Travel
     {
         static void Main(string[] args)
         {
-            Uri baseAddress = new Uri("http://localhost:8000/");
+            //Uri baseAddress = new Uri("http://localhost:8000/");
 
-            WebServiceHost svcHost = new WebServiceHost(typeof(Travel.ITravelService));
+            WebServiceHost svcHost = new WebServiceHost(typeof(Travel.sincService));
 
             try
             {

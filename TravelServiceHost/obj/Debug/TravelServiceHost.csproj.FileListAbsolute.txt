@@ -1,0 +1,8 @@
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelServiceHost\bin\Debug\TravelServiceHost.exe.config
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelServiceHost\bin\Debug\TravelServiceHost.exe
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelServiceHost\bin\Debug\TravelServiceHost.pdb
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelServiceHost\bin\Debug\TravelService.dll
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelServiceHost\bin\Debug\TravelService.pdb
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelServiceHost\obj\Debug\TravelServiceHost.csprojResolveAssemblyReference.cache
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelServiceHost\obj\Debug\TravelServiceHost.exe
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelServiceHost\obj\Debug\TravelServiceHost.pdb

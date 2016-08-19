@@ -28,5 +28,6 @@ d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\Travel\bin\Mic
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\Travel\bin\Microsoft.AI.WindowsServer.xml
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\Travel\bin\Microsoft.ApplicationInsights.xml
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\Travel\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\Travel\obj\Debug\Travel.csprojResolveAssemblyReference.cache
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\Travel\obj\Debug\Travel.dll
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\Travel\obj\Debug\Travel.pdb
