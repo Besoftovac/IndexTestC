@@ -35,7 +35,7 @@
         <AssociationConnector Association="MedmarModel.FlightETicket" />
         <AssociationConnector Association="MedmarModel.SendEticketInfoRequestETicket" />
         <EntityTypeShape EntityType="MedmarModel.UpdateFlightDataRequest" Width="2" PointX="1.25" PointY="15.75" />
-        <EntityTypeShape EntityType="MedmarModel.UpdateFlightsFlight" Width="1.5" PointX="7.75" PointY="13.875" />
+        <EntityTypeShape EntityType="MedmarModel.UpdateFlightsFlight" Width="2.625" PointX="7.75" PointY="13.875" />
         <AssociationConnector Association="MedmarModel.FlightUpdateFlightsFlight" />
         <AssociationConnector Association="MedmarModel.UpdateFlightDataRequestUpdateFlightsFlight" />
         <EntityTypeShape EntityType="MedmarModel.RequireDecisionRequest" Width="2.125" PointX="4.125" PointY="17.75" />

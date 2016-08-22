@@ -31,6 +31,7 @@ namespace MedmarDBDiagram
         public Nullable<System.DateTime> DepartureDate { get; set; }
         public Nullable<System.DateTime> ArrivalDate { get; set; }
         public Nullable<int> BookingRequirementIdHC { get; set; }
+        public string RequestBookingComment { get; set; }
     
         public virtual Service Service { get; set; }
         public virtual ICollection<CancelBookingRequirementRequest> CancelBookingRequirementRequest { get; set; }
