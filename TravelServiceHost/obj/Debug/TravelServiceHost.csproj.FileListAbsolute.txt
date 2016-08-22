@@ -6,3 +6,11 @@ d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelServiceH
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelServiceHost\obj\Debug\TravelServiceHost.csprojResolveAssemblyReference.cache
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelServiceHost\obj\Debug\TravelServiceHost.exe
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelServiceHost\obj\Debug\TravelServiceHost.pdb
+C:\Users\Serverkasa\Desktop\MedmarProject\IndexTestC\TravelServiceHost\bin\Debug\TravelServiceHost.exe.config
+C:\Users\Serverkasa\Desktop\MedmarProject\IndexTestC\TravelServiceHost\obj\Debug\TravelServiceHost.exe
+C:\Users\Serverkasa\Desktop\MedmarProject\IndexTestC\TravelServiceHost\obj\Debug\TravelServiceHost.pdb
+C:\Users\Serverkasa\Desktop\MedmarProject\IndexTestC\TravelServiceHost\bin\Debug\TravelServiceHost.exe
+C:\Users\Serverkasa\Desktop\MedmarProject\IndexTestC\TravelServiceHost\bin\Debug\TravelServiceHost.pdb
+C:\Users\Serverkasa\Desktop\MedmarProject\IndexTestC\TravelServiceHost\bin\Debug\TravelService.dll
+C:\Users\Serverkasa\Desktop\MedmarProject\IndexTestC\TravelServiceHost\bin\Debug\TravelService.pdb
+C:\Users\Serverkasa\Desktop\MedmarProject\IndexTestC\TravelServiceHost\obj\Debug\TravelServiceHost.csprojResolveAssemblyReference.cache

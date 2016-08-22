@@ -9,7 +9,7 @@ namespace TravelServiceHost
 {
     class Program
     {
-        static void Main()
+        static void Main() 
         {
             Uri baseAdr = new Uri("http://localhost:8733/");
             using (ServiceHost host = new ServiceHost(typeof(TravelService.TravelService), baseAdr)) {
