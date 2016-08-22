@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3205ce6ba1d94547930b554993279219" Name="Diagram1" ZoomLevel="99" >
+        <EntityTypeShape EntityType="MedmarModel.Service" Width="1.5" PointX="1.125" PointY="0.5" />
+        <EntityTypeShape EntityType="MedmarModel.Consumer" Width="1.5" PointX="4.875" PointY="0.5" />
+        <AssociationConnector Association="MedmarModel.ServiceConsumer" />
+        <EntityTypeShape EntityType="MedmarModel.requ_SendBookingRequirementRequest" Width="2.375" PointX="0.625" PointY="3" />
+        <EntityTypeShape EntityType="MedmarModel.Person" Width="1.5" PointX="7.625" PointY="0.75" />
+        <EntityTypeShape EntityType="MedmarModel.CancelBookingRequirementRequest" Width="3.25" PointX="5.25" PointY="6.125" />
+        <EntityTypeShape EntityType="MedmarModel.ConfirmBookingRequest" Width="2.625" PointX="10.375" PointY="8.125" />
+        <EntityTypeShape EntityType="MedmarModel.AcceptBookingRequest" Width="2" PointX="0.5" PointY="8" />
+        <EntityTypeShape EntityType="MedmarModel.CancelBookingRequest" Width="2.25" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="MedmarModel.RequireTicketsRequest" Width="2.625" PointX="6.875" PointY="8.5" />
+        <EntityTypeShape EntityType="MedmarModel.BookingResponse" Width="1.875" PointX="9.875" PointY="1.75" />
+        <EntityTypeShape EntityType="MedmarModel.resp_SendAvailableBookingRequest" Width="2.5" PointX="4.25" PointY="11.625" />
+        <EntityTypeShape EntityType="MedmarModel.Flight" Width="2.25" PointX="10.625" PointY="10.75" />
+        <AssociationConnector Association="MedmarModel.Servicerequ_SendBookingRequirementRequest" />
+        <AssociationConnector Association="MedmarModel.requ_SendBookingRequirementRequestCancelBookingRequirementRequest" />
+        <AssociationConnector Association="MedmarModel.requ_SendBookingRequirementRequestAcceptBookingRequest" />
+        <AssociationConnector Association="MedmarModel.requ_SendBookingRequirementRequestCancelBookingRequest" />
+        <AssociationConnector Association="MedmarModel.requ_SendBookingRequirementRequestConfirmBookingRequest" />
+        <AssociationConnector Association="MedmarModel.requ_SendBookingRequirementRequestRequireTicketsRequest" />
+        <AssociationConnector Association="MedmarModel.requ_SendBookingRequirementRequestBookingResponse" />
+        <AssociationConnector Association="MedmarModel.Personrequ_SendBookingRequirementRequest" />
+        <AssociationConnector Association="MedmarModel.SendAvailableBookingRequestAcceptBookingRequest" />
+        <AssociationConnector Association="MedmarModel.SendAvailableBookingRequestCancelBookingRequest" />
+        <AssociationConnector Association="MedmarModel.SendAvailableBookingRequestConfirmBookingRequest" />
+        <EntityTypeShape EntityType="MedmarModel.SendEticketInfoRequest" Width="2.375" PointX="7.875" PointY="17.375" />
+        <AssociationConnector Association="MedmarModel.requ_SendBookingRequirementRequestresp_SendAvailableBookingRequest" />
+        <EntityTypeShape EntityType="MedmarModel.ETicket" Width="1.5" PointX="12.125" PointY="15.75" />
+        <AssociationConnector Association="MedmarModel.FlightETicket" />
+        <AssociationConnector Association="MedmarModel.SendEticketInfoRequestETicket" />
+        <EntityTypeShape EntityType="MedmarModel.UpdateFlightDataRequest" Width="2" PointX="1.25" PointY="15.75" />
+        <EntityTypeShape EntityType="MedmarModel.UpdateFlightsFlight" Width="1.5" PointX="7.75" PointY="13.875" />
+        <AssociationConnector Association="MedmarModel.FlightUpdateFlightsFlight" />
+        <AssociationConnector Association="MedmarModel.UpdateFlightDataRequestUpdateFlightsFlight" />
+        <EntityTypeShape EntityType="MedmarModel.RequireDecisionRequest" Width="2.125" PointX="4.125" PointY="17.75" />
+        <AssociationConnector Association="MedmarModel.resp_SendAvailableBookingRequestRequireDecisionRequest" />
+        <AssociationConnector Association="MedmarModel.resp_SendAvailableBookingRequestSendEticketInfoRequest" />
+        <AssociationConnector Association="MedmarModel.resp_SendAvailableBookingRequestUpdateFlightDataRequest" />
+        <EntityTypeShape EntityType="MedmarModel.RequirementResponse" Width="2" PointX="7.875" PointY="11.75" />
+        <AssociationConnector Association="MedmarModel.resp_SendAvailableBookingRequestRequirementResponse" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

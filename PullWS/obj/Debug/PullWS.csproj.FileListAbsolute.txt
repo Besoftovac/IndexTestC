@@ -60,5 +60,6 @@ d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\PullWS\bin\Mic
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\PullWS\bin\Microsoft.AI.WindowsServer.xml
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\PullWS\bin\Microsoft.ApplicationInsights.xml
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\PullWS\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\PullWS\obj\Debug\PullWS.csprojResolveAssemblyReference.cache
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\PullWS\obj\Debug\PullWS.dll
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\PullWS\obj\Debug\PullWS.pdb

@@ -1,3 +1,4 @@
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelService\obj\Debug\TravelService.csprojResolveAssemblyReference.cache
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelService\bin\Debug\TravelService.dll.config
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelService\bin\Debug\TravelService.dll
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TravelService\bin\Debug\TravelService.pdb

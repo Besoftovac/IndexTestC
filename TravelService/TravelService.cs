@@ -14,5 +14,20 @@ namespace TravelService
         {
             throw new NotImplementedException();
         }
+
+        public String test(Int32 nmb)
+        {
+
+            if (nmb.Equals(null))
+            {
+                return "Broj nije defitniran!";
+            }
+            if (nmb == 1)
+                return "Uneseni broj je 1!";
+            else
+                return "Uneseni broj nije 1!"; 
+
+        }
     }
+
 }

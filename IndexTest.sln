@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelServiceHost", "Travel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelServiceIIS", "TravelServiceIIS\TravelServiceIIS.csproj", "{625311D6-D6B9-47FA-85B0-8689B5C7577C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedmarDBDiagram", "MedmarDBDiagram\MedmarDBDiagram.csproj", "{EA676CA8-7D17-4C99-83D4-4D09E30B0220}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{625311D6-D6B9-47FA-85B0-8689B5C7577C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{625311D6-D6B9-47FA-85B0-8689B5C7577C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{625311D6-D6B9-47FA-85B0-8689B5C7577C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA676CA8-7D17-4C99-83D4-4D09E30B0220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA676CA8-7D17-4C99-83D4-4D09E30B0220}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA676CA8-7D17-4C99-83D4-4D09E30B0220}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA676CA8-7D17-4C99-83D4-4D09E30B0220}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
