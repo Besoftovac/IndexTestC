@@ -12,7 +12,7 @@ namespace TravelServiceHost
     {
         static void Main()
         {
-            SqlConnection conn = TravelService.GeneralSql.CatchDatabase();
+           // SqlConnection conn = TravelService.GeneralSql.CatchDatabase();
             Uri baseAdr = new Uri("http://localhost:8733/");
             using (ServiceHost host = new ServiceHost(typeof(TravelService.TravelService), baseAdr)) {
                 host.Open();

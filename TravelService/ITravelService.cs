@@ -9,7 +9,10 @@ using System.ServiceModel.Web;
 
 
 namespace TravelService
+
 {
+
+    
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "ITravelService" in both code and config file together.
     [ServiceContract(Namespace = "http://www.medmar.eu/TravelService_.svc")]
     public interface ITravelService
@@ -18,14 +21,20 @@ namespace TravelService
         /// Synchronize is the start point that TA webserivce should expose
         /// This the the main function for the communication between TA and HC system
         /// </summary>
-        //[OperationContract]
-        //WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest);
         [OperationContract]
-        [WebInvoke]
+        [WebInvoke(Method = "GET",
+        ResponseFormat = WebMessageFormat.Json)]
+        WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest);
+
+        [OperationContract]
+        [WebInvoke(Method = "GET",
+        ResponseFormat = WebMessageFormat.Json)]
         String test(Int32 nmb);
     }
 
-    
+   
+
+
     /// <summary>
     /// HC generated webservice request
     /// </summary>

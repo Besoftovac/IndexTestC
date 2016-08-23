@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.ServiceModel.Activation;
 using System.Text;
 
 namespace TravelService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "TravelService" in both code and config file together.
+    [AspNetCompatibilityRequirements(RequirementsMode
+    = AspNetCompatibilityRequirementsMode.Allowed)]
     public class TravelService : ITravelService
     {
         public WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest)
