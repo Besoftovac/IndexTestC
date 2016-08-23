@@ -4,6 +4,9 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.ServiceModel.Web;
+
+
 
 namespace TravelService
 {
@@ -18,6 +21,7 @@ namespace TravelService
         //[OperationContract]
         //WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest);
         [OperationContract]
+        [WebInvoke]
         String test(Int32 nmb);
     }
 

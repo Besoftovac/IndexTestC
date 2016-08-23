@@ -151,6 +151,7 @@
     <NavigationProperty Name="BookingResponse" Relationship="MedmarModel.requ_SendBookingRequirementRequestBookingResponse" FromRole="requ_SendBookingRequirementRequest" ToRole="BookingResponse" />
     <NavigationProperty Name="Person" Relationship="MedmarModel.Personrequ_SendBookingRequirementRequest" FromRole="requ_SendBookingRequirementRequest" ToRole="Person" />
     <NavigationProperty Name="resp_SendAvailableBookingRequest" Relationship="MedmarModel.requ_SendBookingRequirementRequestresp_SendAvailableBookingRequest" FromRole="requ_SendBookingRequirementRequest" ToRole="resp_SendAvailableBookingRequest" />
+    <Property Name="RequestBookingComment" Type="String" Nullable="true" MaxLength="Max" />
   </EntityType>
   <EntityType Name="Person">
     <Key>
