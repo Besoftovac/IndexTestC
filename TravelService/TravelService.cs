@@ -21,19 +21,30 @@ namespace TravelService
             return null;
         }
 
-        public String test(Int32 nmb)
+        public RequirementResponse[] SendBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest)
         {
+            WebServiceProviderResponse wpr = new WebServiceProviderResponse();
 
-            if (nmb.Equals(null))
-            {
-                return "Broj nije defitniran!";
+            RequirementResponse[] rrf = null;            
+            List<RequirementResponse> list = new List<RequirementResponse>();
+            SendBookingRequirementRequest[] SendBookingRequirementRequests = null;
+            SendBookingRequirementRequests = webServiceConsumerRequest.SendBookingRequirementRequests;
+            if (SendBookingRequirementRequests == null)
+                return null;
+            foreach (SendBookingRequirementRequest sbrr in SendBookingRequirementRequests) {
+                RequirementResponse rr = new RequirementResponse();
+                long BookingRequirementId = sbrr.BookingRequirementId;
+                rr.BookingRequirementId = BookingRequirementId;
+                rr.Comment = "";
+                rr.IsReceived = true;
+                list.Add(rr);
+
             }
-            if (nmb == 1)
-                return "Uneseni broj je 1!";
-            else
-                return "Uneseni broj nije 1!"; 
-
+            rrf = list.Cast<RequirementResponse>().ToArray();
+            // wpr.r
+            return rrf;
         }
+
     }
 
 }

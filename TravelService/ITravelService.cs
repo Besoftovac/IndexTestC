@@ -26,11 +26,6 @@ namespace TravelService
                 RequestFormat = WebMessageFormat.Xml,
                 ResponseFormat = WebMessageFormat.Xml)]
         WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest);
-
-        [OperationContract]
-        [WebInvoke(Method = "GET",
-        ResponseFormat = WebMessageFormat.Json)]
-        String test(Int32 nmb);
     }
 
    

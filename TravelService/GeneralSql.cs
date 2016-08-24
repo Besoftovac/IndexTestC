@@ -14,8 +14,10 @@ namespace TravelService
     {
 
         public static SqlConnection CatchDatabase() {
-
-            SqlConnection conn = new SqlConnection(@"Integrated Security=SSPI; Initial Catalog=MedmarService; Data Source=89.164.66.22");
+            String user = "Korisnik";
+            String pass = "123";
+            String konekcija = String.Format(@"Integrated Security=SSPI; Initial Catalog=MedmarService; Data Source=89.164.66.22;User Id={0};Password={1}", user, pass);
+            SqlConnection conn = new SqlConnection(konekcija);
             return conn;
               
         }
