@@ -22,8 +22,9 @@ namespace TravelService
         /// This the the main function for the communication between TA and HC system
         /// </summary>
         [OperationContract]
-        [WebInvoke(Method = "GET",
-        ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(UriTemplate = "synchronize/", Method = "POST",
+                RequestFormat = WebMessageFormat.Xml,
+                ResponseFormat = WebMessageFormat.Xml)]
         WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest);
 
         [OperationContract]

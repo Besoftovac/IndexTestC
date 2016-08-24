@@ -103,6 +103,20 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Service References\serviceTest\index.wsdl" />
+    <Content Include="Service References\synchronize\PullWS.synchronize.WebServiceProviderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Service References\synchronize\TravelService.wsdl" />
+    <None Include="Service References\synchronize\TravelService_.wsdl" />
+    <None Include="Service References\synchronize\TravelService_.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\synchronize\TravelService_1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\synchronize\TravelService_2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -122,12 +136,23 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Service References\synchronize\configuration91.svcinfo" />
+    <None Include="Service References\synchronize\configuration.svcinfo" />
+    <None Include="Service References\synchronize\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Service1.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\serviceTest\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\synchronize\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -141,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\serviceTest\" />
+    <WCFMetadataStorage Include="Service References\synchronize\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
