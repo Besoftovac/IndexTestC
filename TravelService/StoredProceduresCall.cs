@@ -33,5 +33,126 @@ namespace TravelService
             cmd.ExecuteNonQuery();
             if (bCloseConn) conn.Close();
         }
+
+        public static Int32 InsertService(long SessionID=-1, Int32 Consumer_Id=-1, Int32 Status=-1) {
+
+            Int32 ServiceID = -1;
+            try
+            {
+                SqlCommand cmd = InitSqlCommand("sp_insertIntoService");
+
+                cmd.Parameters.Add("@SessionID", SqlDbType.Int).Value = SessionID;
+                cmd.Parameters.Add("@Consumer_Id", SqlDbType.Int).Value = Consumer_Id;
+                cmd.Parameters.Add("@ServiceStatus", SqlDbType.Int).Value = Status;
+
+
+                cmd.Parameters.Add("@ServiceID", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                Execute(cmd, false);
+
+                ServiceID = Convert.ToInt32(cmd.Parameters["@ServiceID"].Value);
+            }
+            catch (Exception p)
+            {
+                throw p;
+            }
+
+            finally {
+                conn.Close();
+            }
+            return ServiceID;
+
+        }// public static Int32 InsertService(long SessionID=-1, Int32 Consumer_Id=-1, Int32 Status=-1)
+
+        public static void insert_update_SendBookingRequirementRequests(SendBookingRequirementRequest sbr=null, Int32 ServiceID=-1)
+        {
+            if (sbr == null && ServiceID == -1)
+                return;
+
+            try {
+                  Int32 PersonID = insert_person(sbr.Person);
+                    SqlCommand cmd = InitSqlCommand("insert_requ_SendBookingRequirementRequest");
+
+                if (sbr.FromAirport != null)
+                    cmd.Parameters.Add("@FromAirport", SqlDbType.NVarChar).Value = sbr.FromAirport;
+                if (sbr.ToAirport != null)
+                    cmd.Parameters.Add("@ToAirport", SqlDbType.NVarChar).Value = sbr.ToAirport;
+                if (sbr.DepartureDate != null && sbr.DepartureDate.ToString() != "1.1.0001. 0:00:00" )                                  
+                    cmd.Parameters.Add("@DepartureDate", SqlDbType.DateTime).Value = sbr.DepartureDate;                
+                if (sbr.ArrivalDate != null && sbr.ArrivalDate.ToString() != "1.1.0001. 0:00:00")
+                    cmd.Parameters.Add("@ArrivalDate", SqlDbType.DateTime).Value = sbr.ArrivalDate;
+                if (sbr.BookingRequirementId != 0)
+                    cmd.Parameters.Add("@BookingRequirementIdHC", SqlDbType.Int).Value = sbr.BookingRequirementId;
+                if (sbr.RequestBookingComment != null)
+                    cmd.Parameters.Add("@RequestBookingComment", SqlDbType.NVarChar).Value = sbr.RequestBookingComment;
+                
+                    cmd.Parameters.Add("@Service_Id", SqlDbType.Int).Value = ServiceID;
+                    cmd.Parameters.Add("@Person_Id", SqlDbType.Int).Value = PersonID;
+
+                    Execute(cmd);               
+            }
+            catch (Exception m) {
+
+                throw m;
+            }
+
+        }//public static void insert_update_SendBookingRequirementRequests(SendBookingRequirementRequest[] SendBookingRequirementRequests=null, Int32 ServiceID=-1)
+
+        public static Int32 insert_person(Person person) {
+
+            Int32 PersonID = -1;
+            try {
+                SqlCommand cmd = InitSqlCommand("insert_Person");
+
+                
+                if(person.FirstName!=null)
+                    cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = person.FirstName;
+                if (person.LastName != null)
+                    cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = person.LastName;
+                if (person.PassportNumber != null)
+                    cmd.Parameters.Add("@PassportNumber", SqlDbType.NVarChar).Value = person.PassportNumber;
+                if (person.PassportExpiryDate != null && person.PassportExpiryDate.ToString()!= "1.1.0001. 0:00:00")               
+                    cmd.Parameters.Add("@PassportExpiryDate", SqlDbType.DateTime).Value = person.PassportExpiryDate;               
+                if (person.PassportIssuingCountry != null)
+                    cmd.Parameters.Add("@PassportIssuingCountry", SqlDbType.NVarChar).Value = person.PassportIssuingCountry;
+                if (person.Birthday != null && person.Birthday.ToString() != "1.1.0001. 0:00:00")
+                    cmd.Parameters.Add("@Birthday", SqlDbType.DateTime).Value = person.Birthday;
+                if (person.PlaceOfBirth != null)
+                    cmd.Parameters.Add("@PlaceOfBirth", SqlDbType.NVarChar).Value = person.PlaceOfBirth;
+                if (person.Nationality != null)
+                    cmd.Parameters.Add("@Nationality", SqlDbType.NVarChar).Value = person.Nationality;
+                if (person.SeamansBookNumber != null)
+                    cmd.Parameters.Add("@SeamansBookNumber", SqlDbType.NVarChar).Value = person.SeamansBookNumber;
+                if (person.SeamansBookExpiryDate != null && person.SeamansBookExpiryDate.ToString() != "1.1.0001. 0:00:00")
+                    cmd.Parameters.Add("@SeamansBookExpiryDate", SqlDbType.DateTime).Value = person.SeamansBookExpiryDate;
+                if (person.SeamansBookIssuingCountry != null)
+                    cmd.Parameters.Add("@SeamansBookIssuingCountry", SqlDbType.NVarChar).Value = person.SeamansBookIssuingCountry;
+                if (person.USVisaNumber != null)
+                    cmd.Parameters.Add("@USVisaNumber", SqlDbType.NVarChar).Value = person.USVisaNumber;
+                if (person.USVisaExpiryDate != null && person.USVisaExpiryDate.ToString() != "1.1.0001. 0:00:00")
+                    cmd.Parameters.Add("@USVisaExpiryDate", SqlDbType.DateTime).Value = person.USVisaExpiryDate;
+                if (person.PersonComment != null)
+                    cmd.Parameters.Add("@PersonComment", SqlDbType.NVarChar).Value = person.PersonComment;
+
+
+               cmd.Parameters.Add("@PersonID", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                Execute(cmd, false);
+
+                PersonID = Convert.ToInt32(cmd.Parameters["@PersonID"].Value);
+            }
+
+            catch (Exception m) {
+                throw m;
+            }
+
+            finally
+            {
+                conn.Close();
+            }
+
+            return PersonID;
+
+        }// public static Int32 insert_person(Person person)
     }
 }

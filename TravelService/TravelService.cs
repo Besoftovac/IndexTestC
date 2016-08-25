@@ -17,21 +17,44 @@ namespace TravelService
     {
         public WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest)
         {
-            // throw new NotImplementedException();
-            return null;
+           
+            if (webServiceConsumerRequest != null)
+            {
+                long SessionID = webServiceConsumerRequest.SessionId;
+
+                Int32 ServiceID = StoredProceduresCall.InsertService(SessionID: SessionID);
+                WebServiceProviderResponse WPR = new WebServiceProviderResponse();
+
+                if (webServiceConsumerRequest.SendBookingRequirementRequests != null) {
+                    if(ServiceID !=-1)
+                        WPR.SendBookingRequirementResponses = SendBookingRequirementResponses(webServiceConsumerRequest, ServiceID);                }
+                    
+
+               // if(webServiceConsumerRequest.CancelBookingRequirementRequests != null)
+
+                    return WPR;
+            }
+            else
+                return null;
+            
         }
 
-        public RequirementResponse[] SendBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest)
+       
+        public RequirementResponse[] SendBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
         {
-            WebServiceProviderResponse wpr = new WebServiceProviderResponse();
 
-            RequirementResponse[] rrf = null;            
+            RequirementResponse[] rrf = null;
             List<RequirementResponse> list = new List<RequirementResponse>();
             SendBookingRequirementRequest[] SendBookingRequirementRequests = null;
             SendBookingRequirementRequests = webServiceConsumerRequest.SendBookingRequirementRequests;
+
+
             if (SendBookingRequirementRequests == null)
                 return null;
-            foreach (SendBookingRequirementRequest sbrr in SendBookingRequirementRequests) {
+                     
+            foreach (SendBookingRequirementRequest sbrr in SendBookingRequirementRequests)
+            {
+                StoredProceduresCall.insert_update_SendBookingRequirementRequests(sbrr, ServiceID);
                 RequirementResponse rr = new RequirementResponse();
                 long BookingRequirementId = sbrr.BookingRequirementId;
                 rr.BookingRequirementId = BookingRequirementId;
@@ -43,6 +66,7 @@ namespace TravelService
             rrf = list.Cast<RequirementResponse>().ToArray();
             // wpr.r
             return rrf;
+
         }
 
     }

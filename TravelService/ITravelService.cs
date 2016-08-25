@@ -436,18 +436,19 @@ namespace TravelService
         public DateTime TimeLimit { get; set; }
     }
 
-    [DataContract]
+    [DataContract(Name = "BookingStatus")]
     public enum BookingStatus
     {
-
+        [EnumMember]
         BOOKED = 1,
-
+        [EnumMember]
         WAITLISTED = 2,
-
+        [EnumMember]
         CANCELLED = 3,
-
+        [EnumMember]
         TICKETED = 4,
-
+        [EnumMember]
         CONFIRMED = 5
+
     }
 }
