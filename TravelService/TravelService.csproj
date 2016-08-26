@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
     <Compile Include="GeneralSql.cs" />
     <Compile Include="ITravelService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

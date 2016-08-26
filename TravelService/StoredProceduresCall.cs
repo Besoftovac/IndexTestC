@@ -154,5 +154,47 @@ namespace TravelService
             return PersonID;
 
         }// public static Int32 insert_person(Person person)
+
+        public static void insert_RequirementResponse(RequirementResponse rr, Int32 status) {
+
+            try {
+
+                SqlCommand cmd = InitSqlCommand("insert_RequirementResponse");
+
+              
+                    cmd.Parameters.Add("@BookingRequirementId", SqlDbType.Int).Value = rr.BookingRequirementId;               
+                    cmd.Parameters.Add("@IsReceived", SqlDbType.Bit).Value = rr.IsReceived;
+                    cmd.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = rr.Comment;
+                    cmd.Parameters.Add("@Status", SqlDbType.Int).Value = status;
+
+                    Execute(cmd);
+
+            }
+            catch (Exception m) {
+
+                throw m;
+            }
+        }
+
+        public static void insert_update_CancelBookingRequirementRequest(CancelBookingRequirementRequest CBRR) {
+
+            try {
+
+                SqlCommand cmd = InitSqlCommand("insert_CancelBookingRequirementRequest");
+
+                //napravi provjere Slavice
+                cmd.Parameters.Add("@BookingRequirementId", SqlDbType.Int).Value = CBRR.BookingRequirementId;
+                cmd.Parameters.Add("@Reason", SqlDbType.NVarChar).Value = CBRR.Reason;
+                cmd.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = CBRR.Comment;
+              
+
+                Execute(cmd);
+            }
+            catch (Exception m) {
+
+                throw m;
+            }
+
+        }//public static void insert_update_CancelBookingRequirementRequest(CancelBookingRequirementRequest CBRR) 
     }
 }

@@ -22,18 +22,20 @@ namespace TravelService
             {
                 long SessionID = webServiceConsumerRequest.SessionId;
 
-                Int32 ServiceID = StoredProceduresCall.InsertService(SessionID: SessionID);
+                Int32 ServiceID = StoredProceduresCall.InsertService(SessionID: SessionID, Status:Convert.ToInt32(ServiceStatus.Initial));
                 WebServiceProviderResponse WPR = new WebServiceProviderResponse();
 
-                if (webServiceConsumerRequest.SendBookingRequirementRequests != null) {
-                    if(ServiceID !=-1)
-                        WPR.SendBookingRequirementResponses = SendBookingRequirementResponses(webServiceConsumerRequest, ServiceID);                }
-                    
+                if (webServiceConsumerRequest.SendBookingRequirementRequests != null) 
+                        WPR.SendBookingRequirementResponses = SendBookingRequirementResponses(webServiceConsumerRequest, ServiceID);
+                if (webServiceConsumerRequest.CancelBookingRequirementRequests != null)
+                    WPR.CancelBookingRequirementResponses = CancelBookingRequirementResponses(webServiceConsumerRequest);
 
-               // if(webServiceConsumerRequest.CancelBookingRequirementRequests != null)
+
+
+
 
                     return WPR;
-            }
+            }// if (webServiceConsumerRequest != null)
             else
                 return null;
             
@@ -45,8 +47,7 @@ namespace TravelService
 
             RequirementResponse[] rrf = null;
             List<RequirementResponse> list = new List<RequirementResponse>();
-            SendBookingRequirementRequest[] SendBookingRequirementRequests = null;
-            SendBookingRequirementRequests = webServiceConsumerRequest.SendBookingRequirementRequests;
+            SendBookingRequirementRequest[] SendBookingRequirementRequests = webServiceConsumerRequest.SendBookingRequirementRequests;
 
 
             if (SendBookingRequirementRequests == null)
@@ -57,16 +58,53 @@ namespace TravelService
                 StoredProceduresCall.insert_update_SendBookingRequirementRequests(sbrr, ServiceID);
                 RequirementResponse rr = new RequirementResponse();
                 long BookingRequirementId = sbrr.BookingRequirementId;
-                rr.BookingRequirementId = BookingRequirementId;
-                rr.Comment = "";
-                rr.IsReceived = true;
+                if (BookingRequirementId != 0)
+                {
+                    rr.BookingRequirementId = BookingRequirementId;
+                    rr.Comment = "";
+                    rr.IsReceived = true;
+                    StoredProceduresCall.insert_RequirementResponse(rr, Convert.ToInt32(RequirementResponseStatus.Send));
+                }
+             
                 list.Add(rr);
+
 
             }
             rrf = list.Cast<RequirementResponse>().ToArray();
             // wpr.r
             return rrf;
 
+        }// public RequirementResponse[] SendBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
+
+        RequirementResponse[] CancelBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest) {
+
+            RequirementResponse[] rrf = null;
+            List<RequirementResponse> list = new List<RequirementResponse>();
+            CancelBookingRequirementRequest[] cbrrField = webServiceConsumerRequest.CancelBookingRequirementRequests;
+
+            if (cbrrField == null)
+                return null;
+
+            foreach (CancelBookingRequirementRequest cbrr in cbrrField) {
+
+                StoredProceduresCall.insert_update_CancelBookingRequirementRequest(cbrr);
+                RequirementResponse rr = new RequirementResponse();
+                long BookingRequirementId = cbrr.BookingRequirementId;
+                if (BookingRequirementId != 0)
+                {
+
+                    rr.BookingRequirementId = BookingRequirementId;
+                    rr.Comment = cbrr.Comment;
+                    rr.IsReceived = true;
+                    StoredProceduresCall.insert_RequirementResponse(rr, Convert.ToInt32(RequirementResponseStatus.Cancel));
+                }
+                list.Add(rr);
+            }
+
+
+            rrf = list.Cast<RequirementResponse>().ToArray();
+            // wpr.r
+            return rrf;
         }
 
     }
