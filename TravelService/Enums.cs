@@ -17,4 +17,9 @@ namespace TravelService
         Viewed,
         TA
     }
+    enum BookingResponseStatus : int {
+        Accept=1,
+        Cancel,
+        RequireTickets
+    }
 }

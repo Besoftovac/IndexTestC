@@ -202,10 +202,15 @@ namespace TravelService
             try {
                 SqlCommand cmd = InitSqlCommand("insert_AcceptBookingRequest");
 
-                //napravi provjere Slavice
-                cmd.Parameters.Add("@BookingID", SqlDbType.Int).Value = abr.BookingId;
-                cmd.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = abr.Comment;
+                if (abr.BookingId!=0)
+                    cmd.Parameters.Add("@BookingID", SqlDbType.Int).Value = abr.BookingId;
+                if(abr.Comment!=null)
+                    cmd.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = abr.Comment;
+          
                 cmd.Parameters.Add("@Requ", SqlDbType.Bit).Value = requ;
+                cmd.Parameters.Add("@ServiceID", SqlDbType.NVarChar).Value = ServiceID;
+
+                //@ServiceID
 
 
                 Execute(cmd);
@@ -219,7 +224,7 @@ namespace TravelService
 
         }//public static void insert_update_AcceptBookingRequest(AcceptBookingRequest abr) 
 
-        public static void insert_BookingResponse(BookingResponse br, Int32 ServiceID) {
+        public static void insert_BookingResponse(BookingResponse br, Int32 ServiceID, Int32 Status) {
 
             try {
                 SqlCommand cmd = InitSqlCommand("insert_BookingResponse");
@@ -229,6 +234,7 @@ namespace TravelService
                 cmd.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = br.Comment;
                 cmd.Parameters.Add("@IsReceived", SqlDbType.Bit).Value = br.IsReceived;
                 cmd.Parameters.Add("@ServiceID", SqlDbType.Int).Value = ServiceID;
+                cmd.Parameters.Add("@Status", SqlDbType.Int).Value = Status;
 
 
                 Execute(cmd);
@@ -240,6 +246,60 @@ namespace TravelService
                 throw m;
             }
 
+        }
+
+        public static void insert_CancelBookingRequest(CancelBookingRequest cbr, Int32 ServiceID,  bool requ = true) {
+
+            try
+            {
+                SqlCommand cmd = InitSqlCommand("insert_CancelBookingRequest");
+
+                //napravi provjere Slavice
+                if(cbr.BookingId!=0)
+                    cmd.Parameters.Add("@BookingID", SqlDbType.Int).Value = cbr.BookingId;
+                if(cbr.Comment!=null)
+                    cmd.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = cbr.Comment;
+                if(cbr.Reason!=null)
+                    cmd.Parameters.Add("@Reason", SqlDbType.NVarChar).Value = cbr.Reason;
+                if (cbr.BookingStatus != 0)
+                    cmd.Parameters.Add("@BookingStatusID", SqlDbType.Int).Value = cbr.BookingStatus;
+
+
+                cmd.Parameters.Add("@ServiceID", SqlDbType.Int).Value = ServiceID;
+                cmd.Parameters.Add("@Requ", SqlDbType.Bit).Value = ServiceID;
+               
+
+
+
+                Execute(cmd);
+
+
+            }
+            catch (Exception m)
+            {
+                throw m;
+            }
+        }
+
+        public static void insert_RequireTicketsRequest(RequireTicketsRequest rtr, Int32 ServiceID, bool requ=true) {
+            try
+            {
+                SqlCommand cmd = InitSqlCommand("insert_RequireTicketsRequest");
+
+                if (rtr.BookingId!=0)
+                    cmd.Parameters.Add("@BookingID", SqlDbType.Int).Value = rtr.BookingId;
+                if(rtr.Comment!=null)
+                    cmd.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = rtr.Comment;
+
+                cmd.Parameters.Add("@Requ", SqlDbType.Bit).Value = requ;
+                cmd.Parameters.Add("@ServiceID", SqlDbType.Int).Value = ServiceID;       
+
+                Execute(cmd);
+            }
+            catch (Exception m)
+            {
+                throw m;
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelServiceIIS", "TravelS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedmarDBDiagram", "MedmarDBDiagram\MedmarDBDiagram.csproj", "{EA676CA8-7D17-4C99-83D4-4D09E30B0220}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingWCF", "..\TestingWCF\TestingWCF\TestingWCF.csproj", "{3C83F5E0-4F64-46A7-8778-30DE691B3F31}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingWCF", "TestingWCF\TestingWCF\TestingWCF.csproj", "{3C83F5E0-4F64-46A7-8778-30DE691B3F31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

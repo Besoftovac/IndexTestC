@@ -10,8 +10,8 @@ using System.Web.Script.Serialization;
 namespace TravelService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "TravelService" in both code and config file together.
-    //[AspNetCompatibilityRequirements(RequirementsMode
-    //= AspNetCompatibilityRequirementsMode.Allowed)]
+    [AspNetCompatibilityRequirements(RequirementsMode
+    = AspNetCompatibilityRequirementsMode.Allowed)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class TravelService : ITravelService
     {
@@ -20,6 +20,7 @@ namespace TravelService
            
             if (webServiceConsumerRequest != null)
             {
+               
                 long SessionID = webServiceConsumerRequest.SessionId;
 
                 Int32 ServiceID = StoredProceduresCall.InsertService(SessionID: SessionID, Status:Convert.ToInt32(ServiceStatus.Initial));
@@ -29,10 +30,12 @@ namespace TravelService
                         WPR.SendBookingRequirementResponses = SendBookingRequirementResponses(webServiceConsumerRequest, ServiceID);
                 if (webServiceConsumerRequest.CancelBookingRequirementRequests != null)
                     WPR.CancelBookingRequirementResponses = CancelBookingRequirementResponses(webServiceConsumerRequest);
-
-
-
-
+                if (webServiceConsumerRequest.AcceptBookingRequests != null)
+                    WPR.AcceptBookingResponses = AcceptBookingResponses(webServiceConsumerRequest, ServiceID);
+                if (webServiceConsumerRequest.CancelBookingRequests != null)
+                    WPR.CancelBookingResponses = CancelBookingResponses(webServiceConsumerRequest, ServiceID);
+                if (webServiceConsumerRequest.RequireTicketsRequests != null)
+                    WPR.RequireTicketsResponses = RequireTicketsResponses(webServiceConsumerRequest, ServiceID);
 
                     return WPR;
             }// if (webServiceConsumerRequest != null)
@@ -41,6 +44,7 @@ namespace TravelService
 
         }// public WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest)
 
+       
 
         public RequirementResponse[] SendBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
         {
@@ -128,7 +132,7 @@ namespace TravelService
                     br.Comment = "";
                     br.IsReceived = true;
 
-                    StoredProceduresCall.insert_BookingResponse(br, ServiceID);
+                    StoredProceduresCall.insert_BookingResponse(br, ServiceID, Convert.ToInt32(BookingResponseStatus.Accept));
                 }
                 list.Add(br);
             }
@@ -136,6 +140,66 @@ namespace TravelService
             brfield= list.Cast<BookingResponse>().ToArray();
             return brfield;
         }//public BookingResponse[] AcceptBookingResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID) {
+
+        public BookingResponse[] CancelBookingResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
+        {
+            BookingResponse[] brfield = null;
+            List<BookingResponse> list = new List<BookingResponse>();
+            CancelBookingRequest[] cbrfield = webServiceConsumerRequest.CancelBookingRequests;
+            if (cbrfield == null)
+                return null;
+
+            foreach (CancelBookingRequest cbr in cbrfield) {
+
+                StoredProceduresCall.insert_CancelBookingRequest(cbr, ServiceID);
+                BookingResponse br = new BookingResponse();
+                long BookingID = cbr.BookingId;
+                if (BookingID != 0) {
+
+                    br.BookingId = BookingID;
+                    br.Comment = "";
+                    br.IsReceived = true;
+
+                    StoredProceduresCall.insert_BookingResponse(br, ServiceID, Convert.ToInt32(BookingResponseStatus.Cancel));
+
+                }
+
+                list.Add(br);
+            }
+
+            brfield = list.Cast<BookingResponse>().ToArray();
+            return brfield;
+        }//public BookingResponse[] CancelBookingResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
+
+        public BookingResponse[] RequireTicketsResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
+        {
+            BookingResponse[] brfield = null;
+            List<BookingResponse> list = new List<BookingResponse>();
+            RequireTicketsRequest[] rtrfield = webServiceConsumerRequest.RequireTicketsRequests;
+
+            if (rtrfield == null)
+                return null;
+
+            foreach (RequireTicketsRequest rtr in rtrfield) {
+                StoredProceduresCall.insert_RequireTicketsRequest(rtr, ServiceID);
+                BookingResponse br = new BookingResponse();
+                long BookingID = rtr.BookingId;
+
+                if (BookingID != 0) {
+
+                    br.BookingId = BookingID;
+                    br.Comment = "";
+                    br.IsReceived = true;
+
+                    StoredProceduresCall.insert_BookingResponse(br, ServiceID, Convert.ToInt32(BookingResponseStatus.RequireTickets));
+                }
+
+                list.Add(br);
+            }
+
+            brfield = list.Cast<BookingResponse>().ToArray();
+            return brfield;
+        }//   public BookingResponse[] RequireTicketsResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
 
     }
 
