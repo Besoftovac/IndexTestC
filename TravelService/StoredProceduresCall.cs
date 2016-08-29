@@ -196,5 +196,50 @@ namespace TravelService
             }
 
         }//public static void insert_update_CancelBookingRequirementRequest(CancelBookingRequirementRequest CBRR) 
+
+        public static void insert_update_AcceptBookingRequest(AcceptBookingRequest abr, Int32 ServiceID, bool requ=true) {
+
+            try {
+                SqlCommand cmd = InitSqlCommand("insert_AcceptBookingRequest");
+
+                //napravi provjere Slavice
+                cmd.Parameters.Add("@BookingID", SqlDbType.Int).Value = abr.BookingId;
+                cmd.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = abr.Comment;
+                cmd.Parameters.Add("@Requ", SqlDbType.Bit).Value = requ;
+
+
+                Execute(cmd);
+
+
+            }
+            catch (Exception k) {
+
+                throw k;
+            }
+
+        }//public static void insert_update_AcceptBookingRequest(AcceptBookingRequest abr) 
+
+        public static void insert_BookingResponse(BookingResponse br, Int32 ServiceID) {
+
+            try {
+                SqlCommand cmd = InitSqlCommand("insert_BookingResponse");
+
+                //napravi provjere Slavice
+                cmd.Parameters.Add("@BookingID", SqlDbType.Int).Value = br.BookingId;
+                cmd.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = br.Comment;
+                cmd.Parameters.Add("@IsReceived", SqlDbType.Bit).Value = br.IsReceived;
+                cmd.Parameters.Add("@ServiceID", SqlDbType.Int).Value = ServiceID;
+
+
+                Execute(cmd);
+
+
+            }
+            catch (Exception m)
+            {
+                throw m;
+            }
+
+        }
     }
 }

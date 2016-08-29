@@ -38,10 +38,10 @@ namespace TravelService
             }// if (webServiceConsumerRequest != null)
             else
                 return null;
-            
-        }
 
-       
+        }// public WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest)
+
+
         public RequirementResponse[] SendBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
         {
 
@@ -76,7 +76,7 @@ namespace TravelService
 
         }// public RequirementResponse[] SendBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
 
-        RequirementResponse[] CancelBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest) {
+        public RequirementResponse[] CancelBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest) {
 
             RequirementResponse[] rrf = null;
             List<RequirementResponse> list = new List<RequirementResponse>();
@@ -105,7 +105,37 @@ namespace TravelService
             rrf = list.Cast<RequirementResponse>().ToArray();
             // wpr.r
             return rrf;
-        }
+        }//public RequirementResponse[] CancelBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest) {
+
+        public BookingResponse[] AcceptBookingResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID) {
+
+            BookingResponse[] brfield = null;
+            List<BookingResponse> list = new List<BookingResponse>();
+            AcceptBookingRequest[] abrField = webServiceConsumerRequest.AcceptBookingRequests;
+
+            if (abrField == null)
+                return null;
+
+            foreach (AcceptBookingRequest abr in abrField) {
+
+                StoredProceduresCall.insert_update_AcceptBookingRequest(abr, ServiceID);
+                BookingResponse br = new BookingResponse();
+                long BookingID = abr.BookingId;
+                if (BookingID != 0)
+                {
+
+                    br.BookingId = BookingID;
+                    br.Comment = "";
+                    br.IsReceived = true;
+
+                    StoredProceduresCall.insert_BookingResponse(br, ServiceID);
+                }
+                list.Add(br);
+            }
+
+            brfield= list.Cast<BookingResponse>().ToArray();
+            return brfield;
+        }//public BookingResponse[] AcceptBookingResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID) {
 
     }
 
