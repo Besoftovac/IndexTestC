@@ -107,7 +107,7 @@
     <None Include="Service References\TravelService\TestingWCF.TravelService.WebServiceProviderResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TravelService\TravelService.wsdl" />
+    <None Include="Service References\TravelService\TravelService1.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

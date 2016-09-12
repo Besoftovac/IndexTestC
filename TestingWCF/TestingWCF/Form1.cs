@@ -77,7 +77,7 @@ namespace TestingWCF
 
                          {
 
-                             FirstName = "John",                           
+                             FirstName = "Marinko",                           
 
                              //Some other properties for person
 

@@ -255,6 +255,7 @@ namespace TravelService
         public DateTime USVisaExpiryDate { get; set; }
         [DataMember]
         public string PersonComment { get; set; }
+
     }
     [DataContract]
     public class CancelBookingRequirementRequest

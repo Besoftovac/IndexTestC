@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Threading;
+using System.Globalization;
+using System.Data.Common;
 
 namespace TravelService
 {
@@ -28,13 +31,15 @@ namespace TravelService
 
         private static void Execute(SqlCommand cmd, bool bCloseConn = true)
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-CA");
+
             if (conn != null && conn.State == ConnectionState.Closed)
                 conn.Open();
             cmd.ExecuteNonQuery();
             if (bCloseConn) conn.Close();
         }
 
-        public static Int32 InsertService(long SessionID=-1, Int32 Consumer_Id=-1, Int32 Status=-1) {
+        public static Int32 InsertService(long SessionID=-1, Int32 Consumer_Id=-1) {
 
             Int32 ServiceID = -1;
             try
@@ -43,7 +48,7 @@ namespace TravelService
 
                 cmd.Parameters.Add("@SessionID", SqlDbType.Int).Value = SessionID;
                 cmd.Parameters.Add("@Consumer_Id", SqlDbType.Int).Value = Consumer_Id;
-                cmd.Parameters.Add("@ServiceStatus", SqlDbType.Int).Value = Status;
+            
 
 
                 cmd.Parameters.Add("@ServiceID", SqlDbType.Int).Direction = ParameterDirection.Output;
@@ -64,6 +69,82 @@ namespace TravelService
 
         }// public static Int32 InsertService(long SessionID=-1, Int32 Consumer_Id=-1, Int32 Status=-1)
 
+        public static void insert_Person_field(DataTable dtPerson) {
+
+            try {
+                SqlCommand cmd = conn.CreateCommand();
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "insert_Person_field";
+
+                SqlParameter dtPersonType = cmd.Parameters.Add("@PersonType", SqlDbType.Structured);
+                dtPersonType.Value = dtPerson;
+                dtPersonType.TypeName = "PersonType";
+
+                Execute(cmd);
+
+            }
+            catch (Exception m) {
+
+                throw m;
+
+            }
+
+        }
+
+        public static void insert_update_SendBookingRequirementRequests_field(DataTable dtRequ, DataTable dtPerson) {
+
+            try {
+
+                SqlCommand cmd = conn.CreateCommand();               
+                   
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "insert_requ_SendBookingRequirementRequest_field";
+
+                SqlParameter dtRequType = cmd.Parameters.Add("@requ_SendBookingRequirementRequestType", SqlDbType.Structured);
+                dtRequType.Value = dtRequ;
+                dtRequType.TypeName = "requ_SendBookingRequirementRequestType";
+
+                SqlParameter dtPersonType = cmd.Parameters.Add("@PersonType", SqlDbType.Structured);
+                dtPersonType.Value = dtPerson;
+                dtPersonType.TypeName = "PersonType";
+
+                Execute(cmd);
+
+            }
+            catch (Exception m) {
+
+                throw m;
+            }
+
+        }
+
+        public static void insert_update_SendBookingRequirementRequests_field_test(DataTable dttr)
+        {
+
+            try
+            {        
+                SqlCommand cmd = conn.CreateCommand();
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "insert_requ_SendBookingRequirementRequest_field";
+
+                SqlParameter dtRequType = cmd.Parameters.Add("@TestRequestType", SqlDbType.Structured);
+                dtRequType.Value = dttr;
+                dtRequType.TypeName = "TestRequestType";
+
+
+                Execute(cmd);
+
+            }
+            catch (Exception m)
+            {
+
+                throw m;
+            }
+
+        }
+
         public static void insert_update_SendBookingRequirementRequests(SendBookingRequirementRequest sbr=null, Int32 ServiceID=-1)
         {
             if (sbr == null && ServiceID == -1)
@@ -77,7 +158,8 @@ namespace TravelService
                     cmd.Parameters.Add("@FromAirport", SqlDbType.NVarChar).Value = sbr.FromAirport;
                 if (sbr.ToAirport != null)
                     cmd.Parameters.Add("@ToAirport", SqlDbType.NVarChar).Value = sbr.ToAirport;
-                if (sbr.DepartureDate != null && sbr.DepartureDate.ToString() != "1.1.0001. 0:00:00" )                                  
+                if (sbr.DepartureDate != null && sbr.DepartureDate.ToString() != "1.1.0001. 0:00:00" ) 
+                                                     
                     cmd.Parameters.Add("@DepartureDate", SqlDbType.DateTime).Value = sbr.DepartureDate;                
                 if (sbr.ArrivalDate != null && sbr.ArrivalDate.ToString() != "1.1.0001. 0:00:00")
                     cmd.Parameters.Add("@ArrivalDate", SqlDbType.DateTime).Value = sbr.ArrivalDate;
@@ -88,8 +170,9 @@ namespace TravelService
                 
                     cmd.Parameters.Add("@Service_Id", SqlDbType.Int).Value = ServiceID;
                     cmd.Parameters.Add("@Person_Id", SqlDbType.Int).Value = PersonID;
+                    cmd.Parameters.Add("@Status", SqlDbType.Int).Value = Convert.ToInt32(ServiceStatus.Initial);
 
-                    Execute(cmd);               
+                Execute(cmd);               
             }
             catch (Exception m) {
 

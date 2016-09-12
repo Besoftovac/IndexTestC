@@ -15,7 +15,8 @@ namespace TravelService
 
         Initial=1,
         Viewed,
-        TA
+        TA,
+        ServiceResp
     }
     enum BookingResponseStatus : int {
         Accept=1,
