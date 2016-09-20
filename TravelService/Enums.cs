@@ -16,11 +16,17 @@ namespace TravelService
         Initial=1,
         Viewed,
         TA,
-        ServiceResp
+        ServiceResp,
+        HCupdate
     }
-    enum BookingResponseStatus : int {
+    enum BookingResponseType : int {
         Accept=1,
         Cancel,
         RequireTickets
+    }
+    enum CommentLogUsers : int {
+
+        TA=1,
+        HC
     }
 }

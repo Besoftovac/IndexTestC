@@ -18,7 +18,8 @@ namespace TravelService
     = AspNetCompatibilityRequirementsMode.Allowed)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class TravelService : ITravelService
-    {
+    {  
+
         public WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest)
         {
 
@@ -28,6 +29,8 @@ namespace TravelService
                 long SessionID = webServiceConsumerRequest.SessionId;
 
                 Int32 ServiceID = StoredProceduresCall.InsertService(SessionID: SessionID);
+                setCulture();
+
                 WebServiceProviderResponse WPR = new WebServiceProviderResponse();
 
                 if (webServiceConsumerRequest.SendBookingRequirementRequests != null)
@@ -47,6 +50,27 @@ namespace TravelService
                 return null;
 
         }// public WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest)
+
+        private void setCulture()  {
+
+            String result = StoredProceduresCall.getServerCulture();
+
+            if (result != null)
+            {
+                if (result == "hrvatski")
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+                else
+                    Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-CA");
+            }
+            else
+            {
+                Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-CA");
+            }
+
+            DateTime D = new DateTime();
+            Globals.DefaultDate= D.ToString();
+
+        }
         public static DateTime date(DateTime date) {
 
             DateTime dt;
@@ -84,74 +108,7 @@ namespace TravelService
             return dataTable;
         }
 
-        public PersonTA Initialize_PersonTA(SendBookingRequirementRequest sbrr) {
-
-            //Thread.CurrentThread.CurrentCulture = new CultureInfo("hr-HR");
-
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-CA");
-
-            Person person = sbrr.Person;
-            PersonTA personTA = new PersonTA();
-            DateTime defaultDate = new DateTime(1756, 1, 1);
-
-
-            personTA.FirstName = person.FirstName;
-            personTA.LastName = person.LastName;
-            personTA.PassportNumber = person.PassportNumber;
-            personTA.PassportExpiryDate = (person.PassportExpiryDate == null || person.PassportExpiryDate.ToString() == "1.1.0001. 0:00:00") ? defaultDate : person.PassportExpiryDate;
-            personTA.PassportIssuingCountry = person.PassportIssuingCountry;
-            personTA.Birthday = (person.Birthday == null || person.Birthday.ToString() == "1.1.0001. 0:00:00") ? defaultDate : person.Birthday;
-            personTA.PlaceOfBirth = person.PlaceOfBirth;
-            personTA.Nationality = person.Nationality;
-            personTA.SeamansBookNumber = person.SeamansBookNumber;
-            personTA.SeamansBookExpiryDate = (person.SeamansBookExpiryDate == null || person.SeamansBookExpiryDate.ToString() == "1.1.0001. 0:00:00") ? defaultDate : person.SeamansBookExpiryDate;
-            personTA.SeamansBookIssuingCountry = person.SeamansBookIssuingCountry;
-            personTA.USVisaNumber = person.USVisaNumber;
-            personTA.USVisaExpiryDate = (person.USVisaExpiryDate == null || person.USVisaExpiryDate.ToString() == "1.1.0001. 0:00:00") ? defaultDate : person.USVisaExpiryDate;
-            personTA.PersonComment = person.PersonComment;
-            personTA.Date_ = defaultDate;
-            personTA.BookingRequirementIdHC = (Int32)sbrr.BookingRequirementId;
-
-            return personTA;
-        }//public PersonTA Initialize_PersonTA(SendBookingRequirementRequest sbrr)
-
-        public SendBookingRequirementRequestTA Initialize_SBRRequestTA(SendBookingRequirementRequest sbrr, Int32 ServiceID)  {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-CA");
-
-
-            SendBookingRequirementRequestTA sbrrTA = new SendBookingRequirementRequestTA();
-            DateTime defaultDate = new DateTime(1756,1,1);
-          
-            //defaultDate.GetDateTimeFormats
-            //if (sbr.DepartureDate != null && sbr.DepartureDate.ToString() != "1.1.0001. 0:00:00" )  
-            sbrrTA.FromAirport = sbrr.FromAirport;
-            sbrrTA.ToAirport = sbrr.ToAirport;
-            sbrrTA.DepartureDate = (sbrr.DepartureDate == null || sbrr.DepartureDate.ToString() == "1.1.0001. 0:00:00") ? defaultDate : sbrr.DepartureDate;
-            sbrrTA.ArrivalDate = (sbrr.ArrivalDate == null || sbrr.ArrivalDate.ToString() == "1.1.0001. 0:00:00") ? defaultDate : sbrr.ArrivalDate;
-            sbrrTA.BookingRequirementIdHC = (Int32)sbrr.BookingRequirementId;
-            sbrrTA.RequestBookingComment = sbrr.RequestBookingComment;
-            sbrrTA.Service_Id = ServiceID;
-            sbrrTA.Person_Id = 0;
-            sbrrTA.Date_ = defaultDate;
-            sbrrTA.Status = Convert.ToInt32(ServiceStatus.Initial);
-
-            return sbrrTA;
-
-        }
-
-        public TestRequest initialize_testing(SendBookingRequirementRequest sbrr, Int32 ServiceID) {
-            TestRequest tr = new TestRequest();
-
-            tr.Comment = "Radi!";
-            tr.Requ = true;
-            tr.ServiceID = ServiceID;
-            tr.BookingID = sbrr.BookingRequirementId;
-
-            return tr; 
-            
-
-
-        }
+       
 
         public void SendBookingRequirementResponses_field(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
         {           
@@ -161,64 +118,62 @@ namespace TravelService
 
             SendBookingRequirementRequest[] sbrrfield = webServiceConsumerRequest.SendBookingRequirementRequests;
 
-            foreach (SendBookingRequirementRequest sbrr in sbrrfield) {
+            foreach (SendBookingRequirementRequest sbrr in sbrrfield) {                
 
-                SendBookingRequirementRequestTA sbrrTA = Initialize_SBRRequestTA(sbrr, ServiceID);
-                PersonTA personTA = Initialize_PersonTA(sbrr);
-                //TestRequest tr = initialize_testing(sbrr, ServiceID);
+                SendBookingRequirementRequestTA sbrrTA = InitializeInstances.Initialize_SBRRequestTA(sbrr, ServiceID);
+                PersonTA personTA = InitializeInstances.Initialize_PersonTA(sbrr);              
 
                 listPerson.Add(personTA);
                 listsbrr.Add(sbrrTA);
-                //listtr.Add(tr);
+        
             }
 
             DataTable dtsbrr = ToDataTable<SendBookingRequirementRequestTA>(listsbrr);
             DataTable dtPerson = ToDataTable<PersonTA>(listPerson);
-            //DataTable dttr= ToDataTable<TestRequest>(listtr);
-
-            //if(dtPerson != null)
-            //    StoredProceduresCall.insert_Person_field(dtPerson);
+        
 
             if (dtsbrr != null && dtPerson != null)
                 StoredProceduresCall.insert_update_SendBookingRequirementRequests_field(dtsbrr, dtPerson);
-
-            //if (dttr != null)
-            //    StoredProceduresCall.insert_update_SendBookingRequirementRequests_field_test(dttr);
+           
 
 
         }// public void SendBookingRequirementResponses_field(WebServiceConsumerRequest webServiceConsumerRequest)
+
+        /*************************************************POČETAK INICIJALNIH METODA*******************************************************/
 
         public RequirementResponse[] SendBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
         {
 
             RequirementResponse[] rrf = null;
-            List<RequirementResponse> list = new List<RequirementResponse>();
-            SendBookingRequirementRequest[] SendBookingRequirementRequests = webServiceConsumerRequest.SendBookingRequirementRequests;
+            List<RequirementResponseTA> listRRTA = new List<RequirementResponseTA>();//response za komunikaciju sa bazom prema typu koji šaljemo
+            List<RequirementResponse> listRR = new List<RequirementResponse>();//za generiranje odgovora servisu prema "njihovoj" definiraniranoj klasi
 
+            SendBookingRequirementRequest[] SendBookingRequirementRequests = webServiceConsumerRequest.SendBookingRequirementRequests;
 
             if (SendBookingRequirementRequests == null)
                 return null;
                      
             foreach (SendBookingRequirementRequest sbrr in SendBookingRequirementRequests)
             {
-                //StoredProceduresCall.insert_update_SendBookingRequirementRequests(sbrr, ServiceID);
+                RequirementResponseTA rrTA = InitializeInstances.initialize_RequirementResponseTA(sbrr:sbrr);
                 RequirementResponse rr = new RequirementResponse();
-                long BookingRequirementId = sbrr.BookingRequirementId;
-                if (BookingRequirementId != 0)
-                {
-                    rr.BookingRequirementId = BookingRequirementId;
-                    rr.Comment = "";
-                    rr.IsReceived = true;
-                    StoredProceduresCall.insert_RequirementResponse(rr, Convert.ToInt32(RequirementResponseStatus.Send));
-                }
-             
-                list.Add(rr);
+
+                    rr.Comment = rrTA.Comment;
+                    rr.IsReceived = rrTA.IsReceived;
+                    rr.BookingRequirementId = rrTA.BookingRequirementId;
+
+                    listRRTA.Add(rrTA);
+                    listRR.Add(rr);
+               
 
 
             }
-            SendBookingRequirementResponses_field(webServiceConsumerRequest, ServiceID);
-            rrf = list.Cast<RequirementResponse>().ToArray();
-            // wpr.r
+            SendBookingRequirementResponses_field(webServiceConsumerRequest, ServiceID);//POZIV PROCEDURE I UPIS ZAHTJEVA U BAZU
+            DataTable dtrr = ToDataTable<RequirementResponseTA>(listRRTA);
+
+            StoredProceduresCall.insert_RequirementResponse_field(dtrr);
+
+            rrf = listRR.Cast<RequirementResponse>().ToArray();
             return rrf;
 
         }// public RequirementResponse[] SendBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
@@ -226,7 +181,10 @@ namespace TravelService
         public RequirementResponse[] CancelBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest) {
 
             RequirementResponse[] rrf = null;
-            List<RequirementResponse> list = new List<RequirementResponse>();
+            List<RequirementResponseTA> listRRTA = new List<RequirementResponseTA>();//response za komunikaciju sa bazom prema typu koji šaljemo
+            List<RequirementResponse> listRR = new List<RequirementResponse>();//za generiranje odgovora servisu prema "njihovoj" definiraniranoj klasi
+            List<CancelBookingRequirementRequestTA> listCbrrTA = new List<CancelBookingRequirementRequestTA>();
+
             CancelBookingRequirementRequest[] cbrrField = webServiceConsumerRequest.CancelBookingRequirementRequests;
 
             if (cbrrField == null)
@@ -234,22 +192,29 @@ namespace TravelService
 
             foreach (CancelBookingRequirementRequest cbrr in cbrrField) {
 
-                StoredProceduresCall.insert_update_CancelBookingRequirementRequest(cbrr);
-                RequirementResponse rr = new RequirementResponse();
-                long BookingRequirementId = cbrr.BookingRequirementId;
-                if (BookingRequirementId != 0)
-                {
+                    CancelBookingRequirementRequestTA cbrrta = InitializeInstances.initialize_cbrrTA(cbrr);
+                    RequirementResponseTA rrTA = InitializeInstances.initialize_RequirementResponseTA(cbrr: cbrr);
+                    RequirementResponse rr = new RequirementResponse();
 
-                    rr.BookingRequirementId = BookingRequirementId;
-                    rr.Comment = cbrr.Comment;
-                    rr.IsReceived = true;
-                    StoredProceduresCall.insert_RequirementResponse(rr, Convert.ToInt32(RequirementResponseStatus.Cancel));
-                }
-                list.Add(rr);
+                    rr.Comment = rrTA.Comment;
+                    rr.IsReceived = rrTA.IsReceived;
+                    rr.BookingRequirementId = rrTA.BookingRequirementId;
+
+                    listRRTA.Add(rrTA);
+                    listRR.Add(rr);
+                    listCbrrTA.Add(cbrrta);
+              
             }
+            DataTable dtrr = ToDataTable<RequirementResponseTA>(listRRTA);
+            DataTable dtcbrr = ToDataTable<CancelBookingRequirementRequestTA>(listCbrrTA);
+
+            if (dtrr!=null)
+                StoredProceduresCall.insert_RequirementResponse_field(dtrr);
+            if (dtcbrr != null)
+                StoredProceduresCall.insert_CancelBookingRequirementRequest_field(dtcbrr);
 
 
-            rrf = list.Cast<RequirementResponse>().ToArray();
+            rrf = listRR.Cast<RequirementResponse>().ToArray();
             // wpr.r
             return rrf;
         }//public RequirementResponse[] CancelBookingRequirementResponses(WebServiceConsumerRequest webServiceConsumerRequest) {
@@ -257,90 +222,121 @@ namespace TravelService
         public BookingResponse[] AcceptBookingResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID) {
 
             BookingResponse[] brfield = null;
-            List<BookingResponse> list = new List<BookingResponse>();
+            List<BookingResponse> listBR = new List<BookingResponse>();
+            List<BookingResponseTA> listBRTA = new List<BookingResponseTA>();
+            List<AcceptBookingRequestTA> listabrTA = new List<AcceptBookingRequestTA>();
+
             AcceptBookingRequest[] abrField = webServiceConsumerRequest.AcceptBookingRequests;
 
             if (abrField == null)
                 return null;
 
             foreach (AcceptBookingRequest abr in abrField) {
-
-                StoredProceduresCall.insert_update_AcceptBookingRequest(abr, ServiceID);
+                AcceptBookingRequestTA abrTA = InitializeInstances.initializeAbrTA(abr:abr, ServiceID:ServiceID);
+                BookingResponseTA brTA = InitializeInstances.initialize_BookingRespTA(abr: abr, ServiceID:ServiceID);
                 BookingResponse br = new BookingResponse();
-                long BookingID = abr.BookingId;
-                if (BookingID != 0)
-                {
 
-                    br.BookingId = BookingID;
-                    br.Comment = "";
-                    br.IsReceived = true;
+                br.Comment = brTA.Comment;
+                br.IsReceived = brTA.IsReceived;
+                br.BookingId = brTA.BookingId;
 
-                    StoredProceduresCall.insert_BookingResponse(br, ServiceID, Convert.ToInt32(BookingResponseStatus.Accept));
-                }
-                list.Add(br);
+                listBRTA.Add(brTA);
+                listBR.Add(br);
+                listabrTA.Add(abrTA);
+
             }
 
-            brfield= list.Cast<BookingResponse>().ToArray();
+            DataTable dtbr = ToDataTable<BookingResponseTA>(listBRTA);
+            DataTable dtabr = ToDataTable<AcceptBookingRequestTA>(listabrTA);
+        
+            if (dtbr != null)
+                StoredProceduresCall.insert_BookingResponse_field(dtbr);
+            if (dtabr != null)
+                StoredProceduresCall.insert_AcceptBookingRequest_field(dtabr);
+
+            brfield = listBR.Cast<BookingResponse>().ToArray();
             return brfield;
         }//public BookingResponse[] AcceptBookingResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID) {
 
         public BookingResponse[] CancelBookingResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
         {
             BookingResponse[] brfield = null;
-            List<BookingResponse> list = new List<BookingResponse>();
+            List<BookingResponse> listBR = new List<BookingResponse>();
+            List<BookingResponseTA> listBRTA = new List<BookingResponseTA>();
+            List<CancelBookingRequestTA> listcbrTA = new List<CancelBookingRequestTA>();
+
+
             CancelBookingRequest[] cbrfield = webServiceConsumerRequest.CancelBookingRequests;
             if (cbrfield == null)
                 return null;
 
             foreach (CancelBookingRequest cbr in cbrfield) {
 
-                StoredProceduresCall.insert_CancelBookingRequest(cbr, ServiceID);
+                CancelBookingRequestTA cbrTA = InitializeInstances.initializeCBRTA(cbr: cbr, ServiceID: ServiceID);
+                BookingResponseTA brta = InitializeInstances.initialize_BookingRespTA(cbr: cbr, ServiceID: ServiceID);
+
                 BookingResponse br = new BookingResponse();
-                long BookingID = cbr.BookingId;
-                if (BookingID != 0) {
 
-                    br.BookingId = BookingID;
-                    br.Comment = "";
-                    br.IsReceived = true;
+                br.Comment = brta.Comment;
+                br.IsReceived = brta.IsReceived;
+                br.BookingId = brta.BookingId;
 
-                    StoredProceduresCall.insert_BookingResponse(br, ServiceID, Convert.ToInt32(BookingResponseStatus.Cancel));
+                listBRTA.Add(brta);
+                listBR.Add(br);
+                listcbrTA.Add(cbrTA);
 
-                }
 
-                list.Add(br);
             }
 
-            brfield = list.Cast<BookingResponse>().ToArray();
+            DataTable dtbr = ToDataTable<BookingResponseTA>(listBRTA);
+            DataTable dtcbr = ToDataTable<CancelBookingRequestTA>(listcbrTA);
+
+            if (dtbr != null)
+                StoredProceduresCall.insert_BookingResponse_field(dtbr);
+
+            if (dtcbr != null)
+                StoredProceduresCall.insert_CancelBookingRequest_field(dtcbr);
+
+            brfield = listBR.Cast<BookingResponse>().ToArray();
             return brfield;
         }//public BookingResponse[] CancelBookingResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
 
         public BookingResponse[] RequireTicketsResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
         {
             BookingResponse[] brfield = null;
-            List<BookingResponse> list = new List<BookingResponse>();
+            List<BookingResponse> listbr = new List<BookingResponse>();
+            List<BookingResponseTA> listbrTA = new List<BookingResponseTA>();
+            List<RequireTicketsRequestTA> listrtrTA = new List<RequireTicketsRequestTA>();
             RequireTicketsRequest[] rtrfield = webServiceConsumerRequest.RequireTicketsRequests;
 
             if (rtrfield == null)
                 return null;
 
             foreach (RequireTicketsRequest rtr in rtrfield) {
-                StoredProceduresCall.insert_RequireTicketsRequest(rtr, ServiceID);
+                RequireTicketsRequestTA rtrTA = InitializeInstances.intializeRTRTA(rtr: rtr, ServiceID: ServiceID);
+                BookingResponseTA brta = InitializeInstances.initialize_BookingRespTA(rtr: rtr, ServiceID: ServiceID);
                 BookingResponse br = new BookingResponse();
-                long BookingID = rtr.BookingId;
 
-                if (BookingID != 0) {
+                br.Comment = brta.Comment;
+                br.IsReceived = brta.IsReceived;
+                br.BookingId = brta.BookingId;
 
-                    br.BookingId = BookingID;
-                    br.Comment = "";
-                    br.IsReceived = true;
+                listbrTA.Add(brta);
+                listbr.Add(br);
+                listrtrTA.Add(rtrTA);
 
-                    StoredProceduresCall.insert_BookingResponse(br, ServiceID, Convert.ToInt32(BookingResponseStatus.RequireTickets));
-                }
 
-                list.Add(br);
             }
 
-            brfield = list.Cast<BookingResponse>().ToArray();
+            DataTable dtbr = ToDataTable<BookingResponseTA>(listbrTA);
+            DataTable dtrtr = ToDataTable<RequireTicketsRequestTA>(listrtrTA);
+
+            if (dtbr != null)
+                StoredProceduresCall.insert_BookingResponse_field(dtbr);
+            if (dtrtr != null)
+                StoredProceduresCall.insert_RequireTicketsRequest_field(dtrtr);
+
+            brfield = listbr.Cast<BookingResponse>().ToArray();
             return brfield;
         }//   public BookingResponse[] RequireTicketsResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
 

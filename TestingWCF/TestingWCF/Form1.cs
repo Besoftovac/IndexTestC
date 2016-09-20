@@ -72,7 +72,7 @@ namespace TestingWCF
                      new SendBookingRequirementRequest
                     {
 
-                        BookingRequirementId = 445,
+                        BookingRequirementId = 106,
                          Person = new Person()
 
                          {
@@ -101,7 +101,7 @@ namespace TestingWCF
                     new CancelBookingRequirementRequest
                     {
 
-                        BookingRequirementId = 222,
+                        BookingRequirementId = 253,
                         Reason="",
                         Comment = ""
 

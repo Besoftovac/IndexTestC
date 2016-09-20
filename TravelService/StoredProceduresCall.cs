@@ -14,9 +14,10 @@ using System.Data.Common;
 
 namespace TravelService
 {
-    class StoredProceduresCall
+    class StoredProceduresCall 
     {
 
+       
         static SqlConnection conn = GeneralSql.CatchDatabase();
 
         private static SqlCommand InitSqlCommand(String strProcedureName /*SqlConnection conn*/)
@@ -27,17 +28,19 @@ namespace TravelService
            // cmd.Parameters.Add("@Verzija", SqlDbType.Int).Value = (int)verzija_programa.Jedan;
 
             return cmd;
-        }
+        }//    private static SqlCommand InitSqlCommand(String strProcedureName /*SqlConnection conn*/)
+
 
         private static void Execute(SqlCommand cmd, bool bCloseConn = true)
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-CA");
+            //Thread.CurrentThread.CurrentCulture = new CultureInfo("fr-CA");
 
             if (conn != null && conn.State == ConnectionState.Closed)
                 conn.Open();
             cmd.ExecuteNonQuery();
             if (bCloseConn) conn.Close();
-        }
+        }//private static void Execute(SqlCommand cmd, bool bCloseConn = true)
+
 
         public static Int32 InsertService(long SessionID=-1, Int32 Consumer_Id=-1) {
 
@@ -69,6 +72,34 @@ namespace TravelService
 
         }// public static Int32 InsertService(long SessionID=-1, Int32 Consumer_Id=-1, Int32 Status=-1)
 
+        public static String getServerCulture(Int32 type=1) {
+            String result = null;
+            try {
+
+                SqlCommand cmd = InitSqlCommand("getServerProperty");
+                cmd.Parameters.Add("@Type", SqlDbType.Int).Value = type;
+                cmd.Parameters.Add("@result", SqlDbType.VarChar, 1000).Direction = ParameterDirection.Output;
+
+                Execute(cmd, false);
+
+                result = cmd.Parameters["@result"].Value.ToString();
+            }
+            catch (Exception p) {
+
+
+                throw p;
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return result;
+
+        }//public static String getServerCulture(Int32 type = 1)
+       
+
         public static void insert_Person_field(DataTable dtPerson) {
 
             try {
@@ -90,11 +121,17 @@ namespace TravelService
 
             }
 
-        }
+        }//public static void insert_Person_field(DataTable dtPerson) {
+
 
         public static void insert_update_SendBookingRequirementRequests_field(DataTable dtRequ, DataTable dtPerson) {
 
             try {
+                if (dtPerson == null || dtRequ == null)
+                    return;
+
+                if (dtPerson.Rows.Count < 1 || dtRequ.Rows.Count < 1)
+                    return;
 
                 SqlCommand cmd = conn.CreateCommand();               
                    
@@ -117,7 +154,34 @@ namespace TravelService
                 throw m;
             }
 
-        }
+        }//  public static void insert_update_SendBookingRequirementRequests_field(DataTable dtRequ, DataTable dtPerson) {
+
+        public static void insert_RequirementResponse_field(DataTable rr) {
+
+            try {
+
+                if (rr == null || rr.Rows.Count < 1)
+                    return;
+
+                SqlCommand cmd = conn.CreateCommand();
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "insert_RequirementResponse_field";
+
+                SqlParameter dtRequType = cmd.Parameters.Add("@RequirementResponseType", SqlDbType.Structured);
+                dtRequType.Value = rr;
+                dtRequType.TypeName = "RequirementResponseType";
+
+                Execute(cmd);
+
+            }
+            catch (Exception p) {
+
+                throw p;
+            }
+
+        }//public static void insert_RequirementResponse_field(DataTable rr) {
+
 
         public static void insert_update_SendBookingRequirementRequests_field_test(DataTable dttr)
         {
@@ -158,10 +222,10 @@ namespace TravelService
                     cmd.Parameters.Add("@FromAirport", SqlDbType.NVarChar).Value = sbr.FromAirport;
                 if (sbr.ToAirport != null)
                     cmd.Parameters.Add("@ToAirport", SqlDbType.NVarChar).Value = sbr.ToAirport;
-                if (sbr.DepartureDate != null && sbr.DepartureDate.ToString() != "1.1.0001. 0:00:00" ) 
+                if (sbr.DepartureDate != null && sbr.DepartureDate.ToString() != Globals.DefaultDate) 
                                                      
                     cmd.Parameters.Add("@DepartureDate", SqlDbType.DateTime).Value = sbr.DepartureDate;                
-                if (sbr.ArrivalDate != null && sbr.ArrivalDate.ToString() != "1.1.0001. 0:00:00")
+                if (sbr.ArrivalDate != null && sbr.ArrivalDate.ToString() != Globals.DefaultDate)
                     cmd.Parameters.Add("@ArrivalDate", SqlDbType.DateTime).Value = sbr.ArrivalDate;
                 if (sbr.BookingRequirementId != 0)
                     cmd.Parameters.Add("@BookingRequirementIdHC", SqlDbType.Int).Value = sbr.BookingRequirementId;
@@ -194,11 +258,11 @@ namespace TravelService
                     cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = person.LastName;
                 if (person.PassportNumber != null)
                     cmd.Parameters.Add("@PassportNumber", SqlDbType.NVarChar).Value = person.PassportNumber;
-                if (person.PassportExpiryDate != null && person.PassportExpiryDate.ToString()!= "1.1.0001. 0:00:00")               
+                if (person.PassportExpiryDate != null && person.PassportExpiryDate.ToString()!= Globals.DefaultDate)               
                     cmd.Parameters.Add("@PassportExpiryDate", SqlDbType.DateTime).Value = person.PassportExpiryDate;               
                 if (person.PassportIssuingCountry != null)
                     cmd.Parameters.Add("@PassportIssuingCountry", SqlDbType.NVarChar).Value = person.PassportIssuingCountry;
-                if (person.Birthday != null && person.Birthday.ToString() != "1.1.0001. 0:00:00")
+                if (person.Birthday != null && person.Birthday.ToString() != Globals.DefaultDate)
                     cmd.Parameters.Add("@Birthday", SqlDbType.DateTime).Value = person.Birthday;
                 if (person.PlaceOfBirth != null)
                     cmd.Parameters.Add("@PlaceOfBirth", SqlDbType.NVarChar).Value = person.PlaceOfBirth;
@@ -206,13 +270,13 @@ namespace TravelService
                     cmd.Parameters.Add("@Nationality", SqlDbType.NVarChar).Value = person.Nationality;
                 if (person.SeamansBookNumber != null)
                     cmd.Parameters.Add("@SeamansBookNumber", SqlDbType.NVarChar).Value = person.SeamansBookNumber;
-                if (person.SeamansBookExpiryDate != null && person.SeamansBookExpiryDate.ToString() != "1.1.0001. 0:00:00")
+                if (person.SeamansBookExpiryDate != null && person.SeamansBookExpiryDate.ToString() != Globals.DefaultDate)
                     cmd.Parameters.Add("@SeamansBookExpiryDate", SqlDbType.DateTime).Value = person.SeamansBookExpiryDate;
                 if (person.SeamansBookIssuingCountry != null)
                     cmd.Parameters.Add("@SeamansBookIssuingCountry", SqlDbType.NVarChar).Value = person.SeamansBookIssuingCountry;
                 if (person.USVisaNumber != null)
                     cmd.Parameters.Add("@USVisaNumber", SqlDbType.NVarChar).Value = person.USVisaNumber;
-                if (person.USVisaExpiryDate != null && person.USVisaExpiryDate.ToString() != "1.1.0001. 0:00:00")
+                if (person.USVisaExpiryDate != null && person.USVisaExpiryDate.ToString() != Globals.DefaultDate)
                     cmd.Parameters.Add("@USVisaExpiryDate", SqlDbType.DateTime).Value = person.USVisaExpiryDate;
                 if (person.PersonComment != null)
                     cmd.Parameters.Add("@PersonComment", SqlDbType.NVarChar).Value = person.PersonComment;
@@ -280,6 +344,30 @@ namespace TravelService
 
         }//public static void insert_update_CancelBookingRequirementRequest(CancelBookingRequirementRequest CBRR) 
 
+        public static void insert_CancelBookingRequirementRequest_field(DataTable dtcbrr) {
+
+            try {
+                if (dtcbrr.Rows.Count < 1 || dtcbrr==null)
+                    return;
+
+                SqlCommand cmd = conn.CreateCommand();
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "insert_CancelBookingRequirementRequest_field";
+                cmd.Parameters.Add("@CommentLogUser", SqlDbType.Int).Value = Convert.ToInt32(CommentLogUsers.HC);
+
+                SqlParameter dtRequType = cmd.Parameters.Add("@CancelBookingRequirementRequestType", SqlDbType.Structured);
+                dtRequType.Value = dtcbrr;
+                dtRequType.TypeName = "CancelBookingRequirementRequestType";
+
+                Execute(cmd);
+            }
+            catch (Exception p)
+            {
+                throw p;
+            }
+        }
+
         public static void insert_update_AcceptBookingRequest(AcceptBookingRequest abr, Int32 ServiceID, bool requ=true) {
 
             try {
@@ -307,9 +395,35 @@ namespace TravelService
 
         }//public static void insert_update_AcceptBookingRequest(AcceptBookingRequest abr) 
 
-        public static void insert_BookingResponse(BookingResponse br, Int32 ServiceID, Int32 Status) {
+        public static void insert_AcceptBookingRequest_field(DataTable dtabr) {
 
             try {
+                if (dtabr.Rows.Count < 1 || dtabr == null)
+                    return;
+
+                SqlCommand cmd = conn.CreateCommand();
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "insert_AcceptBookingRequest_field";
+                cmd.Parameters.Add("@CommentLogUser", SqlDbType.Int).Value = Convert.ToInt32(CommentLogUsers.HC);
+
+                SqlParameter dtRequType = cmd.Parameters.Add("@AcceptBookingRequestType", SqlDbType.Structured);
+                dtRequType.Value = dtabr;
+                dtRequType.TypeName = "AcceptBookingRequestType";
+
+                Execute(cmd);
+            }
+
+            catch (Exception m) {
+
+                throw m;
+            }
+        }
+
+        public static void insert_BookingResponse(BookingResponse br, Int32 ServiceID, Int32 BRType, Int32 CommentLogUser, bool Requ=true)
+        {
+            try {
+                
                 SqlCommand cmd = InitSqlCommand("insert_BookingResponse");
 
                 //napravi provjere Slavice
@@ -317,18 +431,44 @@ namespace TravelService
                 cmd.Parameters.Add("@Comment", SqlDbType.NVarChar).Value = br.Comment;
                 cmd.Parameters.Add("@IsReceived", SqlDbType.Bit).Value = br.IsReceived;
                 cmd.Parameters.Add("@ServiceID", SqlDbType.Int).Value = ServiceID;
-                cmd.Parameters.Add("@Status", SqlDbType.Int).Value = Status;
-
+                cmd.Parameters.Add("@BRType", SqlDbType.Int).Value = BRType;
+                cmd.Parameters.Add("@CommentLogUser", SqlDbType.Int).Value = CommentLogUser;
+                cmd.Parameters.Add("@Requ", SqlDbType.Int).Value = Requ;
 
                 Execute(cmd);
-
-
             }
             catch (Exception m)
             {
                 throw m;
             }
 
+        }
+
+        public static void insert_BookingResponse_field(DataTable dtbr) {
+
+
+            try {
+                if (dtbr.Rows.Count < 1 || dtbr == null)
+                    return;
+
+                SqlCommand cmd = conn.CreateCommand();
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "insert_BookingResponse_field";
+                cmd.Parameters.Add("@CommentLogUser", SqlDbType.Int).Value = Convert.ToInt32(CommentLogUsers.HC);
+
+                SqlParameter dtRequType = cmd.Parameters.Add("@BookingResponseType", SqlDbType.Structured);
+                dtRequType.Value = dtbr;
+                dtRequType.TypeName = "BookingResponseType";
+
+                Execute(cmd);
+
+
+            }
+            catch (Exception k) {
+
+                throw k;
+            }
         }
 
         public static void insert_CancelBookingRequest(CancelBookingRequest cbr, Int32 ServiceID,  bool requ = true) {
@@ -349,10 +489,7 @@ namespace TravelService
 
 
                 cmd.Parameters.Add("@ServiceID", SqlDbType.Int).Value = ServiceID;
-                cmd.Parameters.Add("@Requ", SqlDbType.Bit).Value = ServiceID;
-               
-
-
+                cmd.Parameters.Add("@Requ", SqlDbType.Bit).Value = ServiceID;       
 
                 Execute(cmd);
 
@@ -363,7 +500,29 @@ namespace TravelService
                 throw m;
             }
         }
+        public static void insert_CancelBookingRequest_field(DataTable dtcbr) {
 
+            try {
+                if (dtcbr.Rows.Count < 1 || dtcbr == null)
+                    return;
+
+                SqlCommand cmd = conn.CreateCommand();
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "insert_CancelBookingRequest_field";
+                cmd.Parameters.Add("@CommentLogUser", SqlDbType.Int).Value = Convert.ToInt32(CommentLogUsers.HC);
+
+                SqlParameter dtRequType = cmd.Parameters.Add("@CancelBookingRequestType", SqlDbType.Structured);
+                dtRequType.Value = dtcbr;
+                dtRequType.TypeName = "CancelBookingRequestType";
+
+                Execute(cmd);
+
+            }
+            catch (Exception m) {
+                throw m;
+            }
+        }
         public static void insert_RequireTicketsRequest(RequireTicketsRequest rtr, Int32 ServiceID, bool requ=true) {
             try
             {
@@ -383,6 +542,32 @@ namespace TravelService
             {
                 throw m;
             }
+        }
+
+        public static void insert_RequireTicketsRequest_field(DataTable dtrtr) {
+            try
+            {
+                if (dtrtr.Rows.Count < 1 || dtrtr == null)
+                    return;
+
+                SqlCommand cmd = conn.CreateCommand();
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "insert_RequireTicketsRequest_field";
+                cmd.Parameters.Add("@CommentLogUser", SqlDbType.Int).Value = Convert.ToInt32(CommentLogUsers.HC);
+
+                SqlParameter dtRequType = cmd.Parameters.Add("@RequireTicketsRequestType", SqlDbType.Structured);
+                dtRequType.Value = dtrtr;
+                dtRequType.TypeName = "RequireTicketsRequestType";
+
+                Execute(cmd);
+
+            }
+            catch (Exception m)
+            {
+                throw m;
+            }
+
         }
     }
 }
