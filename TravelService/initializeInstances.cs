@@ -177,6 +177,7 @@ namespace TravelService
             cbrTA.Requ = Requ;
             cbrTA.Date_ = defaultDate;
             cbrTA.ServiceID = ServiceID;
+            //cbrTA.s
 
             return cbrTA;
 
@@ -193,5 +194,6 @@ namespace TravelService
             return rtrTA;
 
         }
+     
     }
 }

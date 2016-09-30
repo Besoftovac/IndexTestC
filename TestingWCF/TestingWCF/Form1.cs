@@ -64,9 +64,9 @@ namespace TestingWCF
                          },
 
                          FromAirport = "HAM",
-                         ToAirport = "CPT",
+                         ToAirport = "CPT--",
                          ArrivalDate = new DateTime(2016,12,12),
-                         RequestBookingComment = "First test booking request!"
+                         RequestBookingComment = "Promjenjeni podaci! - TEST"
 
                     },
                      new SendBookingRequirementRequest
@@ -85,10 +85,10 @@ namespace TestingWCF
 
                          },
 
-                         FromAirport = "HAM",
+                         FromAirport = "HAM---",
                          ToAirport = "CPT",
                          ArrivalDate = new DateTime(2016, 12,11),
-                         RequestBookingComment = "Test booking request!"
+                         RequestBookingComment = "RAKIJA  - Test booking request!"
 
                     }
 
@@ -121,7 +121,7 @@ namespace TestingWCF
                 CancelBookingRequests = new CancelBookingRequest[1] {
 
                    new CancelBookingRequest {
-                        BookingId=555,
+                        BookingId=13,
                         Comment = "Test CancelBookingRequest",
                         BookingStatus= BookingStatus.CANCELLED
                     }

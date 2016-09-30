@@ -41,6 +41,30 @@ namespace TravelService
             if (bCloseConn) conn.Close();
         }//private static void Execute(SqlCommand cmd, bool bCloseConn = true)
 
+        public static DataSet response_generateResponse() {
+            DataSet DS = new DataSet();
+            try
+            {
+                conn.Open();
+                SqlDataAdapter da = new SqlDataAdapter();
+                //DataSet ds = new DataSet();
+
+                SqlCommand cmd = InitSqlCommand("response_generateResponse");
+                da.SelectCommand = cmd;
+
+                da.Fill(DS);
+            }
+            catch (Exception m)
+            {
+                throw m;
+            }
+            finally {
+                conn.Close();
+            }
+
+            return DS;
+
+        }// public static DataSet response_generateResponse() {
 
         public static Int32 InsertService(long SessionID=-1, Int32 Consumer_Id=-1) {
 

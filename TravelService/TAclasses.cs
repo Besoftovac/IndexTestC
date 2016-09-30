@@ -41,6 +41,8 @@ namespace TravelService
 
         public Int32 BookingRequirementIdHC { get; set; }
 
+        public Int32 PersonIDFrontDesk { get; set; }
+
     }
     public class SendBookingRequirementRequestTA
     {
@@ -155,6 +157,8 @@ namespace TravelService
 
         public DateTime Date_ { get; set; }
 
+        public Int32 Status { get; set; }
+
     }
 
     public class RequireTicketsRequestTA {
@@ -169,5 +173,8 @@ namespace TravelService
 
         public DateTime Date_ { get; set; }
 
-}
+        Int32 Status { get; set; }
+
+    }
+
 }//namespace
