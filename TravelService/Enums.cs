@@ -22,7 +22,13 @@ namespace TravelService
     enum BookingResponseType : int {
         Accept=1,
         Cancel,
-        RequireTickets
+        RequireTickets,
+        SendAvailableBooking,
+        CancelBooking,
+        ConfirmBooking,
+        UpdateFlightData,
+        EticketInfo,
+        DecisionResponses
     }
     enum CommentLogUsers : int {
 

@@ -33,6 +33,8 @@ namespace TravelService
 
                 WebServiceProviderResponse WPR = new WebServiceProviderResponse();
 
+                WPR.SessionId = (Int32)SessionID;
+
                 if (webServiceConsumerRequest.SendBookingRequirementRequests != null)
                     WPR.SendBookingRequirementResponses = SendBookingRequirementResponses(webServiceConsumerRequest, ServiceID);
                 if (webServiceConsumerRequest.CancelBookingRequirementRequests != null)
@@ -53,7 +55,8 @@ namespace TravelService
                     WPR.SendEticketInfoRequests = EticketInfo(Globals.ResponseTables);
                     WPR.UpdateFlightDataRequests = UpdateFlightData(Globals.ResponseTables);
                 }
-                   
+
+                storeInitial_requResponse(webServiceConsumerRequest, ServiceID);
 
                 return WPR;
             }// if (webServiceConsumerRequest != null)
@@ -61,7 +64,7 @@ namespace TravelService
                 return null;
 
         }// public WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest)
-
+        #region GLOBAL SERVICE
         private void setCulture()  {
 
             String result = StoredProceduresCall.getServerCulture();
@@ -119,7 +122,10 @@ namespace TravelService
             //put a breakpoint here and check datatable
             return dataTable;
         }// public static DataTable ToDataTable<T>(List<T> items)
+        #endregion
 
+
+        #region RESPONSE METHODS - TA SERVICE DATA
         public UpdateFlightDataRequest[] UpdateFlightData(DataSet ds) {
             if ((ds == null) || (ds.Tables.Count == 0))
                 return null;
@@ -128,76 +134,78 @@ namespace TravelService
             List<Flight> listFlights = new List<Flight>();
             List<UpdateFlightDataRequest> listUpFDR = new List<UpdateFlightDataRequest>();
             DataTable dtUpFDR = new DataTable();
-            dtUpFDR = ds.Tables[7];
+            dtUpFDR = ds.Tables[8];
 
             if (dtUpFDR == null || dtUpFDR.Rows.Count < 1)
                 return null;
             /********************************treba preraditi taj dio u proceduri******************************************/
 
-            //ds.Relations.Add("UpdateFlight", ds.Tables[7].Columns["BookingID"], ds.Tables[0].Columns["BookingID"]);
+            ds.Relations.Add("UpdateFlight", ds.Tables[8].Columns["BookingID"], ds.Tables[7].Columns["BookingID"]);
 
-            //foreach (DataRow dr in dtUpFDR.Rows) {
+            foreach (DataRow dr in dtUpFDR.Rows)
+            {
 
-            //    UpdateFlightDataRequest ufdr = new UpdateFlightDataRequest();
+                UpdateFlightDataRequest ufdr = new UpdateFlightDataRequest();
 
-            //    ufdr.BookingComment = (dr["BookingComment"] == DBNull.Value) ? ""
-            //    : (dr["BookingComment"]).ToString();
-            //    ufdr.BookingId = (dr["BookingID"] == DBNull.Value) ? -1
-            //    : Convert.ToInt32(dr["BookingID"]);
-            //    ufdr.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.BOOKED
-            //    : (BookingStatus)(dr["BookingStatusID"]);
-            //    ufdr.SpendTime = (dr["SpendTime"] == DBNull.Value) ? -1
-            //    : Convert.ToInt32(dr["SpendTime"]);
-            //    ufdr.TimeLimit =(dr["TimeLimit"] == DBNull.Value) ? Convert.ToDateTime(Globals.DefaultDate)
-            //    : Convert.ToDateTime(dr["TimeLimit"]);
+                ufdr.BookingComment = (dr["BookingComment"] == DBNull.Value) ? ""
+                : (dr["BookingComment"]).ToString();
+                ufdr.BookingId = (dr["BookingID"] == DBNull.Value) ? -1
+                : Convert.ToInt32(dr["BookingID"]);
+                ufdr.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.BOOKED
+                : (BookingStatus)(dr["BookingStatusID"]);
+                ufdr.SpendTime = (dr["SpendTime"] == DBNull.Value) ? -1
+                : Convert.ToInt32(dr["SpendTime"]);
+                ufdr.TimeLimit = (dr["TimeLimit"] == DBNull.Value) ? Convert.ToDateTime(Globals.DefaultDate)
+                : Convert.ToDateTime(dr["TimeLimit"]);
 
-            //    listFlights.Clear();
+                listFlights.Clear();
 
-            //    foreach (DataRow drChild in dr.GetChildRows("UpdateFlight")) {
+                foreach (DataRow drChild in dr.GetChildRows("UpdateFlight"))
+                {
 
-            //        Flight fl = new Flight();
-            //        fl.FlightId = (drChild["Id"] == DBNull.Value) ? "-1"
-            //        : (drChild["Id"]).ToString();
-            //        fl.FlightStatus = (drChild["FlightStatus"] == DBNull.Value) ? " "
-            //        : (drChild["FlightStatus"]).ToString();
-            //        fl.Airline = (drChild["Airline"] == DBNull.Value) ? " "
-            //        : (drChild["Airline"]).ToString();
-            //        fl.Price = (drChild["Price"] == DBNull.Value) ? " "
-            //        : (drChild["Price"]).ToString();
-            //        fl.Currency = (drChild["Currency"] == DBNull.Value) ? " "
-            //        : (drChild["Currency"]).ToString();
-            //        fl.FromAirport = (drChild["FromAirport"] == DBNull.Value) ? " "
-            //       : (drChild["FromAirport"]).ToString();
-            //        fl.ToAirport = (drChild["ToAirport"] == DBNull.Value) ? " "
-            //       : (drChild["ToAirport"]).ToString();
-            //        fl.ArrivalDate = (drChild["ArrivalDate"] == DBNull.Value) ? Convert.ToDateTime(Globals.DefaultDate)
-            //        : Convert.ToDateTime(drChild["ArrivalDate"]);
-            //        fl.DepartureDate = (drChild["DepartureDate"] == DBNull.Value) ? Convert.ToDateTime(Globals.DefaultDate)
-            //        : Convert.ToDateTime(drChild["DepartureDate"]);
-            //        fl.FlightCode = (drChild["FlightCode"] == DBNull.Value) ? ""
-            //       : (drChild["FlightCode"]).ToString();
-            //        fl.FlightComment = (drChild["FlightComment"] == DBNull.Value) ? ""
-            //      : (drChild["FlightComment"]).ToString();
-            //        fl.Class = (drChild["Class"] == DBNull.Value) ? ""
-            //        : (drChild["Class"]).ToString();
-            //        fl.TicketLocator = (drChild["TicketLocator"] == DBNull.Value) ? ""
-            //    : (drChild["TicketLocator"]).ToString();
-            //        fl.ETicketNumber = (drChild["ETicketNumber"] == DBNull.Value) ? ""
-            //   : (drChild["ETicketNumber"]).ToString();
+                    Flight fl = new Flight();
+                    fl.FlightId = (drChild["Id"] == DBNull.Value) ? "-1"
+                    : (drChild["Id"]).ToString();
+                    fl.FlightStatus = (drChild["FlightStatus"] == DBNull.Value) ? " "
+                    : (drChild["FlightStatus"]).ToString();
+                    fl.Airline = (drChild["Airline"] == DBNull.Value) ? " "
+                    : (drChild["Airline"]).ToString();
+                    fl.Price = (drChild["Price"] == DBNull.Value) ? " "
+                    : (drChild["Price"]).ToString();
+                    fl.Currency = (drChild["Currency"] == DBNull.Value) ? " "
+                    : (drChild["Currency"]).ToString();
+                    fl.FromAirport = (drChild["FromAirport"] == DBNull.Value) ? " "
+                   : (drChild["FromAirport"]).ToString();
+                    fl.ToAirport = (drChild["ToAirport"] == DBNull.Value) ? " "
+                   : (drChild["ToAirport"]).ToString();
+                    fl.ArrivalDate = (drChild["ArrivalDate"] == DBNull.Value) ? Convert.ToDateTime(Globals.DefaultDate)
+                    : Convert.ToDateTime(drChild["ArrivalDate"]);
+                    fl.DepartureDate = (drChild["DepartureDate"] == DBNull.Value) ? Convert.ToDateTime(Globals.DefaultDate)
+                    : Convert.ToDateTime(drChild["DepartureDate"]);
+                    fl.FlightCode = (drChild["FlightCode"] == DBNull.Value) ? ""
+                   : (drChild["FlightCode"]).ToString();
+                    fl.FlightComment = (drChild["FlightComment"] == DBNull.Value) ? ""
+                  : (drChild["FlightComment"]).ToString();
+                    fl.Class = (drChild["Class"] == DBNull.Value) ? ""
+                    : (drChild["Class"]).ToString();
+                    fl.TicketLocator = (drChild["TicketLocator"] == DBNull.Value) ? ""
+                : (drChild["TicketLocator"]).ToString();
+                    fl.ETicketNumber = (drChild["ETicketNumber"] == DBNull.Value) ? ""
+               : (drChild["ETicketNumber"]).ToString();
 
-            //        listFlights.Add(fl);
-
-
-            //    }
-
-                //ufdr.Flights = listFlights.Cast<Flight>().ToArray();
-
-                //listUpFDR.Add(ufdr);
+                    listFlights.Add(fl);
 
 
-            //}
+                }
 
-            //UpFDR = listUpFDR.Cast<UpdateFlightDataRequest>().ToArray();
+                ufdr.Flights = listFlights.Cast<Flight>().ToArray();
+
+                listUpFDR.Add(ufdr);
+
+
+            }
+
+            UpFDR = listUpFDR.Cast<UpdateFlightDataRequest>().ToArray();
             return UpFDR;
 
         }//public UpdateFlightDataRequest[] UpdateFlightData(DataSet ds) {
@@ -441,6 +449,9 @@ namespace TravelService
             bookings = listBooking.Cast<SendAvailableBookingRequest>().ToArray();
             return bookings;
         }//  public SendAvailableBookingRequest[] AvailableBookings(DataSet ds) {
+        #endregion
+
+        #region INIIAL RESPONSE - STORE REQUEST TO DATABASE
 
         public void SendBookingRequirementResponses_field(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
         {           
@@ -582,7 +593,7 @@ namespace TravelService
             DataTable dtabr = ToDataTable<AcceptBookingRequestTA>(listabrTA);
         
             if (dtbr != null)
-                StoredProceduresCall.insert_BookingResponse_field(dtbr);
+                StoredProceduresCall.insert_BookingResponse_field(dtbr, (Int32)CommentLogUsers.TA);
             if (dtabr != null)
                 StoredProceduresCall.insert_AcceptBookingRequest_field(dtabr);
 
@@ -624,7 +635,7 @@ namespace TravelService
             DataTable dtcbr = ToDataTable<CancelBookingRequestTA>(listcbrTA);
 
             if (dtbr != null)
-                StoredProceduresCall.insert_BookingResponse_field(dtbr);
+                StoredProceduresCall.insert_BookingResponse_field(dtbr, (Int32)CommentLogUsers.TA);
 
             if (dtcbr != null)
                 StoredProceduresCall.insert_CancelBookingRequest_field(dtcbr);
@@ -664,13 +675,70 @@ namespace TravelService
             DataTable dtrtr = ToDataTable<RequireTicketsRequestTA>(listrtrTA);
 
             if (dtbr != null)
-                StoredProceduresCall.insert_BookingResponse_field(dtbr);
+                StoredProceduresCall.insert_BookingResponse_field(dtbr, (Int32)CommentLogUsers.TA);
             if (dtrtr != null)
                 StoredProceduresCall.insert_RequireTicketsRequest_field(dtrtr);
 
             brfield = listbr.Cast<BookingResponse>().ToArray();
             return brfield;
         }//   public BookingResponse[] RequireTicketsResponses(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
+        #endregion
+
+        #region INTITAL REQUEST RESPONSE
+
+        public void storeInitial_requResponse(WebServiceConsumerRequest webSCR, Int32 ServiceID) {
+
+            if (webSCR.SendAvailableBookingResponses != null)
+                HC_response(webSCR.SendAvailableBookingResponses, (Int32)BookingResponseType.SendAvailableBooking, ServiceID);
+
+            if (webSCR.CancelBookingResponses != null)
+                HC_response(webSCR.CancelBookingResponses, (Int32)BookingResponseType.CancelBooking, ServiceID);
+
+            if (webSCR.ConfirmBookingResponses != null)
+                HC_response(webSCR.ConfirmBookingResponses, (Int32)BookingResponseType.ConfirmBooking, ServiceID);
+
+            if (webSCR.UpdateFlightDataResponses != null)
+                HC_response(webSCR.UpdateFlightDataResponses, (Int32)BookingResponseType.UpdateFlightData, ServiceID);
+
+            if (webSCR.SendEticketInfoResponses != null)
+                HC_response(webSCR.SendEticketInfoResponses, (Int32)BookingResponseType.EticketInfo, ServiceID);
+
+            if (webSCR.RequestIssuingDecisionResponses != null)
+                HC_response(webSCR.RequestIssuingDecisionResponses, (Int32)BookingResponseType.DecisionResponses, ServiceID);
+        }
+
+        private void HC_response(BookingResponse[] brField, Int32 BrType, Int32 ServiceID, bool requ= true) {
+
+           DateTime defaultDate = new DateTime(1756, 1, 1);
+
+            if (brField == null || BrType == 0)
+                return;
+
+            List<BookingResponseTA> listbrTA = new List<BookingResponseTA>();
+
+            foreach (BookingResponse br in brField) {
+                BookingResponseTA brta = new BookingResponseTA();
+
+                brta.BookingId = (Int32)br.BookingId;
+                brta.BRType = BrType;
+                brta.Comment = br.Comment;
+                brta.IsReceived = br.IsReceived;
+                brta.Requ = requ;
+                brta.Date_ = defaultDate; // Convert.ToDateTime(Globals.DefaultDate);
+                brta.ServiceID = ServiceID;
+
+                listbrTA.Add(brta);
+            }
+
+            DataTable dtbr = ToDataTable<BookingResponseTA>(listbrTA);
+
+            if (dtbr != null)
+                StoredProceduresCall.insert_BookingResponse_field(dtbr, (Int32)CommentLogUsers.HC);
+
+        }
+
+
+        #endregion
 
     }
 

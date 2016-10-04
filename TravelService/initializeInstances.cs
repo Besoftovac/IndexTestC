@@ -118,7 +118,7 @@ namespace TravelService
         }
 
         public static BookingResponseTA initialize_BookingRespTA(AcceptBookingRequest abr=null, CancelBookingRequest cbr=null, 
-            RequireTicketsRequest rtr=null, Int32 ServiceID=-1, bool Requ=true)
+            RequireTicketsRequest rtr=null, Int32 ServiceID=-1, bool Requ=false)
         {
             BookingResponseTA brta = new BookingResponseTA();
 

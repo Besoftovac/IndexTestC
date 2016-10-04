@@ -60,5 +60,6 @@ d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\IndexTest\bin\
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\IndexTest\bin\Microsoft.AI.WindowsServer.xml
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\IndexTest\bin\Microsoft.ApplicationInsights.xml
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\IndexTest\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\IndexTest\obj\Debug\IndexTest.csprojResolveAssemblyReference.cache
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\IndexTest\obj\Debug\IndexTest.dll
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\IndexTest\obj\Debug\IndexTest.pdb

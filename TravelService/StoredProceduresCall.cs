@@ -468,7 +468,7 @@ namespace TravelService
 
         }
 
-        public static void insert_BookingResponse_field(DataTable dtbr) {
+        public static void insert_BookingResponse_field(DataTable dtbr, Int32 who) {//who - inicijalni odgovor od stran HC-a ili nas 
 
 
             try {
@@ -479,7 +479,7 @@ namespace TravelService
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "insert_BookingResponse_field";
-                cmd.Parameters.Add("@CommentLogUser", SqlDbType.Int).Value = Convert.ToInt32(CommentLogUsers.HC);
+                cmd.Parameters.Add("@CommentLogUser", SqlDbType.Int).Value = who; //Convert.ToInt32(CommentLogUsers.HC);
 
                 SqlParameter dtRequType = cmd.Parameters.Add("@BookingResponseType", SqlDbType.Structured);
                 dtRequType.Value = dtbr;

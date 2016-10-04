@@ -42,6 +42,7 @@ namespace TestingWCF
             var rezult = tn.synchronize(new WebServiceConsumerRequest()
 
             {
+                SessionId = 556677,
 
                 SendBookingRequirementRequests =
                 new SendBookingRequirementRequest[2]
@@ -133,7 +134,18 @@ namespace TestingWCF
                         Comment = "Test RequireTicketsRequest"
                     }
 
+                },
+                CancelBookingResponses = new BookingResponse[2] {
+                      new BookingResponse {
+                        BookingId=777,
+                        Comment = "Test cbr HC initial -1"
+                    },
+                     new BookingResponse {
+                        BookingId=555,
+                        Comment = "Test cbr HC initial -2"
+                    }
                 }
+
             });
           
         }
