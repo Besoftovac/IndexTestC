@@ -10,6 +10,7 @@ using System.ServiceModel.Activation;
 using System.Text;
 using System.Threading;
 using System.Web.Script.Serialization;
+using System.Security.Cryptography;
 
 namespace TravelService
 {
@@ -25,13 +26,20 @@ namespace TravelService
 
             if (webServiceConsumerRequest != null)
             {
-                Globals.ResponseTables = StoredProceduresCall.response_generateResponse();
+
+                Int32 ConsumerID = StoredProceduresCall.UserCheck(webServiceConsumerRequest.Username, webServiceConsumerRequest.Password);
+              
+                if (ConsumerID==-1)
+                    return null;
+                            
                 long SessionID = webServiceConsumerRequest.SessionId;
 
-                Int32 ServiceID = StoredProceduresCall.InsertService(SessionID: SessionID);
-                setCulture();
-
+                Int32 ServiceID = StoredProceduresCall.InsertService(SessionID: SessionID, Consumer_Id: ConsumerID);
+                setCulture();// set-a culture prema postavkama servera
+                Globals.ResponseTables = StoredProceduresCall.response_generateResponse();
                 WebServiceProviderResponse WPR = new WebServiceProviderResponse();
+
+               // String pass = PasswordGenerator.GetRandomAlphanumericString(15);
 
                 WPR.SessionId = (Int32)SessionID;
 
@@ -151,7 +159,7 @@ namespace TravelService
                 : (dr["BookingComment"]).ToString();
                 ufdr.BookingId = (dr["BookingID"] == DBNull.Value) ? -1
                 : Convert.ToInt32(dr["BookingID"]);
-                ufdr.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.BOOKED
+                ufdr.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.WAITLISTED
                 : (BookingStatus)(dr["BookingStatusID"]);
                 ufdr.SpendTime = (dr["SpendTime"] == DBNull.Value) ? -1
                 : Convert.ToInt32(dr["SpendTime"]);
@@ -234,7 +242,7 @@ namespace TravelService
                 : (dr["BookingComment"]).ToString();
                 seir.BookingId = (dr["BookingID"] == DBNull.Value) ? -1
                 : Convert.ToInt32(dr["BookingID"]);
-                seir.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.BOOKED
+                seir.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.WAITLISTED
                 : (BookingStatus)(dr["BookingStatusID"]);
 
                 listEticket.Clear();
@@ -279,7 +287,7 @@ namespace TravelService
                 : (dr["BookingComment"]).ToString();
                 conbr.BookingId = (dr["BookingID"] == DBNull.Value) ? -1
                 : Convert.ToInt32(dr["BookingID"]);
-                conbr.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.BOOKED
+                conbr.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.WAITLISTED
                 : (BookingStatus)(dr["BookingStatusID"]);
                 conbr.TimeLimit = (dr["TimeLimit"] == DBNull.Value) ? Convert.ToDateTime(Globals.DefaultDate)
                 : Convert.ToDateTime(dr["TimeLimit"]);
@@ -309,7 +317,7 @@ namespace TravelService
                 CancelBookingRequest canbr = new CancelBookingRequest();
                  canbr.BookingId = (dr["BookingID"] == DBNull.Value) ? -1
                 : Convert.ToInt32(dr["BookingID"]);
-                canbr.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.BOOKED
+                canbr.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.WAITLISTED
                 : (BookingStatus)(dr["BookingStatusID"]);
                 canbr.Comment = (dr["Comment"] == DBNull.Value) ? ""
                 : (dr["Comment"]).ToString();
@@ -342,7 +350,7 @@ namespace TravelService
                 : Convert.ToInt32(dr["BookingID"]);
                 rdr.BookingComment = (dr["BookingComment"] == DBNull.Value) ? ""
                 : (dr["BookingComment"]).ToString();
-                rdr.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.BOOKED
+                rdr.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.WAITLISTED
                 : (BookingStatus)(dr["BookingStatusID"]);
                 rdr.TimeLimit = (dr["TimeLimit"] == DBNull.Value) ? Convert.ToDateTime(Globals.DefaultDate)
                 : Convert.ToDateTime(dr["TimeLimit"]);
@@ -398,7 +406,7 @@ namespace TravelService
                     : (dr["FromAirport"]).ToString();
                 sabr.FromAirport = (dr["ToAirport"] == DBNull.Value) ? ""
                     : (dr["ToAirport"]).ToString();
-                sabr.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.BOOKED
+                sabr.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.WAITLISTED
                     : (BookingStatus)(dr["BookingStatusID"]);
                 sabr.TimeLimit = (dr["TimeLimit"] == DBNull.Value) ? Convert.ToDateTime(Globals.DefaultDate)
                     : Convert.ToDateTime(dr["TimeLimit"]);
@@ -476,7 +484,7 @@ namespace TravelService
         
 
             if (dtsbrr != null && dtPerson != null)
-                StoredProceduresCall.insert_update_SendBookingRequirementRequests_field(dtsbrr, dtPerson);
+                StoredProceduresCall.insert_update_SendBookingRequirementRequests_field(dtsbrr, dtPerson, (Int32)CommentLogUsers.HC);
            
 
 
@@ -514,7 +522,7 @@ namespace TravelService
             SendBookingRequirementResponses_field(webServiceConsumerRequest, ServiceID);//POZIV PROCEDURE I UPIS ZAHTJEVA U BAZU
             DataTable dtrr = ToDataTable<RequirementResponseTA>(listRRTA);
 
-            StoredProceduresCall.insert_RequirementResponse_field(dtrr);
+            StoredProceduresCall.insert_RequirementResponse_field(dtrr, (Int32)CommentLogUsers.TA);
 
             rrf = listRR.Cast<RequirementResponse>().ToArray();
             return rrf;
@@ -551,10 +559,10 @@ namespace TravelService
             DataTable dtrr = ToDataTable<RequirementResponseTA>(listRRTA);
             DataTable dtcbrr = ToDataTable<CancelBookingRequirementRequestTA>(listCbrrTA);
 
-            if (dtrr!=null)
-                StoredProceduresCall.insert_RequirementResponse_field(dtrr);
             if (dtcbrr != null)
                 StoredProceduresCall.insert_CancelBookingRequirementRequest_field(dtcbrr);
+            if (dtrr != null)
+                StoredProceduresCall.insert_RequirementResponse_field(dtrr, (Int32)CommentLogUsers.TA);
 
 
             rrf = listRR.Cast<RequirementResponse>().ToArray();
@@ -592,10 +600,11 @@ namespace TravelService
             DataTable dtbr = ToDataTable<BookingResponseTA>(listBRTA);
             DataTable dtabr = ToDataTable<AcceptBookingRequestTA>(listabrTA);
         
-            if (dtbr != null)
-                StoredProceduresCall.insert_BookingResponse_field(dtbr, (Int32)CommentLogUsers.TA);
             if (dtabr != null)
                 StoredProceduresCall.insert_AcceptBookingRequest_field(dtabr);
+
+            if (dtbr != null)
+                StoredProceduresCall.insert_BookingResponse_field(dtbr, (Int32)CommentLogUsers.TA);
 
             brfield = listBR.Cast<BookingResponse>().ToArray();
             return brfield;
@@ -634,11 +643,10 @@ namespace TravelService
             DataTable dtbr = ToDataTable<BookingResponseTA>(listBRTA);
             DataTable dtcbr = ToDataTable<CancelBookingRequestTA>(listcbrTA);
 
-            if (dtbr != null)
-                StoredProceduresCall.insert_BookingResponse_field(dtbr, (Int32)CommentLogUsers.TA);
-
             if (dtcbr != null)
                 StoredProceduresCall.insert_CancelBookingRequest_field(dtcbr);
+            if (dtbr != null)
+                StoredProceduresCall.insert_BookingResponse_field(dtbr, (Int32)CommentLogUsers.TA);
 
             brfield = listBR.Cast<BookingResponse>().ToArray();
             return brfield;
@@ -674,10 +682,10 @@ namespace TravelService
             DataTable dtbr = ToDataTable<BookingResponseTA>(listbrTA);
             DataTable dtrtr = ToDataTable<RequireTicketsRequestTA>(listrtrTA);
 
-            if (dtbr != null)
-                StoredProceduresCall.insert_BookingResponse_field(dtbr, (Int32)CommentLogUsers.TA);
             if (dtrtr != null)
                 StoredProceduresCall.insert_RequireTicketsRequest_field(dtrtr);
+            if (dtbr != null)
+                StoredProceduresCall.insert_BookingResponse_field(dtbr, (Int32)CommentLogUsers.TA);
 
             brfield = listbr.Cast<BookingResponse>().ToArray();
             return brfield;

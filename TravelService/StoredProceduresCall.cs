@@ -41,6 +41,36 @@ namespace TravelService
             if (bCloseConn) conn.Close();
         }//private static void Execute(SqlCommand cmd, bool bCloseConn = true)
 
+        public static Int32 UserCheck(String User, String Pass) {
+            Int32 UserID = -1;
+            if (User == null || Pass == null)
+                return UserID;
+            try
+            {
+                SqlCommand cmd = InitSqlCommand("UserCheck");
+
+                cmd.Parameters.Add("@UserName", SqlDbType.VarChar).Value = User;
+                cmd.Parameters.Add("@PassWord", SqlDbType.VarChar).Value = Pass;
+
+
+
+                cmd.Parameters.Add("@ConsumerID", SqlDbType.Int).Direction = ParameterDirection.Output;
+
+                Execute(cmd, false);
+
+                UserID = Convert.ToInt32(cmd.Parameters["@ConsumerID"].Value);
+
+            }
+            catch (Exception m)
+            {
+                throw m;
+            }
+            finally {
+                conn.Close();
+            }
+            return UserID;
+        }//   public static bool UserCheck(String User, String Pass) {
+
         public static DataSet response_generateResponse() {
             DataSet DS = new DataSet();
             try
@@ -148,7 +178,7 @@ namespace TravelService
         }//public static void insert_Person_field(DataTable dtPerson) {
 
 
-        public static void insert_update_SendBookingRequirementRequests_field(DataTable dtRequ, DataTable dtPerson) {
+        public static void insert_update_SendBookingRequirementRequests_field(DataTable dtRequ, DataTable dtPerson, Int32 CommentLogUser) {
 
             try {
                 if (dtPerson == null || dtRequ == null)
@@ -161,6 +191,7 @@ namespace TravelService
                    
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "insert_requ_SendBookingRequirementRequest_field";
+                cmd.Parameters.Add("@CommentLogUser", SqlDbType.Int).Value = CommentLogUser;
 
                 SqlParameter dtRequType = cmd.Parameters.Add("@requ_SendBookingRequirementRequestType", SqlDbType.Structured);
                 dtRequType.Value = dtRequ;
@@ -180,7 +211,7 @@ namespace TravelService
 
         }//  public static void insert_update_SendBookingRequirementRequests_field(DataTable dtRequ, DataTable dtPerson) {
 
-        public static void insert_RequirementResponse_field(DataTable rr) {
+        public static void insert_RequirementResponse_field(DataTable rr, Int32 CommentLogUser) {
 
             try {
 
@@ -191,6 +222,7 @@ namespace TravelService
 
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.CommandText = "insert_RequirementResponse_field";
+                cmd.Parameters.Add("@CommentLogUser", SqlDbType.Int).Value = CommentLogUser;
 
                 SqlParameter dtRequType = cmd.Parameters.Add("@RequirementResponseType", SqlDbType.Structured);
                 dtRequType.Value = rr;

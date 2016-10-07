@@ -43,6 +43,8 @@ namespace TestingWCF
 
             {
                 SessionId = 556677,
+                Username= "Offen",
+                Password= "R6pRDrQ0pLgZ9Ms",
 
                 SendBookingRequirementRequests =
                 new SendBookingRequirementRequest[2]
@@ -67,7 +69,7 @@ namespace TestingWCF
                          FromAirport = "HAM",
                          ToAirport = "CPT--",
                          ArrivalDate = new DateTime(2016,12,12),
-                         RequestBookingComment = "Promjenjeni podaci! - TEST"
+                         RequestBookingComment = "Oni traže booking za Petera - naš je requ response"
 
                     },
                      new SendBookingRequirementRequest
@@ -89,7 +91,7 @@ namespace TestingWCF
                          FromAirport = "HAM---",
                          ToAirport = "CPT",
                          ArrivalDate = new DateTime(2016, 12,11),
-                         RequestBookingComment = "RAKIJA  - Test booking request!"
+                         RequestBookingComment = "Oni traže booking  booking za Marinka - naš je requ response"
 
                     }
 
@@ -104,26 +106,34 @@ namespace TestingWCF
 
                         BookingRequirementId = 253,
                         Reason="",
-                        Comment = ""
+                        Comment = "Njihov CancelBookingRequirementRequest - naš je requ response"
 
 
                     }
 
                 },
 
-                AcceptBookingRequests = new AcceptBookingRequest[1] {
+                AcceptBookingRequests = new AcceptBookingRequest[3] {
 
                     new AcceptBookingRequest {
-                        BookingId=556,
-                        Comment = "Test AcceptBookingRequest"
+                        BookingId=256,
+                        Comment = "AcceptBookingRequest oni šalju - response je naš-commentLogTest(515)"
+                    },
+                   new AcceptBookingRequest {
+                        BookingId=257,
+                        Comment = "AcceptBookingRequest oni šalju - response je naš-commentLogTest(516)"
+                    },
+                   new AcceptBookingRequest {
+                        BookingId=258,
+                        Comment = "AcceptBookingRequest oni šalju - response je naš-commentLogTest(517)"
                     }
                 },
 
                 CancelBookingRequests = new CancelBookingRequest[1] {
 
                    new CancelBookingRequest {
-                        BookingId=13,
-                        Comment = "Test CancelBookingRequest",
+                        BookingId=517,
+                        Comment = "CancelBookingRequest oni šalju - response je naš",
                         BookingStatus= BookingStatus.CANCELLED
                     }
                 },
@@ -131,18 +141,18 @@ namespace TestingWCF
 
                      new RequireTicketsRequest {
                         BookingId=555,
-                        Comment = "Test RequireTicketsRequest"
+                        Comment = "RequireTicketsRequest oni šalju - response je naš"
                     }
 
                 },
                 CancelBookingResponses = new BookingResponse[2] {
                       new BookingResponse {
-                        BookingId=777,
-                        Comment = "Test cbr HC initial -1"
+                        BookingId=517,
+                        Comment = "Njihov inicijalni response na naš cancel za id 777"
                     },
                      new BookingResponse {
                         BookingId=555,
-                        Comment = "Test cbr HC initial -2"
+                        Comment = "Njihov inicijalni response na naš cancel za id 555"
                     }
                 }
 
