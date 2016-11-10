@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://www.medmar.eu/TravelService_.svc" elementFormDefault="qualified" targetNamespace="http://www.medmar.eu/TravelService_.svc" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://www.medmar.eu/TravelService_.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/TravelService" />
+  <xs:import schemaLocation="http://localhost:8733/?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/TravelService" />
   <xs:element name="synchronize">
     <xs:complexType>
       <xs:sequence>

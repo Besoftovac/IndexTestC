@@ -19,14 +19,15 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://www.medmar.eu/TravelService_.svc?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8733/" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="TravelService_3.xsd" MetadataType="Schema" ID="c0659371-5caf-46e8-a264-ae7e9e663722" SourceId="1" SourceUrl="http://www.medmar.eu/TravelService_.svc?xsd=xsd0" />
-    <MetadataFile FileName="TravelService_4.xsd" MetadataType="Schema" ID="8334edf9-a421-4d52-bf1c-e8de3776ff9e" SourceId="1" SourceUrl="http://www.medmar.eu/TravelService_.svc?xsd=xsd2" />
-    <MetadataFile FileName="TravelService2.wsdl" MetadataType="Wsdl" ID="b896cc1c-514c-4fbd-a5dd-9c4ac8c19374" SourceId="1" SourceUrl="http://www.medmar.eu/TravelService_.svc?wsdl" />
-    <MetadataFile FileName="TravelService_5.xsd" MetadataType="Schema" ID="f1eba293-a7e1-4672-a706-ab395f3452e6" SourceId="1" SourceUrl="http://www.medmar.eu/TravelService_.svc?xsd=xsd1" />
-    <MetadataFile FileName="TravelService_1.wsdl" MetadataType="Wsdl" ID="ef2c79ef-13c5-42c6-8dea-b7427ec1b4b2" SourceId="1" SourceUrl="http://www.medmar.eu/TravelService_.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="4d61817d-a731-4507-a5e1-be4078babfe6" SourceId="1" SourceUrl="http://localhost:8733/?disco" />
+    <MetadataFile FileName="TravelService2.wsdl" MetadataType="Wsdl" ID="48d2c57e-cfb9-487a-a555-09c237565a51" SourceId="1" SourceUrl="http://localhost:8733/?wsdl" />
+    <MetadataFile FileName="item1.wsdl" MetadataType="Wsdl" ID="2f26761d-9d65-4f14-84ac-9bf45c07fcac" SourceId="1" SourceUrl="http://localhost:8733/?wsdl=wsdl0" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="582bc5e3-3cf8-4104-8fd6-b5a57b3c9f1f" SourceId="1" SourceUrl="http://localhost:8733/?xsd=xsd0" />
+    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="caafba3f-7043-496f-b512-09294f67b1bc" SourceId="1" SourceUrl="http://localhost:8733/?xsd=xsd1" />
+    <MetadataFile FileName="item5.xsd" MetadataType="Schema" ID="340c073b-5b38-4079-9a1f-eb4cbfc1e22e" SourceId="1" SourceUrl="http://localhost:8733/?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

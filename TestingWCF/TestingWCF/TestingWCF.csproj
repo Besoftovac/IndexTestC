@@ -94,6 +94,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Service References\TravelService\item1.wsdl" />
+    <None Include="Service References\TravelService\item3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TravelService\item4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TravelService\item5.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\TravelService\TestingWCF.TravelService.WebServiceProviderResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -103,20 +113,10 @@
     <None Include="Service References\TravelService\TravelService_.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\TravelService\TravelService_1.wsdl" />
     <None Include="Service References\TravelService\TravelService_1.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\TravelService\TravelService_2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TravelService\TravelService_3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TravelService\TravelService_4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TravelService\TravelService_5.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -140,6 +140,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TravelService\item.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

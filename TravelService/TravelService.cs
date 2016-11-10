@@ -493,13 +493,16 @@ namespace TravelService
 
             SendBookingRequirementRequest[] sbrrfield = webServiceConsumerRequest.SendBookingRequirementRequests;
 
-            foreach (SendBookingRequirementRequest sbrr in sbrrfield) {                
+            foreach (SendBookingRequirementRequest sbrr in sbrrfield) {
 
-                SendBookingRequirementRequestTA sbrrTA = InitializeInstances.Initialize_SBRRequestTA(sbrr, ServiceID);
-                PersonTA personTA = InitializeInstances.Initialize_PersonTA(sbrr);              
+                if (sbrr.BookingRequirementId != 0)
+                {
+                    SendBookingRequirementRequestTA sbrrTA = InitializeInstances.Initialize_SBRRequestTA(sbrr, ServiceID);
+                    PersonTA personTA = InitializeInstances.Initialize_PersonTA(sbrr);
 
-                listPerson.Add(personTA);
-                listsbrr.Add(sbrrTA);
+                    listPerson.Add(personTA);
+                    listsbrr.Add(sbrrTA);
+                }
         
             }
 
@@ -540,7 +543,7 @@ namespace TravelService
                 }
                 else
                 {
-                    rr.Comment = InitialComment; // rrTA.Comment;
+                    rr.Comment = rrTA.Comment;
                     rr.IsReceived = rrTA.IsReceived;
                     rr.BookingRequirementId = rrTA.BookingRequirementId;
 
@@ -580,14 +583,23 @@ namespace TravelService
                     RequirementResponseTA rrTA = InitializeInstances.initialize_RequirementResponseTA(cbrr: cbrr, InitialComment: InitialComment);
                     RequirementResponse rr = new RequirementResponse();
 
-                rr.Comment = InitialComment;// rrTA.Comment;
+                if (rrTA.BookingRequirementId == 0)
+                {
+                    rr = notReceiveRR();
+                }
+                else
+                {
+                    rr.Comment = rrTA.Comment;
                     rr.IsReceived = rrTA.IsReceived;
                     rr.BookingRequirementId = rrTA.BookingRequirementId;
 
                     listRRTA.Add(rrTA);
-                    listRR.Add(rr);
                     listCbrrTA.Add(cbrrta);
-              
+
+                }
+                listRR.Add(rr);
+                
+
             }
             DataTable dtrr = ToDataTable<RequirementResponseTA>(listRRTA);
             DataTable dtcbrr = ToDataTable<CancelBookingRequirementRequestTA>(listCbrrTA);
@@ -621,14 +633,19 @@ namespace TravelService
                 BookingResponseTA brTA = InitializeInstances.initialize_BookingRespTA(abr: abr, ServiceID:ServiceID, InitialComment: InitialComment);
                 BookingResponse br = new BookingResponse();
 
-                br.Comment = InitialComment;//brTA.Comment;
-                br.IsReceived = brTA.IsReceived;
-                br.BookingId = brTA.BookingId;
+                if (brTA.BookingId == 0)
+                {
+                    br = notReceivedBR();
+                }
+                else {
+                    br.Comment = brTA.Comment;
+                    br.IsReceived = brTA.IsReceived;
+                    br.BookingId = brTA.BookingId;
 
-                listBRTA.Add(brTA);
+                    listBRTA.Add(brTA);                   
+                    listabrTA.Add(abrTA);
+                }
                 listBR.Add(br);
-                listabrTA.Add(abrTA);
-
             }
 
             DataTable dtbr = ToDataTable<BookingResponseTA>(listBRTA);
@@ -661,18 +678,22 @@ namespace TravelService
 
                 CancelBookingRequestTA cbrTA = InitializeInstances.initializeCBRTA(cbr: cbr, ServiceID: ServiceID);
                 BookingResponseTA brta = InitializeInstances.initialize_BookingRespTA(cbr: cbr, ServiceID: ServiceID, InitialComment: InitialComment);
-
                 BookingResponse br = new BookingResponse();
 
-                br.Comment = InitialComment; //brta.Comment;
-                br.IsReceived = brta.IsReceived;
-                br.BookingId = brta.BookingId;
+                if (brta.BookingId == 0) {
 
-                listBRTA.Add(brta);
+                    br = notReceivedBR();
+                }
+                else {
+                    br.Comment = brta.Comment;
+                    br.IsReceived = brta.IsReceived;
+                    br.BookingId = brta.BookingId;
+
+                    listBRTA.Add(brta);
+                    listcbrTA.Add(cbrTA);
+                }
+
                 listBR.Add(br);
-                listcbrTA.Add(cbrTA);
-
-
             }
 
             DataTable dtbr = ToDataTable<BookingResponseTA>(listBRTA);
@@ -704,15 +725,22 @@ namespace TravelService
                 BookingResponseTA brta = InitializeInstances.initialize_BookingRespTA(rtr: rtr, ServiceID: ServiceID, InitialComment: InitialComment);
                 BookingResponse br = new BookingResponse();
 
-                br.Comment = InitialComment; // brta.Comment;
-                br.IsReceived = brta.IsReceived;
-                br.BookingId = brta.BookingId;
+                if (brta.BookingId == 0)
+                {
+                    br = notReceivedBR();
 
-                listbrTA.Add(brta);
+                }
+                else {
+
+                    br.Comment = brta.Comment;
+                    br.IsReceived = brta.IsReceived;
+                    br.BookingId = brta.BookingId;
+
+                    listbrTA.Add(brta);
+                    listrtrTA.Add(rtrTA);
+                }
+
                 listbr.Add(br);
-                listrtrTA.Add(rtrTA);
-
-
             }
 
             DataTable dtbr = ToDataTable<BookingResponseTA>(listbrTA);

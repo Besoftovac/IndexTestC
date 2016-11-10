@@ -15,3 +15,4 @@ d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TestingWCF\Tes
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TestingWCF\TestingWCF\obj\Debug\TestingWCF.csproj.GenerateResource.Cache
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TestingWCF\TestingWCF\obj\Debug\TestingWCF.exe
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TestingWCF\TestingWCF\obj\Debug\TestingWCF.pdb
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TestingWCF\TestingWCF\obj\Debug\TestingWCF.csprojResolveAssemblyReference.cache
