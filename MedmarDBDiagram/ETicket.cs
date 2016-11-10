@@ -16,8 +16,7 @@ namespace MedmarDBDiagram
     {
         public int Id { get; set; }
         public string ETicketNumber { get; set; }
-    
-        public virtual Flight Flight { get; set; }
-        public virtual SendEticketInfoRequest SendEticketInfoRequest { get; set; }
+        public int Flight_Id { get; set; }
+        public int SendEticketInfoRequest_Id { get; set; }
     }
 }

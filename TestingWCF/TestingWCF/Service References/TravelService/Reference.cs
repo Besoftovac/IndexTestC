@@ -2009,7 +2009,7 @@ namespace TestingWCF.TravelService {
         private string FlightIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FlightStatusField;
+        private TestingWCF.TravelService.BookingStatus FlightStatusField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FromAirportField;
@@ -2151,12 +2151,12 @@ namespace TestingWCF.TravelService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FlightStatus {
+        public TestingWCF.TravelService.BookingStatus FlightStatus {
             get {
                 return this.FlightStatusField;
             }
             set {
-                if ((object.ReferenceEquals(this.FlightStatusField, value) != true)) {
+                if ((this.FlightStatusField.Equals(value) != true)) {
                     this.FlightStatusField = value;
                     this.RaisePropertyChanged("FlightStatus");
                 }

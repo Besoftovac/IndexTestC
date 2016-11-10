@@ -366,7 +366,8 @@ namespace TravelService
         [DataMember]
         public string FlightCode { get; set; }
         [DataMember]
-        public string FlightStatus { get; set; }
+        public BookingStatus FlightStatus { get; set; }
+        //public string FlightStatus { get; set; }
         [DataMember]
         public string FlightComment { get; set; }
         [DataMember]

@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MedmarServiceModelStoreContainer" CdmEntityContainer="MedmarServiceEntities">
+    <EntitySetMapping Name="AcceptBookingRequest">
+      <EntityTypeMapping TypeName="MedmarServiceModel.AcceptBookingRequest">
+        <MappingFragment StoreEntitySet="AcceptBookingRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Requ" ColumnName="Requ" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="agent">
+      <EntityTypeMapping TypeName="MedmarServiceModel.agent">
+        <MappingFragment StoreEntitySet="agent">
+          <ScalarProperty Name="IdAgent" ColumnName="IdAgent" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="NameSurname" ColumnName="NameSurname" />
+          <ScalarProperty Name="Adress" ColumnName="Adress" />
+          <ScalarProperty Name="Adress2" ColumnName="Adress2" />
+          <ScalarProperty Name="Idzipcode" ColumnName="Idzipcode" />
+          <ScalarProperty Name="IdCountry" ColumnName="IdCountry" />
+          <ScalarProperty Name="MB" ColumnName="MB" />
+          <ScalarProperty Name="OIB" ColumnName="OIB" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Telefax" ColumnName="Telefax" />
+          <ScalarProperty Name="GSM" ColumnName="GSM" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="Web" ColumnName="Web" />
+          <ScalarProperty Name="passwordAccount" ColumnName="passwordAccount" />
+          <ScalarProperty Name="RoleAccount" ColumnName="RoleAccount" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="usertype" ColumnName="usertype" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="password2" ColumnName="password2" />
+          <ScalarProperty Name="remember_token" ColumnName="remember_token" />
+          <ScalarProperty Name="role" ColumnName="role" />
+          <ScalarProperty Name="passwordFrontOffice" ColumnName="passwordFrontOffice" />
+          <ScalarProperty Name="RoleFrontOffice" ColumnName="RoleFrontOffice" />
+          <ScalarProperty Name="databases" ColumnName="databases" />
+          <ScalarProperty Name="Firm" ColumnName="Firm" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AgentRequ">
+      <EntityTypeMapping TypeName="MedmarServiceModel.AgentRequ">
+        <MappingFragment StoreEntitySet="AgentRequ">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="RequID" ColumnName="RequID" />
+          <ScalarProperty Name="AgentID" ColumnName="AgentID" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookingResponse">
+      <EntityTypeMapping TypeName="MedmarServiceModel.BookingResponse">
+        <MappingFragment StoreEntitySet="BookingResponse">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="IsReceived" ColumnName="IsReceived" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+          <ScalarProperty Name="BRType" ColumnName="BRType" />
+          <ScalarProperty Name="Requ" ColumnName="Requ" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookingResponsetType">
+      <EntityTypeMapping TypeName="MedmarServiceModel.BookingResponsetType">
+        <MappingFragment StoreEntitySet="BookingResponsetType">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Requ" ColumnName="Requ" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookingStatusHC">
+      <EntityTypeMapping TypeName="MedmarServiceModel.BookingStatusHC">
+        <MappingFragment StoreEntitySet="BookingStatusHC">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Initial" ColumnName="Initial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BookingStatusTA">
+      <EntityTypeMapping TypeName="MedmarServiceModel.BookingStatusTA">
+        <MappingFragment StoreEntitySet="BookingStatusTA">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Initial" ColumnName="Initial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelBookingRequest">
+      <EntityTypeMapping TypeName="MedmarServiceModel.CancelBookingRequest">
+        <MappingFragment StoreEntitySet="CancelBookingRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="BookingStatusID" ColumnName="BookingStatusID" />
+          <ScalarProperty Name="Requ" ColumnName="Requ" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelBookingRequirementRequest">
+      <EntityTypeMapping TypeName="MedmarServiceModel.CancelBookingRequirementRequest">
+        <MappingFragment StoreEntitySet="CancelBookingRequirementRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Reason" ColumnName="Reason" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="BookingRequirementId" ColumnName="BookingRequirementId" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommentLog">
+      <EntityTypeMapping TypeName="MedmarServiceModel.CommentLog">
+        <MappingFragment StoreEntitySet="CommentLog">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Fk_table" ColumnName="Fk_table" />
+          <ScalarProperty Name="Fk_ID" ColumnName="Fk_ID" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+          <ScalarProperty Name="Who" ColumnName="Who" />
+          <ScalarProperty Name="SystemUpdate" ColumnName="SystemUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CommentLogUsers">
+      <EntityTypeMapping TypeName="MedmarServiceModel.CommentLogUsers">
+        <MappingFragment StoreEntitySet="CommentLogUsers">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConfirmBookingRequest">
+      <EntityTypeMapping TypeName="MedmarServiceModel.ConfirmBookingRequest">
+        <MappingFragment StoreEntitySet="ConfirmBookingRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BookingComment" ColumnName="BookingComment" />
+          <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
+          <ScalarProperty Name="BookingStatusID" ColumnName="BookingStatusID" />
+          <ScalarProperty Name="Requ" ColumnName="Requ" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Consumer">
+      <EntityTypeMapping TypeName="MedmarServiceModel.Consumer">
+        <MappingFragment StoreEntitySet="Consumer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Defaults_">
+      <EntityTypeMapping TypeName="MedmarServiceModel.Defaults_">
+        <MappingFragment StoreEntitySet="Defaults_">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ETicket">
+      <EntityTypeMapping TypeName="MedmarServiceModel.ETicket">
+        <MappingFragment StoreEntitySet="ETicket">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ETicketNumber" ColumnName="ETicketNumber" />
+          <ScalarProperty Name="Flight_Id" ColumnName="Flight_Id" />
+          <ScalarProperty Name="SendEticketInfoRequest_Id" ColumnName="SendEticketInfoRequest_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EventData">
+      <EntityTypeMapping TypeName="MedmarServiceModel.EventData">
+        <MappingFragment StoreEntitySet="EventData">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EVENTDATA1" ColumnName="EVENTDATA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Flight">
+      <EntityTypeMapping TypeName="MedmarServiceModel.Flight">
+        <MappingFragment StoreEntitySet="Flight">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FlightId" ColumnName="FlightId" />
+          <ScalarProperty Name="Airline" ColumnName="Airline" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Currency" ColumnName="Currency" />
+          <ScalarProperty Name="FromAirport" ColumnName="FromAirport" />
+          <ScalarProperty Name="ToAirport" ColumnName="ToAirport" />
+          <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+          <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+          <ScalarProperty Name="FlightCode" ColumnName="FlightCode" />
+          <ScalarProperty Name="FlightStatus" ColumnName="FlightStatus" />
+          <ScalarProperty Name="FlightComment" ColumnName="FlightComment" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="TicketLocator" ColumnName="TicketLocator" />
+          <ScalarProperty Name="ETicketNumber" ColumnName="ETicketNumber" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="Update_" ColumnName="Update_" />
+          <ScalarProperty Name="PNR" ColumnName="PNR" />
+          <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+          <ScalarProperty Name="PassID_frontDesk" ColumnName="PassID_frontDesk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListOfColumns">
+      <EntityTypeMapping TypeName="MedmarServiceModel.ListOfColumns">
+        <MappingFragment StoreEntitySet="ListOfColumns">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+          <ScalarProperty Name="fk_idTable" ColumnName="fk_idTable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListOfTables">
+      <EntityTypeMapping TypeName="MedmarServiceModel.ListOfTables">
+        <MappingFragment StoreEntitySet="ListOfTables">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CommentColumnName" ColumnName="CommentColumnName" />
+          <ScalarProperty Name="RowIdentificatorCN" ColumnName="RowIdentificatorCN" />
+          <ScalarProperty Name="ComboBoxName" ColumnName="ComboBoxName" />
+          <ScalarProperty Name="RespID" ColumnName="RespID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Person">
+      <EntityTypeMapping TypeName="MedmarServiceModel.Person">
+        <MappingFragment StoreEntitySet="Person">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+          <ScalarProperty Name="PassportExpiryDate" ColumnName="PassportExpiryDate" />
+          <ScalarProperty Name="PassportIssuingCountry" ColumnName="PassportIssuingCountry" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="SeamansBookNumber" ColumnName="SeamansBookNumber" />
+          <ScalarProperty Name="SeamansBookExpiryDate" ColumnName="SeamansBookExpiryDate" />
+          <ScalarProperty Name="SeamansBookIssuingCountry" ColumnName="SeamansBookIssuingCountry" />
+          <ScalarProperty Name="USVisaNumber" ColumnName="USVisaNumber" />
+          <ScalarProperty Name="USVisaExpiryDate" ColumnName="USVisaExpiryDate" />
+          <ScalarProperty Name="PersonComment" ColumnName="PersonComment" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+          <ScalarProperty Name="BookingRequirementIdHC" ColumnName="BookingRequirementIdHC" />
+          <ScalarProperty Name="PersonIDFrontDesk" ColumnName="PersonIDFrontDesk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Procedures">
+      <EntityTypeMapping TypeName="MedmarServiceModel.Procedures">
+        <MappingFragment StoreEntitySet="Procedures">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ProcName" ColumnName="ProcName" />
+          <ScalarProperty Name="ProcCode" ColumnName="ProcCode" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+          <ScalarProperty Name="Proccessed" ColumnName="Proccessed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="requ_SendBookingRequirementRequest">
+      <EntityTypeMapping TypeName="MedmarServiceModel.requ_SendBookingRequirementRequest">
+        <MappingFragment StoreEntitySet="requ_SendBookingRequirementRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FromAirport" ColumnName="FromAirport" />
+          <ScalarProperty Name="ToAirport" ColumnName="ToAirport" />
+          <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+          <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+          <ScalarProperty Name="BookingRequirementIdHC" ColumnName="BookingRequirementIdHC" />
+          <ScalarProperty Name="RequestBookingComment" ColumnName="RequestBookingComment" />
+          <ScalarProperty Name="Service_Id" ColumnName="Service_Id" />
+          <ScalarProperty Name="Person_Id" ColumnName="Person_Id" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="requ_SendBookingRequirementRequest_history">
+      <EntityTypeMapping TypeName="MedmarServiceModel.requ_SendBookingRequirementRequest_history">
+        <MappingFragment StoreEntitySet="requ_SendBookingRequirementRequest_history">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FromAirport" ColumnName="FromAirport" />
+          <ScalarProperty Name="ToAirport" ColumnName="ToAirport" />
+          <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+          <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+          <ScalarProperty Name="BookingRequirementIdHC" ColumnName="BookingRequirementIdHC" />
+          <ScalarProperty Name="RequestBookingComment" ColumnName="RequestBookingComment" />
+          <ScalarProperty Name="Service_Id" ColumnName="Service_Id" />
+          <ScalarProperty Name="Person_Id" ColumnName="Person_Id" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="RequID" ColumnName="RequID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequireDecisionRequest">
+      <EntityTypeMapping TypeName="MedmarServiceModel.RequireDecisionRequest">
+        <MappingFragment StoreEntitySet="RequireDecisionRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BookingComment" ColumnName="BookingComment" />
+          <ScalarProperty Name="BookingStatusID" ColumnName="BookingStatusID" />
+          <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequirementResponse">
+      <EntityTypeMapping TypeName="MedmarServiceModel.RequirementResponse">
+        <MappingFragment StoreEntitySet="RequirementResponse">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="IsReceived" ColumnName="IsReceived" />
+          <ScalarProperty Name="BookingRequirementId" ColumnName="BookingRequirementId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequirementResponseStatus">
+      <EntityTypeMapping TypeName="MedmarServiceModel.RequirementResponseStatus">
+        <MappingFragment StoreEntitySet="RequirementResponseStatus">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RequireTicketsRequest">
+      <EntityTypeMapping TypeName="MedmarServiceModel.RequireTicketsRequest">
+        <MappingFragment StoreEntitySet="RequireTicketsRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Requ" ColumnName="Requ" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="resp_SendAvailableBookingRequest">
+      <EntityTypeMapping TypeName="MedmarServiceModel.resp_SendAvailableBookingRequest">
+        <MappingFragment StoreEntitySet="resp_SendAvailableBookingRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FromAirport" ColumnName="FromAirport" />
+          <ScalarProperty Name="ToAirport" ColumnName="ToAirport" />
+          <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+          <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+          <ScalarProperty Name="BookingStatusID" ColumnName="BookingStatusID" />
+          <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
+          <ScalarProperty Name="BookingComment" ColumnName="BookingComment" />
+          <ScalarProperty Name="SpendTime" ColumnName="SpendTime" />
+          <ScalarProperty Name="requ_SendBookingRequirementRequest_Id" ColumnName="requ_SendBookingRequirementRequest_Id" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+          <ScalarProperty Name="TAstatus" ColumnName="TAstatus" />
+          <ScalarProperty Name="FlagUndefFlightStatus" ColumnName="FlagUndefFlightStatus" />
+          <ScalarProperty Name="Sent" ColumnName="Sent" />
+          <ScalarProperty Name="RequDescisionCounter" ColumnName="RequDescisionCounter" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SendAvailableBookingRequestFlight">
+      <EntityTypeMapping TypeName="MedmarServiceModel.SendAvailableBookingRequestFlight">
+        <MappingFragment StoreEntitySet="SendAvailableBookingRequestFlight">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="resp_SendAvailableBookingRequest_Id" ColumnName="resp_SendAvailableBookingRequest_Id" />
+          <ScalarProperty Name="Flight_Id" ColumnName="Flight_Id" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SendEticketInfoRequest">
+      <EntityTypeMapping TypeName="MedmarServiceModel.SendEticketInfoRequest">
+        <MappingFragment StoreEntitySet="SendEticketInfoRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BookingComment" ColumnName="BookingComment" />
+          <ScalarProperty Name="BookingStatusID" ColumnName="BookingStatusID" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Service">
+      <EntityTypeMapping TypeName="MedmarServiceModel.Service">
+        <MappingFragment StoreEntitySet="Service">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+          <ScalarProperty Name="Consumer_Id" ColumnName="Consumer_Id" />
+          <ScalarProperty Name="Date_" ColumnName="Date_" />
+          <ScalarProperty Name="D" ColumnName="D" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServiceStatus">
+      <EntityTypeMapping TypeName="MedmarServiceModel.ServiceStatus">
+        <MappingFragment StoreEntitySet="ServiceStatus">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="UpdateInitial" ColumnName="UpdateInitial" />
+          <ScalarProperty Name="Requ" ColumnName="Requ" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="SendReady" ColumnName="SendReady" />
+          <ScalarProperty Name="Sent" ColumnName="Sent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestRequest">
+      <EntityTypeMapping TypeName="MedmarServiceModel.TestRequest">
+        <MappingFragment StoreEntitySet="TestRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Requ" ColumnName="Requ" />
+          <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UpdateFlightDataRequest">
+      <EntityTypeMapping TypeName="MedmarServiceModel.UpdateFlightDataRequest">
+        <MappingFragment StoreEntitySet="UpdateFlightDataRequest">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BookingComment" ColumnName="BookingComment" />
+          <ScalarProperty Name="BookingStatusID" ColumnName="BookingStatusID" />
+          <ScalarProperty Name="TimeLimit" ColumnName="TimeLimit" />
+          <ScalarProperty Name="SpendTime" ColumnName="SpendTime" />
+          <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UpdateFlightsFlight">
+      <EntityTypeMapping TypeName="MedmarServiceModel.UpdateFlightsFlight">
+        <MappingFragment StoreEntitySet="UpdateFlightsFlight">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Flight_Id" ColumnName="Flight_Id" />
+          <ScalarProperty Name="UpdateFlightDataRequest_Id" ColumnName="UpdateFlightDataRequest_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

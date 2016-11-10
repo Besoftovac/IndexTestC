@@ -41,6 +41,33 @@ namespace TravelService
             if (bCloseConn) conn.Close();
         }//private static void Execute(SqlCommand cmd, bool bCloseConn = true)
 
+        public static String GetResponseCommentText(bool requ=false, Int32 Type=-1) {
+
+            String comment = null;
+            try {
+                SqlCommand cmd = InitSqlCommand("get_initialResponseSystemComment");
+
+                cmd.Parameters.Add("@RequRequ", SqlDbType.Bit).Value = requ;
+                cmd.Parameters.Add("@TypeID", SqlDbType.Int).Value = Type;
+
+
+                cmd.Parameters.Add("@Comment", SqlDbType.VarChar,8000).Direction = ParameterDirection.Output;
+
+                Execute(cmd, false);
+
+                comment = (cmd.Parameters["@Comment"].Value).ToString();
+            }
+            catch (Exception p) {
+
+                throw p;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return comment;
+        }// public String GetResponseCommentText(bool requ..
+
         public static Int32 UserCheck(String User, String Pass) {
             Int32 UserID = -1;
             if (User == null || Pass == null)

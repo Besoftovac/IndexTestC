@@ -16,8 +16,7 @@ namespace MedmarDBDiagram
     {
         public int Id { get; set; }
         public string Comment { get; set; }
-    
-        public virtual Flight Flight { get; set; }
-        public virtual UpdateFlightDataRequest UpdateFlightDataRequest { get; set; }
+        public int Flight_Id { get; set; }
+        public int UpdateFlightDataRequest_Id { get; set; }
     }
 }

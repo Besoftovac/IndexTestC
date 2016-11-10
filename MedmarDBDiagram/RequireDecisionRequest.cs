@@ -18,7 +18,8 @@ namespace MedmarDBDiagram
         public string BookingComment { get; set; }
         public Nullable<int> BookingStatusID { get; set; }
         public Nullable<System.DateTime> TimeLimit { get; set; }
-    
-        public virtual resp_SendAvailableBookingRequest resp_SendAvailableBookingRequest { get; set; }
+        public int BookingID { get; set; }
+        public Nullable<System.DateTime> Date_ { get; set; }
+        public Nullable<int> Status { get; set; }
     }
 }

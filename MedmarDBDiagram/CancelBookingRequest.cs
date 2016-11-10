@@ -20,5 +20,8 @@ namespace MedmarDBDiagram
         public Nullable<int> BookingStatusID { get; set; }
         public Nullable<bool> Requ { get; set; }
         public Nullable<int> BookingID { get; set; }
+        public Nullable<int> ServiceID { get; set; }
+        public Nullable<System.DateTime> Date_ { get; set; }
+        public Nullable<int> Status { get; set; }
     }
 }

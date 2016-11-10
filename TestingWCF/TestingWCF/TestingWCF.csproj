@@ -94,20 +94,31 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Service References\TravelService\item.wsdl" />
-    <None Include="Service References\TravelService\item.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TravelService\item1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\TravelService\item2.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\TravelService\TestingWCF.TravelService.WebServiceProviderResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\TravelService\TravelService1.wsdl" />
+    <None Include="Service References\TravelService\TravelService.wsdl" />
+    <None Include="Service References\TravelService\TravelService2.wsdl" />
+    <None Include="Service References\TravelService\TravelService_.wsdl" />
+    <None Include="Service References\TravelService\TravelService_.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TravelService\TravelService_1.wsdl" />
+    <None Include="Service References\TravelService\TravelService_1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TravelService\TravelService_2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TravelService\TravelService_3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TravelService\TravelService_4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TravelService\TravelService_5.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

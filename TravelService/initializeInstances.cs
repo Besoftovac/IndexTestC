@@ -77,7 +77,7 @@ namespace TravelService
             return tr;
         }
 
-        public static RequirementResponseTA initialize_RequirementResponseTA(SendBookingRequirementRequest sbrr=null, CancelBookingRequirementRequest cbrr = null) {
+        public static RequirementResponseTA initialize_RequirementResponseTA(SendBookingRequirementRequest sbrr=null, CancelBookingRequirementRequest cbrr = null, String InitialComment=null) {
 
             if (sbrr == null && cbrr == null)
                 return null;
@@ -85,7 +85,7 @@ namespace TravelService
             {
                 RequirementResponseTA rrta = new RequirementResponseTA();
 
-                rrta.Comment = "Initial response";
+                rrta.Comment = InitialComment;
                 rrta.IsReceived = true;
                 if (sbrr != null)
                 {
@@ -118,7 +118,7 @@ namespace TravelService
         }
 
         public static BookingResponseTA initialize_BookingRespTA(AcceptBookingRequest abr=null, CancelBookingRequest cbr=null, 
-            RequireTicketsRequest rtr=null, Int32 ServiceID=-1, bool Requ=false)
+            RequireTicketsRequest rtr=null, Int32 ServiceID=-1, bool Requ=false, String InitialComment=null)
         {
             BookingResponseTA brta = new BookingResponseTA();
 
@@ -126,14 +126,14 @@ namespace TravelService
 
                 brta.BookingId = (Int32)abr.BookingId;
                 brta.BRType = (Int32)BookingResponseType.Accept;
-                brta.Comment = abr.Comment;
+                brta.Comment = InitialComment;//abr.Comment;
             }
 
             if (cbr != null)
             {
                 brta.BookingId = (Int32)cbr.BookingId;
                 brta.BRType = (Int32)BookingResponseType.Cancel;
-                brta.Comment = cbr.Comment;
+                brta.Comment = InitialComment;// cbr.Comment;
 
             }
 
@@ -141,7 +141,7 @@ namespace TravelService
             {
                 brta.BookingId = (Int32)rtr.BookingId;
                 brta.BRType = (Int32)BookingResponseType.RequireTickets;
-                brta.Comment = rtr.Comment;
+                brta.Comment = InitialComment;// rtr.Comment;
 
             }
 

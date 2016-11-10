@@ -14,17 +14,6 @@ namespace MedmarDBDiagram
     
     public partial class resp_SendAvailableBookingRequest
     {
-        public resp_SendAvailableBookingRequest()
-        {
-            this.AcceptBookingRequest = new HashSet<AcceptBookingRequest>();
-            this.CancelBookingRequest = new HashSet<CancelBookingRequest>();
-            this.ConfirmBookingRequest = new HashSet<ConfirmBookingRequest>();
-            this.RequireDecisionRequest = new HashSet<RequireDecisionRequest>();
-            this.SendEticketInfoRequest = new HashSet<SendEticketInfoRequest>();
-            this.UpdateFlightDataRequest = new HashSet<UpdateFlightDataRequest>();
-            this.RequirementResponse = new HashSet<RequirementResponse>();
-        }
-    
         public int Id { get; set; }
         public string FromAirport { get; set; }
         public string ToAirport { get; set; }
@@ -34,14 +23,13 @@ namespace MedmarDBDiagram
         public Nullable<System.DateTime> TimeLimit { get; set; }
         public string BookingComment { get; set; }
         public Nullable<int> SpendTime { get; set; }
-    
-        public virtual ICollection<AcceptBookingRequest> AcceptBookingRequest { get; set; }
-        public virtual ICollection<CancelBookingRequest> CancelBookingRequest { get; set; }
-        public virtual ICollection<ConfirmBookingRequest> ConfirmBookingRequest { get; set; }
-        public virtual requ_SendBookingRequirementRequest requ_SendBookingRequirementRequest { get; set; }
-        public virtual ICollection<RequireDecisionRequest> RequireDecisionRequest { get; set; }
-        public virtual ICollection<SendEticketInfoRequest> SendEticketInfoRequest { get; set; }
-        public virtual ICollection<UpdateFlightDataRequest> UpdateFlightDataRequest { get; set; }
-        public virtual ICollection<RequirementResponse> RequirementResponse { get; set; }
+        public int requ_SendBookingRequirementRequest_Id { get; set; }
+        public Nullable<int> Status { get; set; }
+        public Nullable<int> BookingID { get; set; }
+        public Nullable<System.DateTime> Date_ { get; set; }
+        public Nullable<int> TAstatus { get; set; }
+        public Nullable<bool> FlagUndefFlightStatus { get; set; }
+        public Nullable<bool> Sent { get; set; }
+        public Nullable<int> RequDescisionCounter { get; set; }
     }
 }

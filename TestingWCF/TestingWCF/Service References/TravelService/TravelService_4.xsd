@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/TravelService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/TravelService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://www.medmar.eu/TravelService_.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="WebServiceConsumerRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AcceptBookingRequests" nillable="true" type="tns:ArrayOfAcceptBookingRequest" />
+      <xs:element minOccurs="0" name="CancelBookingRequests" nillable="true" type="tns:ArrayOfCancelBookingRequest" />
+      <xs:element minOccurs="0" name="CancelBookingRequirementRequests" nillable="true" type="tns:ArrayOfCancelBookingRequirementRequest" />
+      <xs:element minOccurs="0" name="CancelBookingResponses" nillable="true" type="tns:ArrayOfBookingResponse" />
+      <xs:element minOccurs="0" name="ConfirmBookingResponses" nillable="true" type="tns:ArrayOfBookingResponse" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RequestIssuingDecisionResponses" nillable="true" type="tns:ArrayOfBookingResponse" />
+      <xs:element minOccurs="0" name="RequireTicketsRequests" nillable="true" type="tns:ArrayOfRequireTicketsRequest" />
+      <xs:element minOccurs="0" name="SendAvailableBookingResponses" nillable="true" type="tns:ArrayOfBookingResponse" />
+      <xs:element minOccurs="0" name="SendBookingRequirementRequests" nillable="true" type="tns:ArrayOfSendBookingRequirementRequest" />
+      <xs:element minOccurs="0" name="SendEticketInfoResponses" nillable="true" type="tns:ArrayOfBookingResponse" />
+      <xs:element minOccurs="0" name="SessionId" type="xs:long" />
+      <xs:element minOccurs="0" name="UpdateFlightDataResponses" nillable="true" type="tns:ArrayOfBookingResponse" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WebServiceConsumerRequest" nillable="true" type="tns:WebServiceConsumerRequest" />
+  <xs:complexType name="ArrayOfAcceptBookingRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AcceptBookingRequest" nillable="true" type="tns:AcceptBookingRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAcceptBookingRequest" nillable="true" type="tns:ArrayOfAcceptBookingRequest" />
+  <xs:complexType name="AcceptBookingRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingId" type="xs:long" />
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AcceptBookingRequest" nillable="true" type="tns:AcceptBookingRequest" />
+  <xs:complexType name="ArrayOfCancelBookingRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CancelBookingRequest" nillable="true" type="tns:CancelBookingRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCancelBookingRequest" nillable="true" type="tns:ArrayOfCancelBookingRequest" />
+  <xs:complexType name="CancelBookingRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingId" type="xs:long" />
+      <xs:element minOccurs="0" name="BookingStatus" type="tns:BookingStatus" />
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Reason" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CancelBookingRequest" nillable="true" type="tns:CancelBookingRequest" />
+  <xs:simpleType name="BookingStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="BOOKED">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WAITLISTED">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CANCELLED">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TICKETED">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CONFIRMED">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="BookingStatus" nillable="true" type="tns:BookingStatus" />
+  <xs:complexType name="ArrayOfCancelBookingRequirementRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CancelBookingRequirementRequest" nillable="true" type="tns:CancelBookingRequirementRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCancelBookingRequirementRequest" nillable="true" type="tns:ArrayOfCancelBookingRequirementRequest" />
+  <xs:complexType name="CancelBookingRequirementRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingRequirementId" type="xs:long" />
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Reason" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CancelBookingRequirementRequest" nillable="true" type="tns:CancelBookingRequirementRequest" />
+  <xs:complexType name="ArrayOfBookingResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BookingResponse" nillable="true" type="tns:BookingResponse" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBookingResponse" nillable="true" type="tns:ArrayOfBookingResponse" />
+  <xs:complexType name="BookingResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingId" type="xs:long" />
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsReceived" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BookingResponse" nillable="true" type="tns:BookingResponse" />
+  <xs:complexType name="ArrayOfRequireTicketsRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RequireTicketsRequest" nillable="true" type="tns:RequireTicketsRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRequireTicketsRequest" nillable="true" type="tns:ArrayOfRequireTicketsRequest" />
+  <xs:complexType name="RequireTicketsRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingId" type="xs:long" />
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RequireTicketsRequest" nillable="true" type="tns:RequireTicketsRequest" />
+  <xs:complexType name="ArrayOfSendBookingRequirementRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SendBookingRequirementRequest" nillable="true" type="tns:SendBookingRequirementRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSendBookingRequirementRequest" nillable="true" type="tns:ArrayOfSendBookingRequirementRequest" />
+  <xs:complexType name="SendBookingRequirementRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ArrivalDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="BookingRequirementId" type="xs:long" />
+      <xs:element minOccurs="0" name="DepartureDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FromAirport" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Person" nillable="true" type="tns:Person" />
+      <xs:element minOccurs="0" name="RequestBookingComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ToAirport" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SendBookingRequirementRequest" nillable="true" type="tns:SendBookingRequirementRequest" />
+  <xs:complexType name="Person">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Birthday" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nationality" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PassportExpiryDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PassportIssuingCountry" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PassportNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PersonComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PersonId" type="xs:long" />
+      <xs:element minOccurs="0" name="PlaceOfBirth" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SeamansBookExpiryDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SeamansBookIssuingCountry" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SeamansBookNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="USVisaExpiryDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="USVisaNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Person" nillable="true" type="tns:Person" />
+  <xs:complexType name="WebServiceProviderResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AcceptBookingResponses" nillable="true" type="tns:ArrayOfBookingResponse" />
+      <xs:element minOccurs="0" name="CancelBookingRequests" nillable="true" type="tns:ArrayOfCancelBookingRequest" />
+      <xs:element minOccurs="0" name="CancelBookingRequirementResponses" nillable="true" type="tns:ArrayOfRequirementResponse" />
+      <xs:element minOccurs="0" name="CancelBookingResponses" nillable="true" type="tns:ArrayOfBookingResponse" />
+      <xs:element minOccurs="0" name="ConfirmBookingRequests" nillable="true" type="tns:ArrayOfConfirmBookingRequest" />
+      <xs:element minOccurs="0" name="RequireDecisionRequests" nillable="true" type="tns:ArrayOfRequireDecisionRequest" />
+      <xs:element minOccurs="0" name="RequireTicketsResponses" nillable="true" type="tns:ArrayOfBookingResponse" />
+      <xs:element minOccurs="0" name="SendAvailableBookingRequests" nillable="true" type="tns:ArrayOfSendAvailableBookingRequest" />
+      <xs:element minOccurs="0" name="SendBookingRequirementResponses" nillable="true" type="tns:ArrayOfRequirementResponse" />
+      <xs:element minOccurs="0" name="SendEticketInfoRequests" nillable="true" type="tns:ArrayOfSendEticketInfoRequest" />
+      <xs:element minOccurs="0" name="SessionId" type="xs:int" />
+      <xs:element minOccurs="0" name="UpdateFlightDataRequests" nillable="true" type="tns:ArrayOfUpdateFlightDataRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="WebServiceProviderResponse" nillable="true" type="tns:WebServiceProviderResponse" />
+  <xs:complexType name="ArrayOfRequirementResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RequirementResponse" nillable="true" type="tns:RequirementResponse" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRequirementResponse" nillable="true" type="tns:ArrayOfRequirementResponse" />
+  <xs:complexType name="RequirementResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingRequirementId" type="xs:long" />
+      <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsReceived" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RequirementResponse" nillable="true" type="tns:RequirementResponse" />
+  <xs:complexType name="ArrayOfConfirmBookingRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ConfirmBookingRequest" nillable="true" type="tns:ConfirmBookingRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfConfirmBookingRequest" nillable="true" type="tns:ArrayOfConfirmBookingRequest" />
+  <xs:complexType name="ConfirmBookingRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BookingId" type="xs:long" />
+      <xs:element minOccurs="0" name="BookingStatus" type="tns:BookingStatus" />
+      <xs:element minOccurs="0" name="TimeLimit" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ConfirmBookingRequest" nillable="true" type="tns:ConfirmBookingRequest" />
+  <xs:complexType name="ArrayOfRequireDecisionRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RequireDecisionRequest" nillable="true" type="tns:RequireDecisionRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRequireDecisionRequest" nillable="true" type="tns:ArrayOfRequireDecisionRequest" />
+  <xs:complexType name="RequireDecisionRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BookingId" type="xs:long" />
+      <xs:element minOccurs="0" name="BookingStatus" type="tns:BookingStatus" />
+      <xs:element minOccurs="0" name="TimeLimit" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RequireDecisionRequest" nillable="true" type="tns:RequireDecisionRequest" />
+  <xs:complexType name="ArrayOfSendAvailableBookingRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SendAvailableBookingRequest" nillable="true" type="tns:SendAvailableBookingRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSendAvailableBookingRequest" nillable="true" type="tns:ArrayOfSendAvailableBookingRequest" />
+  <xs:complexType name="SendAvailableBookingRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ArrivalDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="BookingComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BookingId" type="xs:long" />
+      <xs:element minOccurs="0" name="BookingRequirementId" type="xs:long" />
+      <xs:element minOccurs="0" name="BookingStatus" type="tns:BookingStatus" />
+      <xs:element minOccurs="0" name="DepartureDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Flights" nillable="true" type="tns:ArrayOfFlight" />
+      <xs:element minOccurs="0" name="FromAirport" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SpendTime" type="xs:int" />
+      <xs:element minOccurs="0" name="TimeLimit" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ToAirport" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SendAvailableBookingRequest" nillable="true" type="tns:SendAvailableBookingRequest" />
+  <xs:complexType name="ArrayOfFlight">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Flight" nillable="true" type="tns:Flight" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFlight" nillable="true" type="tns:ArrayOfFlight" />
+  <xs:complexType name="Flight">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Airline" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ArrivalDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Class" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DepartureDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ETicketNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FlightCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FlightComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FlightId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FlightStatus" type="tns:BookingStatus" />
+      <xs:element minOccurs="0" name="FromAirport" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TicketLocator" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ToAirport" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Flight" nillable="true" type="tns:Flight" />
+  <xs:complexType name="ArrayOfSendEticketInfoRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SendEticketInfoRequest" nillable="true" type="tns:SendEticketInfoRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSendEticketInfoRequest" nillable="true" type="tns:ArrayOfSendEticketInfoRequest" />
+  <xs:complexType name="SendEticketInfoRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BookingId" type="xs:long" />
+      <xs:element minOccurs="0" name="BookingStatus" type="tns:BookingStatus" />
+      <xs:element minOccurs="0" name="ETickets" nillable="true" type="tns:ArrayOfETicket" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SendEticketInfoRequest" nillable="true" type="tns:SendEticketInfoRequest" />
+  <xs:complexType name="ArrayOfETicket">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ETicket" nillable="true" type="tns:ETicket" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfETicket" nillable="true" type="tns:ArrayOfETicket" />
+  <xs:complexType name="ETicket">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ETicketNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FlightId" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ETicket" nillable="true" type="tns:ETicket" />
+  <xs:complexType name="ArrayOfUpdateFlightDataRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="UpdateFlightDataRequest" nillable="true" type="tns:UpdateFlightDataRequest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfUpdateFlightDataRequest" nillable="true" type="tns:ArrayOfUpdateFlightDataRequest" />
+  <xs:complexType name="UpdateFlightDataRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookingComment" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BookingId" type="xs:long" />
+      <xs:element minOccurs="0" name="BookingStatus" type="tns:BookingStatus" />
+      <xs:element minOccurs="0" name="Flights" nillable="true" type="tns:ArrayOfFlight" />
+      <xs:element minOccurs="0" name="SpendTime" type="xs:int" />
+      <xs:element minOccurs="0" name="TimeLimit" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UpdateFlightDataRequest" nillable="true" type="tns:UpdateFlightDataRequest" />
+</xs:schema>

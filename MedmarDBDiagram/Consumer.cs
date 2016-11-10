@@ -14,15 +14,8 @@ namespace MedmarDBDiagram
     
     public partial class Consumer
     {
-        public Consumer()
-        {
-            this.Service = new HashSet<Service>();
-        }
-    
         public int Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
-    
-        public virtual ICollection<Service> Service { get; set; }
     }
 }

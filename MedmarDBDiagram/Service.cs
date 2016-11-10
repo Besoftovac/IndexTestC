@@ -14,16 +14,10 @@ namespace MedmarDBDiagram
     
     public partial class Service
     {
-        public Service()
-        {
-            this.requ_SendBookingRequirementRequest = new HashSet<requ_SendBookingRequirementRequest>();
-        }
-    
         public int Id { get; set; }
-        public Nullable<bool> Requ { get; set; }
         public Nullable<int> SessionID { get; set; }
-    
-        public virtual Consumer Consumer { get; set; }
-        public virtual ICollection<requ_SendBookingRequirementRequest> requ_SendBookingRequirementRequest { get; set; }
+        public int Consumer_Id { get; set; }
+        public Nullable<System.DateTime> Date_ { get; set; }
+        public Nullable<int> D { get; set; }
     }
 }

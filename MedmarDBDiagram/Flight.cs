@@ -14,12 +14,6 @@ namespace MedmarDBDiagram
     
     public partial class Flight
     {
-        public Flight()
-        {
-            this.ETicket = new HashSet<ETicket>();
-            this.UpdateFlightsFlight = new HashSet<UpdateFlightsFlight>();
-        }
-    
         public int Id { get; set; }
         public string FlightId { get; set; }
         public string Airline { get; set; }
@@ -35,8 +29,11 @@ namespace MedmarDBDiagram
         public string Class { get; set; }
         public string TicketLocator { get; set; }
         public string ETicketNumber { get; set; }
-    
-        public virtual ICollection<ETicket> ETicket { get; set; }
-        public virtual ICollection<UpdateFlightsFlight> UpdateFlightsFlight { get; set; }
+        public Nullable<System.DateTime> Date_ { get; set; }
+        public Nullable<int> BookingID { get; set; }
+        public Nullable<bool> Update_ { get; set; }
+        public string PNR { get; set; }
+        public Nullable<int> FlightNumber { get; set; }
+        public Nullable<int> PassID_frontDesk { get; set; }
     }
 }

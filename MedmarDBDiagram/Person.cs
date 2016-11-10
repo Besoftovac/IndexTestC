@@ -14,11 +14,6 @@ namespace MedmarDBDiagram
     
     public partial class Person
     {
-        public Person()
-        {
-            this.requ_SendBookingRequirementRequest = new HashSet<requ_SendBookingRequirementRequest>();
-        }
-    
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -29,12 +24,13 @@ namespace MedmarDBDiagram
         public string PlaceOfBirth { get; set; }
         public string Nationality { get; set; }
         public string SeamansBookNumber { get; set; }
-        public string SeamansBookExpiryDate { get; set; }
+        public Nullable<System.DateTime> SeamansBookExpiryDate { get; set; }
         public string SeamansBookIssuingCountry { get; set; }
         public string USVisaNumber { get; set; }
         public Nullable<System.DateTime> USVisaExpiryDate { get; set; }
         public string PersonComment { get; set; }
-    
-        public virtual ICollection<requ_SendBookingRequirementRequest> requ_SendBookingRequirementRequest { get; set; }
+        public Nullable<System.DateTime> Date_ { get; set; }
+        public Nullable<int> BookingRequirementIdHC { get; set; }
+        public Nullable<int> PersonIDFrontDesk { get; set; }
     }
 }

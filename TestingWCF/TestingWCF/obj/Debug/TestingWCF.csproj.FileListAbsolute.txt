@@ -10,7 +10,6 @@ d:\Users\Slavica\Documents\Visual Studio 2015\Projects\TestingWCF\TestingWCF\obj
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TestingWCF\TestingWCF\bin\Debug\TestingWCF.exe.config
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TestingWCF\TestingWCF\bin\Debug\TestingWCF.exe
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TestingWCF\TestingWCF\bin\Debug\TestingWCF.pdb
-d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TestingWCF\TestingWCF\obj\Debug\TestingWCF.csprojResolveAssemblyReference.cache
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TestingWCF\TestingWCF\obj\Debug\TestingWCF.Form1.resources
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TestingWCF\TestingWCF\obj\Debug\TestingWCF.Properties.Resources.resources
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\TestingWCF\TestingWCF\obj\Debug\TestingWCF.csproj.GenerateResource.Cache

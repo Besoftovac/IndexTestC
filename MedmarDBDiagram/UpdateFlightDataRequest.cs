@@ -14,18 +14,12 @@ namespace MedmarDBDiagram
     
     public partial class UpdateFlightDataRequest
     {
-        public UpdateFlightDataRequest()
-        {
-            this.UpdateFlightsFlight = new HashSet<UpdateFlightsFlight>();
-        }
-    
         public int Id { get; set; }
         public string BookingComment { get; set; }
         public Nullable<int> BookingStatusID { get; set; }
         public Nullable<System.DateTime> TimeLimit { get; set; }
         public Nullable<int> SpendTime { get; set; }
-    
-        public virtual ICollection<UpdateFlightsFlight> UpdateFlightsFlight { get; set; }
-        public virtual resp_SendAvailableBookingRequest resp_SendAvailableBookingRequest { get; set; }
+        public int BookingID { get; set; }
+        public Nullable<int> Status { get; set; }
     }
 }

@@ -14,17 +14,6 @@ namespace MedmarDBDiagram
     
     public partial class requ_SendBookingRequirementRequest
     {
-        public requ_SendBookingRequirementRequest()
-        {
-            this.CancelBookingRequirementRequest = new HashSet<CancelBookingRequirementRequest>();
-            this.AcceptBookingRequest = new HashSet<AcceptBookingRequest>();
-            this.CancelBookingRequest = new HashSet<CancelBookingRequest>();
-            this.ConfirmBookingRequest = new HashSet<ConfirmBookingRequest>();
-            this.RequireTicketsRequest = new HashSet<RequireTicketsRequest>();
-            this.BookingResponse = new HashSet<BookingResponse>();
-            this.resp_SendAvailableBookingRequest = new HashSet<resp_SendAvailableBookingRequest>();
-        }
-    
         public int Id { get; set; }
         public string FromAirport { get; set; }
         public string ToAirport { get; set; }
@@ -32,15 +21,9 @@ namespace MedmarDBDiagram
         public Nullable<System.DateTime> ArrivalDate { get; set; }
         public Nullable<int> BookingRequirementIdHC { get; set; }
         public string RequestBookingComment { get; set; }
-    
-        public virtual Service Service { get; set; }
-        public virtual ICollection<CancelBookingRequirementRequest> CancelBookingRequirementRequest { get; set; }
-        public virtual ICollection<AcceptBookingRequest> AcceptBookingRequest { get; set; }
-        public virtual ICollection<CancelBookingRequest> CancelBookingRequest { get; set; }
-        public virtual ICollection<ConfirmBookingRequest> ConfirmBookingRequest { get; set; }
-        public virtual ICollection<RequireTicketsRequest> RequireTicketsRequest { get; set; }
-        public virtual ICollection<BookingResponse> BookingResponse { get; set; }
-        public virtual Person Person { get; set; }
-        public virtual ICollection<resp_SendAvailableBookingRequest> resp_SendAvailableBookingRequest { get; set; }
+        public int Service_Id { get; set; }
+        public int Person_Id { get; set; }
+        public Nullable<System.DateTime> Date_ { get; set; }
+        public Nullable<int> Status { get; set; }
     }
 }

@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedmarServiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AcceptBookingRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment" Type="varchar(max)" />
+    <Property Name="Requ" Type="bit" />
+    <Property Name="ServiceID" Type="int" />
+    <Property Name="Date_" Type="datetime" />
+    <Property Name="BookingID" Type="int" />
+  </EntityType>
+  <EntityType Name="agent">
+    <Key>
+      <PropertyRef Name="IdAgent" />
+    </Key>
+    <Property Name="IdAgent" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="30" />
+    <Property Name="Surname" Type="varchar" MaxLength="30" />
+    <Property Name="NameSurname" Type="varchar" MaxLength="60" />
+    <Property Name="Adress" Type="varchar" MaxLength="30" />
+    <Property Name="Adress2" Type="varchar" MaxLength="30" />
+    <Property Name="Idzipcode" Type="int" />
+    <Property Name="IdCountry" Type="int" />
+    <Property Name="MB" Type="varchar" MaxLength="13" />
+    <Property Name="OIB" Type="varchar" MaxLength="15" />
+    <Property Name="Telefon" Type="varchar" MaxLength="30" />
+    <Property Name="Telefax" Type="varchar" MaxLength="30" />
+    <Property Name="GSM" Type="varchar" MaxLength="30" />
+    <Property Name="email" Type="varchar" MaxLength="30" />
+    <Property Name="Web" Type="varchar" MaxLength="80" />
+    <Property Name="passwordAccount" Type="varchar" MaxLength="255" />
+    <Property Name="RoleAccount" Type="varchar" MaxLength="100" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="usertype" Type="varchar" MaxLength="255" />
+    <Property Name="username" Type="varchar" MaxLength="30" />
+    <Property Name="password" Type="varbinary" MaxLength="16" />
+    <Property Name="password2" Type="varchar" MaxLength="255" />
+    <Property Name="remember_token" Type="varchar" MaxLength="255" />
+    <Property Name="role" Type="varchar" MaxLength="30" />
+    <Property Name="passwordFrontOffice" Type="varchar" MaxLength="255" />
+    <Property Name="RoleFrontOffice" Type="varchar" MaxLength="100" />
+    <Property Name="databases" Type="varchar" MaxLength="30" />
+    <Property Name="Firm" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="AgentRequ">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RequID" Type="int" />
+    <Property Name="AgentID" Type="int" />
+    <Property Name="Comment" Type="varchar(max)" />
+    <Property Name="Date_" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BookingResponse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment" Type="varchar(max)" />
+    <Property Name="IsReceived" Type="bit" />
+    <Property Name="BookingID" Type="int" />
+    <Property Name="ServiceID" Type="int" />
+    <Property Name="Date_" Type="datetime" />
+    <Property Name="BRType" Type="int" />
+    <Property Name="Requ" Type="bit" />
+  </EntityType>
+  <EntityType Name="BookingResponsetType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" />
+    <Property Name="Requ" Type="bit" />
+  </EntityType>
+  <EntityType Name="BookingStatusHC">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" />
+    <Property Name="Initial" Type="bit" />
+  </EntityType>
+  <EntityType Name="BookingStatusTA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Initial" Type="bit" />
+  </EntityType>
+  <EntityType Name="CancelBookingRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Reason" Type="varchar(max)" />
+    <Property Name="Comment" Type="varchar(max)" />
+    <Property Name="BookingStatusID" Type="int" />
+    <Property Name="Requ" Type="bit" />
+    <Property Name="BookingID" Type="int" />
+    <Property Name="ServiceID" Type="int" />
+    <Property Name="Date_" Type="datetime" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="CancelBookingRequirementRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Reason" Type="varchar(max)" />
+    <Property Name="Comment" Type="varchar(max)" />
+    <Property Name="BookingRequirementId" Type="int" Nullable="false" />
+    <Property Name="Date_" Type="datetime" />
+  </EntityType>
+  <EntityType Name="CommentLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment" Type="varchar(max)" />
+    <Property Name="Fk_table" Type="int" />
+    <Property Name="Fk_ID" Type="int" />
+    <Property Name="Date_" Type="datetime" />
+    <Property Name="Who" Type="int" />
+    <Property Name="SystemUpdate" Type="bit" />
+  </EntityType>
+  <EntityType Name="CommentLogUsers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="ConfirmBookingRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingComment" Type="varchar(max)" />
+    <Property Name="TimeLimit" Type="datetime" />
+    <Property Name="BookingStatusID" Type="int" />
+    <Property Name="Requ" Type="bit" />
+    <Property Name="BookingID" Type="int" />
+    <Property Name="Date_" Type="datetime" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="Consumer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar(max)" />
+    <Property Name="Password" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="Defaults_">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" />
+    <Property Name="Value" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="ETicket">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ETicketNumber" Type="varchar(max)" />
+    <Property Name="Flight_Id" Type="int" Nullable="false" />
+    <Property Name="SendEticketInfoRequest_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EventData">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EVENTDATA" Type="xml" />
+  </EntityType>
+  <EntityType Name="Flight">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FlightId" Type="varchar(max)" />
+    <Property Name="Airline" Type="varchar(max)" />
+    <Property Name="Price" Type="varchar(max)" />
+    <Property Name="Currency" Type="varchar(max)" />
+    <Property Name="FromAirport" Type="varchar(max)" />
+    <Property Name="ToAirport" Type="varchar(max)" />
+    <Property Name="ArrivalDate" Type="datetime" />
+    <Property Name="DepartureDate" Type="datetime" />
+    <Property Name="FlightCode" Type="varchar(max)" />
+    <Property Name="FlightStatus" Type="varchar(max)" />
+    <Property Name="FlightComment" Type="varchar(max)" />
+    <Property Name="Class" Type="varchar(max)" />
+    <Property Name="TicketLocator" Type="varchar(max)" />
+    <Property Name="ETicketNumber" Type="varchar(max)" />
+    <Property Name="Date_" Type="datetime" />
+    <Property Name="BookingID" Type="int" />
+    <Property Name="Update_" Type="bit" />
+    <Property Name="PNR" Type="varchar(max)" />
+    <Property Name="FlightNumber" Type="int" />
+    <Property Name="PassID_frontDesk" Type="int" />
+  </EntityType>
+  <EntityType Name="ListOfColumns">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Naziv" Type="varchar(max)" />
+    <Property Name="fk_idTable" Type="int" />
+  </EntityType>
+  <EntityType Name="ListOfTables">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" />
+    <Property Name="CommentColumnName" Type="varchar(max)" />
+    <Property Name="RowIdentificatorCN" Type="varchar(max)" />
+    <Property Name="ComboBoxName" Type="varchar(max)" />
+    <Property Name="RespID" Type="bit" />
+  </EntityType>
+  <EntityType Name="Person">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar(max)" />
+    <Property Name="LastName" Type="varchar(max)" />
+    <Property Name="PassportNumber" Type="varchar(max)" />
+    <Property Name="PassportExpiryDate" Type="datetime" />
+    <Property Name="PassportIssuingCountry" Type="varchar(max)" />
+    <Property Name="Birthday" Type="datetime" />
+    <Property Name="PlaceOfBirth" Type="varchar(max)" />
+    <Property Name="Nationality" Type="varchar(max)" />
+    <Property Name="SeamansBookNumber" Type="varchar(max)" />
+    <Property Name="SeamansBookExpiryDate" Type="datetime" />
+    <Property Name="SeamansBookIssuingCountry" Type="varchar(max)" />
+    <Property Name="USVisaNumber" Type="varchar(max)" />
+    <Property Name="USVisaExpiryDate" Type="datetime" />
+    <Property Name="PersonComment" Type="varchar(max)" />
+    <Property Name="Date_" Type="datetime" />
+    <Property Name="BookingRequirementIdHC" Type="int" />
+    <Property Name="PersonIDFrontDesk" Type="int" />
+  </EntityType>
+  <EntityType Name="Procedures">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProcName" Type="varchar(max)" />
+    <Property Name="ProcCode" Type="varchar(max)" />
+    <Property Name="Date_" Type="datetime" />
+    <Property Name="Proccessed" Type="bit" />
+  </EntityType>
+  <EntityType Name="requ_SendBookingRequirementRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FromAirport" Type="varchar(max)" />
+    <Property Name="ToAirport" Type="varchar(max)" />
+    <Property Name="DepartureDate" Type="datetime" />
+    <Property Name="ArrivalDate" Type="datetime" />
+    <Property Name="BookingRequirementIdHC" Type="int" />
+    <Property Name="RequestBookingComment" Type="varchar(max)" />
+    <Property Name="Service_Id" Type="int" Nullable="false" />
+    <Property Name="Person_Id" Type="int" Nullable="false" />
+    <Property Name="Date_" Type="datetime" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="requ_SendBookingRequirementRequest_history">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FromAirport" Type="varchar(max)" />
+    <Property Name="ToAirport" Type="varchar(max)" />
+    <Property Name="DepartureDate" Type="datetime" />
+    <Property Name="ArrivalDate" Type="datetime" />
+    <Property Name="BookingRequirementIdHC" Type="int" />
+    <Property Name="RequestBookingComment" Type="varchar(max)" />
+    <Property Name="Service_Id" Type="int" Nullable="false" />
+    <Property Name="Person_Id" Type="int" Nullable="false" />
+    <Property Name="Date_" Type="datetime" />
+    <Property Name="Status" Type="int" />
+    <Property Name="RequID" Type="int" />
+  </EntityType>
+  <EntityType Name="RequireDecisionRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingComment" Type="varchar(max)" />
+    <Property Name="BookingStatusID" Type="int" />
+    <Property Name="TimeLimit" Type="datetime" />
+    <Property Name="BookingID" Type="int" Nullable="false" />
+    <Property Name="Date_" Type="datetime" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="RequirementResponse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment" Type="varchar(max)" />
+    <Property Name="IsReceived" Type="bit" />
+    <Property Name="BookingRequirementId" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Date_" Type="datetime" />
+  </EntityType>
+  <EntityType Name="RequirementResponseStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="RequireTicketsRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment" Type="varchar(max)" />
+    <Property Name="Requ" Type="bit" />
+    <Property Name="BookingID" Type="int" />
+    <Property Name="ServiceID" Type="int" />
+    <Property Name="Date_" Type="datetime" />
+  </EntityType>
+  <EntityType Name="resp_SendAvailableBookingRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FromAirport" Type="varchar(max)" />
+    <Property Name="ToAirport" Type="varchar(max)" />
+    <Property Name="DepartureDate" Type="datetime" />
+    <Property Name="ArrivalDate" Type="datetime" />
+    <Property Name="BookingStatusID" Type="int" />
+    <Property Name="TimeLimit" Type="datetime" />
+    <Property Name="BookingComment" Type="varchar(max)" />
+    <Property Name="SpendTime" Type="int" />
+    <Property Name="requ_SendBookingRequirementRequest_Id" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" />
+    <Property Name="BookingID" Type="int" />
+    <Property Name="Date_" Type="datetime" />
+    <Property Name="TAstatus" Type="int" />
+    <Property Name="FlagUndefFlightStatus" Type="bit" />
+    <Property Name="Sent" Type="bit" />
+    <Property Name="RequDescisionCounter" Type="int" />
+  </EntityType>
+  <EntityType Name="SendAvailableBookingRequestFlight">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="resp_SendAvailableBookingRequest_Id" Type="int" Nullable="false" />
+    <Property Name="Flight_Id" Type="int" Nullable="false" />
+    <Property Name="Date_" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SendEticketInfoRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingComment" Type="varchar(max)" />
+    <Property Name="BookingStatusID" Type="int" />
+    <Property Name="BookingID" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SessionID" Type="int" />
+    <Property Name="Consumer_Id" Type="int" Nullable="false" />
+    <Property Name="Date_" Type="datetime" />
+    <Property Name="D" Type="int" />
+  </EntityType>
+  <EntityType Name="ServiceStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar(max)" />
+    <Property Name="UpdateInitial" Type="bit" />
+    <Property Name="Requ" Type="bit" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="SendReady" Type="bit" />
+    <Property Name="Sent" Type="bit" />
+  </EntityType>
+  <EntityType Name="TestRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment" Type="varchar(max)" />
+    <Property Name="Requ" Type="bit" />
+    <Property Name="ServiceID" Type="int" />
+    <Property Name="BookingID" Type="int" />
+  </EntityType>
+  <EntityType Name="UpdateFlightDataRequest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BookingComment" Type="varchar(max)" />
+    <Property Name="BookingStatusID" Type="int" />
+    <Property Name="TimeLimit" Type="datetime" />
+    <Property Name="SpendTime" Type="int" />
+    <Property Name="BookingID" Type="int" Nullable="false" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="UpdateFlightsFlight">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Comment" Type="varchar(max)" />
+    <Property Name="Flight_Id" Type="int" Nullable="false" />
+    <Property Name="UpdateFlightDataRequest_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="MedmarServiceModelStoreContainer">
+    <EntitySet Name="AcceptBookingRequest" EntityType="Self.AcceptBookingRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="agent" EntityType="Self.agent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AgentRequ" EntityType="Self.AgentRequ" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookingResponse" EntityType="Self.BookingResponse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookingResponsetType" EntityType="Self.BookingResponsetType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookingStatusHC" EntityType="Self.BookingStatusHC" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BookingStatusTA" EntityType="Self.BookingStatusTA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CancelBookingRequest" EntityType="Self.CancelBookingRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CancelBookingRequirementRequest" EntityType="Self.CancelBookingRequirementRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CommentLog" EntityType="Self.CommentLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CommentLogUsers" EntityType="Self.CommentLogUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ConfirmBookingRequest" EntityType="Self.ConfirmBookingRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Consumer" EntityType="Self.Consumer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Defaults_" EntityType="Self.Defaults_" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ETicket" EntityType="Self.ETicket" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventData" EntityType="Self.EventData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Flight" EntityType="Self.Flight" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ListOfColumns" EntityType="Self.ListOfColumns" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ListOfTables" EntityType="Self.ListOfTables" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Procedures" EntityType="Self.Procedures" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="requ_SendBookingRequirementRequest" EntityType="Self.requ_SendBookingRequirementRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="requ_SendBookingRequirementRequest_history" EntityType="Self.requ_SendBookingRequirementRequest_history" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RequireDecisionRequest" EntityType="Self.RequireDecisionRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RequirementResponse" EntityType="Self.RequirementResponse" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RequirementResponseStatus" EntityType="Self.RequirementResponseStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RequireTicketsRequest" EntityType="Self.RequireTicketsRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="resp_SendAvailableBookingRequest" EntityType="Self.resp_SendAvailableBookingRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SendAvailableBookingRequestFlight" EntityType="Self.SendAvailableBookingRequestFlight" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SendEticketInfoRequest" EntityType="Self.SendEticketInfoRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ServiceStatus" EntityType="Self.ServiceStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TestRequest" EntityType="Self.TestRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UpdateFlightDataRequest" EntityType="Self.UpdateFlightDataRequest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UpdateFlightsFlight" EntityType="Self.UpdateFlightsFlight" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

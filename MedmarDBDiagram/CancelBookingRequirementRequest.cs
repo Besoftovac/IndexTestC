@@ -17,7 +17,7 @@ namespace MedmarDBDiagram
         public int Id { get; set; }
         public string Reason { get; set; }
         public string Comment { get; set; }
-    
-        public virtual requ_SendBookingRequirementRequest requ_SendBookingRequirementRequest { get; set; }
+        public int BookingRequirementId { get; set; }
+        public Nullable<System.DateTime> Date_ { get; set; }
     }
 }

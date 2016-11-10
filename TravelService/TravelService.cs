@@ -174,8 +174,8 @@ namespace TravelService
                     Flight fl = new Flight();
                     fl.FlightId = (drChild["Id"] == DBNull.Value) ? "-1"
                     : (drChild["Id"]).ToString();
-                    fl.FlightStatus = (drChild["FlightStatus"] == DBNull.Value) ? " "
-                    : (drChild["FlightStatus"]).ToString();
+                    fl.FlightStatus = (drChild["BOOKINGSTATUS"] == DBNull.Value) ? BookingStatus.WAITLISTED
+                    : (BookingStatus)(drChild["BOOKINGSTATUS"]);
                     fl.Airline = (drChild["Airline"] == DBNull.Value) ? " "
                     : (drChild["Airline"]).ToString();
                     fl.Price = (drChild["Price"] == DBNull.Value) ? " "
@@ -406,8 +406,8 @@ namespace TravelService
                     : (dr["FromAirport"]).ToString();
                 sabr.FromAirport = (dr["ToAirport"] == DBNull.Value) ? ""
                     : (dr["ToAirport"]).ToString();
-                sabr.BookingStatus = (dr["BookingStatusID"] == DBNull.Value) ? BookingStatus.WAITLISTED
-                    : (BookingStatus)(dr["BookingStatusID"]);
+                sabr.BookingStatus = (dr["BookingStatus2"] == DBNull.Value) ? BookingStatus.WAITLISTED
+                    : (BookingStatus)(dr["BookingStatus2"]);
                 sabr.TimeLimit = (dr["TimeLimit"] == DBNull.Value) ? Convert.ToDateTime(Globals.DefaultDate)
                     : Convert.ToDateTime(dr["TimeLimit"]);
                 sabr.SpendTime = (dr["SpendTime"] == DBNull.Value) ? -1
@@ -419,8 +419,8 @@ namespace TravelService
                     Flight flight = new Flight();
                     flight.FlightId = (drChild["Id"] == DBNull.Value) ? "-1"
                     : (drChild["Id"]).ToString();
-                    flight.FlightStatus= (drChild["FlightStatus"] == DBNull.Value) ? " "
-                    : (drChild["FlightStatus"]).ToString();
+                    flight.FlightStatus= (drChild["BOOKINGSTATUS"] == DBNull.Value) ? BookingStatus.WAITLISTED
+                    : (BookingStatus)(drChild["BOOKINGSTATUS"]);
                     flight.Airline=(drChild["Airline"] == DBNull.Value) ? " "
                     : (drChild["Airline"]).ToString();
                     flight.Price = (drChild["Price"] == DBNull.Value) ? " "
@@ -461,6 +461,30 @@ namespace TravelService
 
         #region INIIAL RESPONSE - STORE REQUEST TO DATABASE
 
+        public BookingResponse notReceivedBR ()
+        {
+            String noID = "Our system could not receive any booking related object without Booking ID!";
+
+            BookingResponse br = new BookingResponse();
+            br.BookingId = -1;
+            br.Comment = noID;
+            br.IsReceived = false;
+
+            return br;
+        }
+        public RequirementResponse notReceiveRR() {
+
+            String noID = "Our system could not receive any requirement booking related object without Booking Requirement ID!";
+
+            RequirementResponse rr = new RequirementResponse();
+            rr.BookingRequirementId = -1;
+            rr.Comment = noID;
+            rr.IsReceived = false;
+
+            return rr;
+
+        }
+
         public void SendBookingRequirementResponses_field(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
         {           
             List<PersonTA> listPerson = new List<PersonTA>();
@@ -500,25 +524,33 @@ namespace TravelService
             List<RequirementResponse> listRR = new List<RequirementResponse>();//za generiranje odgovora servisu prema "njihovoj" definiraniranoj klasi
 
             SendBookingRequirementRequest[] SendBookingRequirementRequests = webServiceConsumerRequest.SendBookingRequirementRequests;
+            String InitialComment = StoredProceduresCall.GetResponseCommentText(true, (Int32)RequirementResponseStatus.Send);
 
             if (SendBookingRequirementRequests == null)
                 return null;
                      
             foreach (SendBookingRequirementRequest sbrr in SendBookingRequirementRequests)
             {
-                RequirementResponseTA rrTA = InitializeInstances.initialize_RequirementResponseTA(sbrr:sbrr);
+                RequirementResponseTA rrTA = InitializeInstances.initialize_RequirementResponseTA(sbrr:sbrr, InitialComment: InitialComment);
                 RequirementResponse rr = new RequirementResponse();
 
-                    rr.Comment = rrTA.Comment;
+                if (rrTA.BookingRequirementId == 0)
+                {
+                    rr = notReceiveRR();
+                }
+                else
+                {
+                    rr.Comment = InitialComment; // rrTA.Comment;
                     rr.IsReceived = rrTA.IsReceived;
                     rr.BookingRequirementId = rrTA.BookingRequirementId;
 
-                    listRRTA.Add(rrTA);
-                    listRR.Add(rr);
-               
+                    listRRTA.Add(rrTA);                 
+                }
 
+                    listRR.Add(rr);
 
             }
+
             SendBookingRequirementResponses_field(webServiceConsumerRequest, ServiceID);//POZIV PROCEDURE I UPIS ZAHTJEVA U BAZU
             DataTable dtrr = ToDataTable<RequirementResponseTA>(listRRTA);
 
@@ -538,16 +570,17 @@ namespace TravelService
 
             CancelBookingRequirementRequest[] cbrrField = webServiceConsumerRequest.CancelBookingRequirementRequests;
 
+            String InitialComment = StoredProceduresCall.GetResponseCommentText(true, (Int32)RequirementResponseStatus.Cancel);
             if (cbrrField == null)
                 return null;
 
             foreach (CancelBookingRequirementRequest cbrr in cbrrField) {
 
                     CancelBookingRequirementRequestTA cbrrta = InitializeInstances.initialize_cbrrTA(cbrr);
-                    RequirementResponseTA rrTA = InitializeInstances.initialize_RequirementResponseTA(cbrr: cbrr);
+                    RequirementResponseTA rrTA = InitializeInstances.initialize_RequirementResponseTA(cbrr: cbrr, InitialComment: InitialComment);
                     RequirementResponse rr = new RequirementResponse();
 
-                    rr.Comment = rrTA.Comment;
+                rr.Comment = InitialComment;// rrTA.Comment;
                     rr.IsReceived = rrTA.IsReceived;
                     rr.BookingRequirementId = rrTA.BookingRequirementId;
 
@@ -578,16 +611,17 @@ namespace TravelService
             List<AcceptBookingRequestTA> listabrTA = new List<AcceptBookingRequestTA>();
 
             AcceptBookingRequest[] abrField = webServiceConsumerRequest.AcceptBookingRequests;
+            String InitialComment = StoredProceduresCall.GetResponseCommentText(false, (Int32)BookingResponseType.Accept);
 
             if (abrField == null)
                 return null;
 
             foreach (AcceptBookingRequest abr in abrField) {
                 AcceptBookingRequestTA abrTA = InitializeInstances.initializeAbrTA(abr:abr, ServiceID:ServiceID);
-                BookingResponseTA brTA = InitializeInstances.initialize_BookingRespTA(abr: abr, ServiceID:ServiceID);
+                BookingResponseTA brTA = InitializeInstances.initialize_BookingRespTA(abr: abr, ServiceID:ServiceID, InitialComment: InitialComment);
                 BookingResponse br = new BookingResponse();
 
-                br.Comment = brTA.Comment;
+                br.Comment = InitialComment;//brTA.Comment;
                 br.IsReceived = brTA.IsReceived;
                 br.BookingId = brTA.BookingId;
 
@@ -617,6 +651,7 @@ namespace TravelService
             List<BookingResponseTA> listBRTA = new List<BookingResponseTA>();
             List<CancelBookingRequestTA> listcbrTA = new List<CancelBookingRequestTA>();
 
+            String InitialComment = StoredProceduresCall.GetResponseCommentText(false, (Int32)BookingResponseType.Cancel);
 
             CancelBookingRequest[] cbrfield = webServiceConsumerRequest.CancelBookingRequests;
             if (cbrfield == null)
@@ -625,11 +660,11 @@ namespace TravelService
             foreach (CancelBookingRequest cbr in cbrfield) {
 
                 CancelBookingRequestTA cbrTA = InitializeInstances.initializeCBRTA(cbr: cbr, ServiceID: ServiceID);
-                BookingResponseTA brta = InitializeInstances.initialize_BookingRespTA(cbr: cbr, ServiceID: ServiceID);
+                BookingResponseTA brta = InitializeInstances.initialize_BookingRespTA(cbr: cbr, ServiceID: ServiceID, InitialComment: InitialComment);
 
                 BookingResponse br = new BookingResponse();
 
-                br.Comment = brta.Comment;
+                br.Comment = InitialComment; //brta.Comment;
                 br.IsReceived = brta.IsReceived;
                 br.BookingId = brta.BookingId;
 
@@ -658,6 +693,7 @@ namespace TravelService
             List<BookingResponse> listbr = new List<BookingResponse>();
             List<BookingResponseTA> listbrTA = new List<BookingResponseTA>();
             List<RequireTicketsRequestTA> listrtrTA = new List<RequireTicketsRequestTA>();
+            String InitialComment = StoredProceduresCall.GetResponseCommentText(false, (Int32)BookingResponseType.RequireTickets);
             RequireTicketsRequest[] rtrfield = webServiceConsumerRequest.RequireTicketsRequests;
 
             if (rtrfield == null)
@@ -665,10 +701,10 @@ namespace TravelService
 
             foreach (RequireTicketsRequest rtr in rtrfield) {
                 RequireTicketsRequestTA rtrTA = InitializeInstances.intializeRTRTA(rtr: rtr, ServiceID: ServiceID);
-                BookingResponseTA brta = InitializeInstances.initialize_BookingRespTA(rtr: rtr, ServiceID: ServiceID);
+                BookingResponseTA brta = InitializeInstances.initialize_BookingRespTA(rtr: rtr, ServiceID: ServiceID, InitialComment: InitialComment);
                 BookingResponse br = new BookingResponse();
 
-                br.Comment = brta.Comment;
+                br.Comment = InitialComment; // brta.Comment;
                 br.IsReceived = brta.IsReceived;
                 br.BookingId = brta.BookingId;
 

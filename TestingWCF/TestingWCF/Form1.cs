@@ -42,121 +42,123 @@ namespace TestingWCF
             var rezult = tn.synchronize(new WebServiceConsumerRequest()
 
             {
-                SessionId = 556677,
-                Username= "Offen",
-                Password= "R6pRDrQ0pLgZ9Ms",
+                SessionId = 22091982,
+                Username = "Offen",
+                Password = "R6pRDrQ0pLgZ9Ms"
 
-                SendBookingRequirementRequests =
-                new SendBookingRequirementRequest[2]
+                //SendBookingRequirementRequests =
+                //    new SendBookingRequirementRequest[2]
 
-                {
-                    new SendBookingRequirementRequest
-                    {
+                //    {
+                //        new SendBookingRequirementRequest
+                //        {
 
-                        BookingRequirementId = 123,
-                         Person = new Person()
+                //            BookingRequirementId = 123,
+                //             Person = new Person()
 
-                         {
+                //             {
 
-                             FirstName = "Peter",                           
+                //                 FirstName = "Peter",                           
 
-                             //Some other properties for person
-
-                 
-
-                         },
-
-                         FromAirport = "HAM",
-                         ToAirport = "CPT--",
-                         ArrivalDate = new DateTime(2016,12,12),
-                         RequestBookingComment = "Oni traže booking za Petera - naš je requ response"
-
-                    },
-                     new SendBookingRequirementRequest
-                    {
-
-                        BookingRequirementId = 106,
-                         Person = new Person()
-
-                         {
-
-                             FirstName = "Marinko",                           
-
-                             //Some other properties for person
-
-                 
-
-                         },
-
-                         FromAirport = "HAM---",
-                         ToAirport = "CPT",
-                         ArrivalDate = new DateTime(2016, 12,11),
-                         RequestBookingComment = "Oni traže booking  booking za Marinka - naš je requ response"
-
-                    }
-
-                },
-
-                CancelBookingRequirementRequests =
-                new CancelBookingRequirementRequest[1]
-
-                {
-                    new CancelBookingRequirementRequest
-                    {
-
-                        BookingRequirementId = 253,
-                        Reason="",
-                        Comment = "Njihov CancelBookingRequirementRequest - naš je requ response"
+                //                 //Some other properties for person
 
 
-                    }
 
-                },
+                //             },
 
-                AcceptBookingRequests = new AcceptBookingRequest[3] {
+                //             FromAirport = "HAM",
+                //             ToAirport = "CPT--",
+                //             ArrivalDate = new DateTime(2016,12,12),
+                //             RequestBookingComment = "Oni traže booking za Petera - naš je requ response"
 
-                    new AcceptBookingRequest {
-                        BookingId=256,
-                        Comment = "AcceptBookingRequest oni šalju - response je naš-commentLogTest(515)"
-                    },
-                   new AcceptBookingRequest {
-                        BookingId=257,
-                        Comment = "AcceptBookingRequest oni šalju - response je naš-commentLogTest(516)"
-                    },
-                   new AcceptBookingRequest {
-                        BookingId=258,
-                        Comment = "AcceptBookingRequest oni šalju - response je naš-commentLogTest(517)"
-                    }
-                },
+                //        },
+                //         new SendBookingRequirementRequest
+                //        {
 
-                CancelBookingRequests = new CancelBookingRequest[1] {
+                //            BookingRequirementId = 106,
+                //             Person = new Person()
 
-                   new CancelBookingRequest {
-                        BookingId=517,
-                        Comment = "CancelBookingRequest oni šalju - response je naš",
-                        BookingStatus= BookingStatus.CANCELLED
-                    }
-                },
-                RequireTicketsRequests = new RequireTicketsRequest[1] {
+                //             {
 
-                     new RequireTicketsRequest {
-                        BookingId=555,
-                        Comment = "RequireTicketsRequest oni šalju - response je naš"
-                    }
+                //                 FirstName = "Marinko",                           
 
-                },
-                CancelBookingResponses = new BookingResponse[2] {
-                      new BookingResponse {
-                        BookingId=517,
-                        Comment = "Njihov inicijalni response na naš cancel za id 777"
-                    },
-                     new BookingResponse {
-                        BookingId=555,
-                        Comment = "Njihov inicijalni response na naš cancel za id 555"
-                    }
-                }
+                //                 //Some other properties for person
+
+
+
+                //             },
+
+                //             FromAirport = "HAM---",
+                //             ToAirport = "CPT",
+                //             ArrivalDate = new DateTime(2016, 12,11),
+                //             RequestBookingComment = "Oni traže booking  booking za Marinka - naš je requ response"
+
+                //        }
+
+                //    },
+
+                //CancelBookingRequirementRequests =
+                //    new CancelBookingRequirementRequest[1]
+
+                //    {
+                //        new CancelBookingRequirementRequest
+                //        {
+
+                //            BookingRequirementId = 253,
+                //            Reason="",
+                //            Comment = "Njihov CancelBookingRequirementRequest - naš je requ response"
+
+
+                //        }
+
+                //    },
+
+                //AcceptBookingRequests = new AcceptBookingRequest[3] {
+
+                //        new AcceptBookingRequest {
+                //            BookingId=256,
+                //            Comment = "AcceptBookingRequest oni šalju - response je naš-commentLogTest(515)"
+                //        },
+                //       new AcceptBookingRequest {
+                //            BookingId=257,
+                //            Comment = "AcceptBookingRequest oni šalju - response je naš-commentLogTest(516)"
+                //        },
+                //       new AcceptBookingRequest {
+                //            BookingId=258,
+                //            Comment = "AcceptBookingRequest oni šalju - response je naš-commentLogTest(517)"
+                //        }
+                //    },
+
+                //CancelBookingRequests = new CancelBookingRequest[1] {
+
+                //       new CancelBookingRequest {
+                //            BookingId=517,
+                //            Comment = "CancelBookingRequest oni šalju - response je naš",
+                //            BookingStatus= BookingStatus.CANCELLED
+                //        }
+                //    },
+                //RequireTicketsRequests = new RequireTicketsRequest[1] {
+
+                //         new RequireTicketsRequest {
+                //            BookingId=555,
+                //            Comment = "RequireTicketsRequest oni šalju - response je naš"
+                //        }
+
+                //    },
+                //CancelBookingResponses = new BookingResponse[2] {
+                //          new BookingResponse {
+                //            BookingId=517,
+                //            Comment = "Njihov inicijalni response na naš cancel za id 777"
+                //        },
+                //         new BookingResponse {
+                //            BookingId=555,
+                //            Comment = "Njihov inicijalni response na naš cancel za id 555"
+                //        }
+                //    }
 
             });
+
+            WebServiceProviderResponse wpr = rezult;
           
         }
 

@@ -267,7 +267,7 @@
       <xs:element minOccurs="0" name="FlightCode" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FlightComment" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FlightId" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="FlightStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FlightStatus" type="tns:BookingStatus" />
       <xs:element minOccurs="0" name="FromAirport" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Price" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TicketLocator" nillable="true" type="xs:string" />
