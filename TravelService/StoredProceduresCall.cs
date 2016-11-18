@@ -41,6 +41,39 @@ namespace TravelService
             if (bCloseConn) conn.Close();
         }//private static void Execute(SqlCommand cmd, bool bCloseConn = true)
 
+        public static DataRow getStoredFilesDiskFolder() {           
+
+            DataSet ds = new DataSet();
+            DataRow dr = null;
+            DataTable dt = null;
+            try
+            {
+                conn.Open();
+                SqlDataAdapter da = new SqlDataAdapter();
+                               
+                SqlCommand cmd = InitSqlCommand("getStoredFilesDiskFolder");
+                da.SelectCommand = cmd;
+
+                da.Fill(ds);
+
+                if(ds.Tables.Count>0)
+                    dt =ds.Tables[0];
+
+                if (dt.Rows.Count > 0)
+                        dr = dt.Rows[0];
+            }
+            catch (Exception m)
+            {
+                throw m;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+           
+            return dr;
+        }
         public static String GetResponseCommentText(bool requ=false, Int32 Type=-1) {
 
             String comment = null;

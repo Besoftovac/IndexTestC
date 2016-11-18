@@ -11,6 +11,9 @@ using System.Text;
 using System.Threading;
 using System.Web.Script.Serialization;
 using System.Security.Cryptography;
+using System.ServiceModel.Channels;
+using System.IO;
+using System.Xml;
 
 namespace TravelService
 {
@@ -26,8 +29,17 @@ namespace TravelService
 
             if (webServiceConsumerRequest != null)
             {
-
+                String disk = null;
+                String folder = null;
+                     
                 Int32 ConsumerID = StoredProceduresCall.UserCheck(webServiceConsumerRequest.Username, webServiceConsumerRequest.Password);
+                DataRow dr = StoredProceduresCall.getStoredFilesDiskFolder();
+
+                if (dr != null) {
+
+                   disk = (dr["DiskName"] == DBNull.Value) ? "" : dr["DiskName"].ToString();
+                   folder = (dr["FolderName"] == DBNull.Value) ? "" : dr["FolderName"].ToString();
+                }
               
                 if (ConsumerID==-1)
                     return null;
@@ -65,13 +77,63 @@ namespace TravelService
                 }
 
                 storeInitial_requResponse(webServiceConsumerRequest, ServiceID);
+                //webServiceConsumerRequest.            
 
+                generate_xml_requ(webServiceConsumerRequest, disk, folder);
+                generate_xml_resp(WPR, disk, folder);
                 return WPR;
+
+                
             }// if (webServiceConsumerRequest != null)
             else
                 return null;
 
         }// public WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest)
+
+        #region GENERATE XML REQU RESP
+        private void generate_xml_requ(WebServiceConsumerRequest webServiceConsumerRequest, String diskName, String folderName) {
+           
+            DataContractSerializer dcs = new DataContractSerializer(typeof(WebServiceConsumerRequest));
+            String sessionID= webServiceConsumerRequest.SessionId.ToString();
+
+            bool exists = System.IO.Directory.Exists(diskName + "\\" + folderName);
+
+            if (!exists)
+                System.IO.Directory.CreateDirectory(diskName+"\\"+ folderName);
+
+            using (Stream stream = new FileStream(diskName + "\\"+folderName+"\\OffenRequest"+ sessionID + ".xml", FileMode.Create, FileAccess.Write))
+            {
+                using (XmlDictionaryWriter writer =
+                    XmlDictionaryWriter.CreateTextWriter(stream, Encoding.UTF8))
+                {
+                    writer.WriteStartDocument();
+                    dcs.WriteObject(writer, webServiceConsumerRequest);
+                }
+            }
+        }
+
+        private void generate_xml_resp(WebServiceProviderResponse WPR, String diskName, String folderName)
+        {
+           
+            DataContractSerializer dcs = new DataContractSerializer(typeof(WebServiceProviderResponse));
+            String sessionID = WPR.SessionId.ToString();
+
+            bool exists = System.IO.Directory.Exists(diskName + "\\" + folderName);
+
+            if (!exists)
+                System.IO.Directory.CreateDirectory(diskName + "\\" + folderName);
+
+            using (Stream stream = new FileStream(diskName + "\\" + folderName +"\\MedmarResponse" + sessionID + ".xml", FileMode.Create, FileAccess.Write))
+            {
+                using (XmlDictionaryWriter writer =
+                    XmlDictionaryWriter.CreateTextWriter(stream, Encoding.UTF8))
+                {
+                    writer.WriteStartDocument();
+                    dcs.WriteObject(writer, WPR);
+                }
+            }
+        }
+        #endregion
         #region GLOBAL SERVICE
         private void setCulture()  {
 

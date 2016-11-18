@@ -139,6 +139,8 @@ namespace TravelService
 
         public Int32 BookingId { get; set; }
 
+        public bool Seen { get; set; } 
+
     }
 
     public class CancelBookingRequestTA

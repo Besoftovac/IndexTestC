@@ -162,6 +162,7 @@ namespace TravelService
             abrrta.Requ = Requ;
             abrrta.ServiceID = ServiceID;
             abrrta.Date_ = defaultDate;
+            abrrta.Seen = false;
 
             return abrrta;
         }

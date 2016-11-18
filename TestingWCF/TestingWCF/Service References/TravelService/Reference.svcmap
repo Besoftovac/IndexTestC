@@ -19,15 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:8733/" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://www.medmar.eu/TravelService_.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="4d61817d-a731-4507-a5e1-be4078babfe6" SourceId="1" SourceUrl="http://localhost:8733/?disco" />
-    <MetadataFile FileName="TravelService2.wsdl" MetadataType="Wsdl" ID="48d2c57e-cfb9-487a-a555-09c237565a51" SourceId="1" SourceUrl="http://localhost:8733/?wsdl" />
-    <MetadataFile FileName="item1.wsdl" MetadataType="Wsdl" ID="2f26761d-9d65-4f14-84ac-9bf45c07fcac" SourceId="1" SourceUrl="http://localhost:8733/?wsdl=wsdl0" />
-    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="582bc5e3-3cf8-4104-8fd6-b5a57b3c9f1f" SourceId="1" SourceUrl="http://localhost:8733/?xsd=xsd0" />
-    <MetadataFile FileName="item4.xsd" MetadataType="Schema" ID="caafba3f-7043-496f-b512-09294f67b1bc" SourceId="1" SourceUrl="http://localhost:8733/?xsd=xsd1" />
-    <MetadataFile FileName="item5.xsd" MetadataType="Schema" ID="340c073b-5b38-4079-9a1f-eb4cbfc1e22e" SourceId="1" SourceUrl="http://localhost:8733/?xsd=xsd2" />
+    <MetadataFile FileName="TravelService_3.xsd" MetadataType="Schema" ID="024aa83e-f203-408a-92a8-f11cfb2162e8" SourceId="1" SourceUrl="http://www.medmar.eu/TravelService_.svc?xsd=xsd0" />
+    <MetadataFile FileName="TravelService_4.xsd" MetadataType="Schema" ID="293eea78-5800-49ca-a74e-fa83e4ea907b" SourceId="1" SourceUrl="http://www.medmar.eu/TravelService_.svc?xsd=xsd2" />
+    <MetadataFile FileName="TravelService2.wsdl" MetadataType="Wsdl" ID="54b06dca-c2ed-4f06-b9e7-5cbe286cd6dc" SourceId="1" SourceUrl="http://www.medmar.eu/TravelService_.svc?wsdl" />
+    <MetadataFile FileName="TravelService_5.xsd" MetadataType="Schema" ID="4800cc31-3a05-4a7c-b0f4-38613414a2e5" SourceId="1" SourceUrl="http://www.medmar.eu/TravelService_.svc?xsd=xsd1" />
+    <MetadataFile FileName="TravelService_1.wsdl" MetadataType="Wsdl" ID="8b4f4d49-fcf8-45d5-ba27-fc280f1e84d4" SourceId="1" SourceUrl="http://www.medmar.eu/TravelService_.svc?wsdl=wsdl0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
