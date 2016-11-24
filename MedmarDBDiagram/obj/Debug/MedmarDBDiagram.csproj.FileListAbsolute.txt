@@ -7,3 +7,4 @@ d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\MedmarDBDiagra
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\MedmarDBDiagram\obj\Debug\MedmarDBDiagram.csproj.GenerateResource.Cache
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\MedmarDBDiagram\obj\Debug\MedmarDBDiagram.exe
 d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\MedmarDBDiagram\obj\Debug\MedmarDBDiagram.pdb
+d:\Users\Slavica\Documents\Visual Studio 2015\Projects\IndexTestC\MedmarDBDiagram\obj\Debug\MedmarDBDiagram.csprojResolveAssemblyReference.cache

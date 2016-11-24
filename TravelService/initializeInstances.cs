@@ -158,7 +158,7 @@ namespace TravelService
 
             AcceptBookingRequestTA abrrta = new AcceptBookingRequestTA();
             abrrta.BookingId = (Int32)abr.BookingId;
-            abrrta.Comment = abr.Comment;
+            abrrta.Comment = (abr.Comment==null)?"": abr.Comment;
             abrrta.Requ = Requ;
             abrrta.ServiceID = ServiceID;
             abrrta.Date_ = defaultDate;

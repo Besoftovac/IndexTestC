@@ -46,78 +46,78 @@ namespace TestingWCF
                 Username = "Offen",
                 Password = "R6pRDrQ0pLgZ9Ms",
 
-                SendBookingRequirementRequests =
-                    new SendBookingRequirementRequest[3]
+                //SendBookingRequirementRequests =
+                //    new SendBookingRequirementRequest[3]
 
-                    {
-                        new SendBookingRequirementRequest
-                        {
+                //    {
+                //        new SendBookingRequirementRequest
+                //        {
 
-                            BookingRequirementId = 100,
-                             Person = new Person()
+                //            BookingRequirementId = 100,
+                //             Person = new Person()
 
-                             {
+                //             {
 
-                                 FirstName = "Peter",                           
+                //                 FirstName = "Peter",                           
 
-                                 //Some other properties for person
-
-
-
-                             },
-
-                             FromAirport = "HAM",
-                             ToAirport = "CPT",
-                             ArrivalDate = new DateTime(2016,12,12),
-                             RequestBookingComment = "Test comment 100"
-
-                        },
-                         new SendBookingRequirementRequest
-                        {
-
-                           // BookingRequirementId = 106,
-                             Person = new Person()
-
-                             {
-
-                                 FirstName = "No id",                           
-
-                                 //Some other properties for person
+                //                 //Some other properties for person
 
 
 
-                             },
+                //             },
 
-                             FromAirport = "HAM",
-                             ToAirport = "CPT",
-                             ArrivalDate = new DateTime(2016, 12,11),
-                             RequestBookingComment = "no id test"
+                //             FromAirport = "HAM",
+                //             ToAirport = "CPT",
+                //             ArrivalDate = new DateTime(2016,12,12),
+                //             RequestBookingComment = "Test comment 100"
 
-                        },
-                          new SendBookingRequirementRequest
-                        {
+                //        },
+                //         new SendBookingRequirementRequest
+                //        {
 
-                            BookingRequirementId = 101,
-                             Person = new Person()
+                //           // BookingRequirementId = 106,
+                //             Person = new Person()
 
-                             {
+                //             {
 
-                                 FirstName = "Marinko",                           
+                //                 FirstName = "No id",                           
 
-                                 //Some other properties for person
+                //                 //Some other properties for person
 
 
 
-                             },
+                //             },
 
-                             FromAirport = "HAM---",
-                             ToAirport = "CPT",
-                             ArrivalDate = new DateTime(2016, 12,11),
-                             RequestBookingComment = "Test comment 101"
+                //             FromAirport = "HAM",
+                //             ToAirport = "CPT",
+                //             ArrivalDate = new DateTime(2016, 12,11),
+                //             RequestBookingComment = "no id test"
 
-                        }
+                //        },
+                //          new SendBookingRequirementRequest
+                //        {
 
-                    }
+                //            BookingRequirementId = 101,
+                //             Person = new Person()
+
+                //             {
+
+                //                 FirstName = "Marinko",                           
+
+                //                 //Some other properties for person
+
+
+
+                //             },
+
+                //             FromAirport = "HAM---",
+                //             ToAirport = "CPT",
+                //             ArrivalDate = new DateTime(2016, 12,11),
+                //             RequestBookingComment = "Test comment 101"
+
+                //        }
+
+                //    }
 
                 //CancelBookingRequirementRequests =
                 //    new CancelBookingRequirementRequest[1]
@@ -135,21 +135,42 @@ namespace TestingWCF
 
                 //    },
 
-                //AcceptBookingRequests = new AcceptBookingRequest[3] {
+                AcceptBookingRequests = new AcceptBookingRequest[8] {
 
-                //        new AcceptBookingRequest {
-                //            BookingId=10,
-                //            Comment = "Accepted booking with id 10!"
-                //        },
-                //       new AcceptBookingRequest {
-                //            BookingId=14,
-                //            Comment = "Accepted booking with id 14!"
-                //        },
-                //       new AcceptBookingRequest {
-                //            BookingId=15,
-                //            Comment = "Accepted booking with id 15!"
-                //        }
-                //    },
+                        new AcceptBookingRequest {
+                            BookingId=14
+                        },
+                       new AcceptBookingRequest {
+                            BookingId=17
+                           
+                        },
+                       new AcceptBookingRequest {
+                            BookingId=19,
+                            Comment = "so expensive!!!"
+
+
+                        },
+                         new AcceptBookingRequest {
+                            BookingId=29
+                           
+                        },
+                       new AcceptBookingRequest {
+                            BookingId=31
+                           
+                        },
+                       new AcceptBookingRequest {
+                            BookingId=33
+                          
+                        },
+                        new AcceptBookingRequest {
+                            BookingId=35
+                            
+                        },
+                       new AcceptBookingRequest {
+                            BookingId=37
+                          
+                        }
+                    },
 
                 //CancelBookingRequests = new CancelBookingRequest[4] {
 

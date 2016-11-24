@@ -133,11 +133,11 @@ namespace TravelService
 
         public bool Requ { get; set; }
 
+        public Int32 BookingId { get; set; }
+
         public Int32 ServiceID { get; set; }
 
-        public DateTime Date_ { get; set; }
-
-        public Int32 BookingId { get; set; }
+        public DateTime Date_ { get; set; }       
 
         public bool Seen { get; set; } 
 
