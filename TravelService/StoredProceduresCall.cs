@@ -41,6 +41,65 @@ namespace TravelService
             if (bCloseConn) conn.Close();
         }//private static void Execute(SqlCommand cmd, bool bCloseConn = true)
 
+        public static bool check_if_booking_exists(Int32 BookingID) {
+
+            bool exists = false;
+
+            try {
+                SqlCommand cmd = InitSqlCommand("check_if_booking_exists");               
+                cmd.Parameters.Add("@BookingID", SqlDbType.Int).Value = BookingID;
+                cmd.Parameters.Add("@Exists", SqlDbType.Bit).Direction = ParameterDirection.Output;
+
+                Execute(cmd, false);
+
+                exists = Convert.ToBoolean((cmd.Parameters["@Exists"].Value));
+            }
+            catch (Exception m)
+            {
+
+                throw m;
+            }
+            finally {
+                conn.Close();
+            }
+            return exists;
+
+        }
+
+
+        public static DataTable select_InitialSystemErorrs() {
+
+            DataSet ds = new DataSet();
+            DataTable dt = null;
+
+            try
+            {
+                conn.Open();
+                SqlDataAdapter da = new SqlDataAdapter();
+
+                SqlCommand cmd = InitSqlCommand("select_InitialSystemErorrs");
+                da.SelectCommand = cmd;
+
+                da.Fill(ds);
+
+                if (ds.Tables.Count > 0)
+                    dt = ds.Tables[0];
+                
+            }
+
+            catch (Exception m)
+            {
+                throw m;
+            }
+
+            finally
+            {
+                conn.Close();
+            }
+
+            return dt;
+        }
+
         public static DataRow getStoredFilesDiskFolder() {           
 
             DataSet ds = new DataSet();

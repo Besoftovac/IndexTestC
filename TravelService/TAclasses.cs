@@ -43,6 +43,8 @@ namespace TravelService
 
         public Int32 PersonIDFrontDesk { get; set; }
 
+        public string  MiddleName { get; set; }
+
     }
     public class SendBookingRequirementRequestTA
     {
@@ -125,6 +127,8 @@ namespace TravelService
 
         public bool Requ { get; set; }
 
+        public bool Seen { get; set; }
+
     }
 
     public class AcceptBookingRequestTA {
@@ -173,9 +177,9 @@ namespace TravelService
 
         public Int32 ServiceID { get; set; }
 
-        public DateTime Date_ { get; set; }
+        public DateTime Date_ { get; set; }      
 
-        Int32 Status { get; set; }
+        public bool Seen { get; set; }
 
     }
 

@@ -39,6 +39,7 @@ namespace TravelService
             personTA.PersonComment = person.PersonComment;
             personTA.Date_ = defaultDate;
             personTA.BookingRequirementIdHC = (Int32)sbrr.BookingRequirementId;
+            personTA.MiddleName = person.MiddleName;
 
             return personTA;
         }//public PersonTA Initialize_PersonTA(SendBookingRequirementRequest sbrr)
@@ -118,7 +119,7 @@ namespace TravelService
         }
 
         public static BookingResponseTA initialize_BookingRespTA(AcceptBookingRequest abr=null, CancelBookingRequest cbr=null, 
-            RequireTicketsRequest rtr=null, Int32 ServiceID=-1, bool Requ=false, String InitialComment=null)
+            RequireTicketsRequest rtr=null, Int32 ServiceID=-1, bool Requ=false, String InitialComment=null, bool IsReceived=true)
         {
             BookingResponseTA brta = new BookingResponseTA();
 
@@ -145,10 +146,11 @@ namespace TravelService
 
             }
 
-            brta.IsReceived = true;
+            brta.IsReceived = IsReceived;
             brta.Requ = Requ;
             brta.Date_ = defaultDate;
             brta.ServiceID = ServiceID;
+            brta.Seen = false;
 
             return brta;
 
@@ -191,6 +193,7 @@ namespace TravelService
             rtrTA.ServiceID = ServiceID;
             rtrTA.Requ = Requ;
             rtrTA.Date_ = defaultDate;
+            rtrTA.Seen = false;
 
             return rtrTA;
 

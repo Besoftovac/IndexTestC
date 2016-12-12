@@ -22,7 +22,11 @@ namespace TravelService
     = AspNetCompatibilityRequirementsMode.Allowed)]
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class TravelService : ITravelService
-    {  
+    {
+        DataTable dterrors = null;
+        String noidresp = null;
+        String noidrequ = null;
+        String bonoex = null;
 
         public WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest)
         {
@@ -54,6 +58,8 @@ namespace TravelService
                // String pass = PasswordGenerator.GetRandomAlphanumericString(15);
 
                 WPR.SessionId = (Int32)SessionID;
+                dterrors = StoredProceduresCall.select_InitialSystemErorrs();
+                setInitialErrorString();
 
                 if (webServiceConsumerRequest.SendBookingRequirementRequests != null)
                     WPR.SendBookingRequirementResponses = SendBookingRequirementResponses(webServiceConsumerRequest, ServiceID);
@@ -234,8 +240,8 @@ namespace TravelService
                 {
 
                     Flight fl = new Flight();
-                    fl.FlightId = (drChild["Id"] == DBNull.Value) ? "-1"
-                    : (drChild["Id"]).ToString();
+                    fl.FlightId = (drChild["PRIMARID"] == DBNull.Value) ? "-1"
+                    : (drChild["PRIMARID"]).ToString();
                     fl.FlightStatus = (drChild["BOOKINGSTATUS"] == DBNull.Value) ? BookingStatus.WAITLISTED
                     : (BookingStatus)(drChild["BOOKINGSTATUS"]);
                     fl.Airline = (drChild["Airline"] == DBNull.Value) ? " "
@@ -479,8 +485,8 @@ namespace TravelService
                 foreach (DataRow drChild in dr.GetChildRows("Response_flight")) {
 
                     Flight flight = new Flight();
-                    flight.FlightId = (drChild["Id"] == DBNull.Value) ? "-1"
-                    : (drChild["Id"]).ToString();
+                    flight.FlightId = (drChild["PRIMARID"] == DBNull.Value) ? "-1"
+                    : (drChild["PRIMARID"]).ToString();
                     flight.FlightStatus= (drChild["BOOKINGSTATUS"] == DBNull.Value) ? BookingStatus.WAITLISTED
                     : (BookingStatus)(drChild["BOOKINGSTATUS"]);
                     flight.Airline=(drChild["Airline"] == DBNull.Value) ? " "
@@ -521,32 +527,54 @@ namespace TravelService
         }//  public SendAvailableBookingRequest[] AvailableBookings(DataSet ds) {
         #endregion
 
-        #region INIIAL RESPONSE - STORE REQUEST TO DATABASE
+        #region INIIAL RESPONSE - STORE REQUEST TO DATABASE      
 
+
+        public void setInitialErrorString() {
+            if (dterrors != null)
+            {
+                int rowIndex = dterrors.Rows.IndexOf(dterrors.Select("RequirementResp=0 AND NoBookingID=1 AND BIDnotExist=0")[0]);
+                noidresp = (dterrors.Rows[rowIndex]["ErrorText"] == DBNull.Value) ? "" : Convert.ToString(dterrors.Rows[rowIndex]["ErrorText"]);
+
+                rowIndex = dterrors.Rows.IndexOf(dterrors.Select("RequirementResp=1 AND NoBookingID=1 AND BIDnotExist=0")[0]);
+                noidrequ = (dterrors.Rows[rowIndex]["ErrorText"] == DBNull.Value) ? "" : Convert.ToString(dterrors.Rows[rowIndex]["ErrorText"]);
+
+                rowIndex = dterrors.Rows.IndexOf(dterrors.Select("RequirementResp=0 AND NoBookingID=0 AND BIDnotExist=1")[0]);
+                bonoex = (dterrors.Rows[rowIndex]["ErrorText"] == DBNull.Value) ? "" : Convert.ToString(dterrors.Rows[rowIndex]["ErrorText"]);
+
+            }
+
+        }
         public BookingResponse notReceivedBR ()
         {
-            String noID = "Our system could not receive any booking related object without Booking ID!";
-
             BookingResponse br = new BookingResponse();
             br.BookingId = -1;
-            br.Comment = noID;
+            br.Comment = noidresp;
             br.IsReceived = false;
 
             return br;
         }
         public RequirementResponse notReceiveRR() {
 
-            String noID = "Our system could not receive any requirement booking related object without Booking Requirement ID!";
-
             RequirementResponse rr = new RequirementResponse();
             rr.BookingRequirementId = -1;
-            rr.Comment = noID;
+            rr.Comment = noidrequ;
             rr.IsReceived = false;
 
             return rr;
 
         }
 
+        public BookingResponse BookingNotEx(Int32 BookingID) {
+            
+            BookingResponse br = new BookingResponse();
+            br.BookingId = BookingID;
+            br.Comment = bonoex;
+            br.IsReceived = false;
+
+            return br;
+        }
+      
         public void SendBookingRequirementResponses_field(WebServiceConsumerRequest webServiceConsumerRequest, Int32 ServiceID)
         {           
             List<PersonTA> listPerson = new List<PersonTA>();
@@ -692,21 +720,34 @@ namespace TravelService
 
             foreach (AcceptBookingRequest abr in abrField) {
                 AcceptBookingRequestTA abrTA = InitializeInstances.initializeAbrTA(abr:abr, ServiceID:ServiceID);
-                BookingResponseTA brTA = InitializeInstances.initialize_BookingRespTA(abr: abr, ServiceID:ServiceID, InitialComment: InitialComment);
+                BookingResponseTA brTA = null;              
                 BookingResponse br = new BookingResponse();
 
-                if (brTA.BookingId == 0)
+                if (abrTA.BookingId == 0)
                 {
+                    brTA = InitializeInstances.initialize_BookingRespTA(abr: abr, ServiceID: ServiceID,
+                            InitialComment: noidresp, IsReceived: false);
                     br = notReceivedBR();
-                }
+                }// if (brTA.BookingId == 0)
                 else {
-                    br.Comment = brTA.Comment;
-                    br.IsReceived = brTA.IsReceived;
-                    br.BookingId = brTA.BookingId;
+                    if (!StoredProceduresCall.check_if_booking_exists(abrTA.BookingId)) {
+                        brTA = InitializeInstances.initialize_BookingRespTA(abr: abr, ServiceID: ServiceID, 
+                            InitialComment: bonoex, IsReceived:false);
+                        br = BookingNotEx(brTA.BookingId);
 
-                    listBRTA.Add(brTA);                   
-                    listabrTA.Add(abrTA);
-                }
+                    }//if (!StoredProceduresCall.check_if_booking_exists(brTA.BookingId)) {
+                    else {
+                        brTA = InitializeInstances.initialize_BookingRespTA(abr: abr, ServiceID: ServiceID, InitialComment: InitialComment);
+                        br.Comment = brTA.Comment;
+                        br.IsReceived = brTA.IsReceived;
+                        br.BookingId = brTA.BookingId;
+                        listabrTA.Add(abrTA);
+                    }//else {
+
+
+                    listBRTA.Add(brTA);
+
+                }// else { if not (brTA.BookingId == 0) 
                 listBR.Add(br);
             }
 
@@ -739,20 +780,35 @@ namespace TravelService
             foreach (CancelBookingRequest cbr in cbrfield) {
 
                 CancelBookingRequestTA cbrTA = InitializeInstances.initializeCBRTA(cbr: cbr, ServiceID: ServiceID);
-                BookingResponseTA brta = InitializeInstances.initialize_BookingRespTA(cbr: cbr, ServiceID: ServiceID, InitialComment: InitialComment);
+                BookingResponseTA brta = null; 
                 BookingResponse br = new BookingResponse();
 
-                if (brta.BookingId == 0) {
-
+                if (cbr.BookingId == 0)
+                {
+                    brta = InitializeInstances.initialize_BookingRespTA(cbr: cbr, ServiceID: ServiceID,
+                            InitialComment: noidresp, IsReceived: false);
                     br = notReceivedBR();
                 }
-                else {
-                    br.Comment = brta.Comment;
-                    br.IsReceived = brta.IsReceived;
-                    br.BookingId = brta.BookingId;
+                else
+                {
+                    if (!StoredProceduresCall.check_if_booking_exists((Int32)cbr.BookingId))
+                    {
+                        brta = InitializeInstances.initialize_BookingRespTA(cbr: cbr, ServiceID: ServiceID,
+                            InitialComment: bonoex, IsReceived: false);
+                        br = BookingNotEx(brta.BookingId);
+
+                    }
+                    else {
+
+                        brta = InitializeInstances.initialize_BookingRespTA(cbr: cbr, ServiceID: ServiceID, InitialComment: InitialComment);
+                        br.Comment = brta.Comment;
+                        br.IsReceived = brta.IsReceived;
+                        br.BookingId = brta.BookingId;
+                        
+                        listcbrTA.Add(cbrTA);
+                    }
 
                     listBRTA.Add(brta);
-                    listcbrTA.Add(cbrTA);
                 }
 
                 listBR.Add(br);
@@ -784,22 +840,37 @@ namespace TravelService
 
             foreach (RequireTicketsRequest rtr in rtrfield) {
                 RequireTicketsRequestTA rtrTA = InitializeInstances.intializeRTRTA(rtr: rtr, ServiceID: ServiceID);
-                BookingResponseTA brta = InitializeInstances.initialize_BookingRespTA(rtr: rtr, ServiceID: ServiceID, InitialComment: InitialComment);
+                BookingResponseTA brta = null;
                 BookingResponse br = new BookingResponse();
 
-                if (brta.BookingId == 0)
+                if (rtr.BookingId == 0)
                 {
+                    brta = InitializeInstances.initialize_BookingRespTA(rtr: rtr, ServiceID: ServiceID,
+                           InitialComment: noidresp, IsReceived: false);
                     br = notReceivedBR();
 
                 }
                 else {
+                    if (!StoredProceduresCall.check_if_booking_exists((Int32)rtr.BookingId))
+                    {
+                        brta = InitializeInstances.initialize_BookingRespTA(rtr: rtr, ServiceID: ServiceID,
+                            InitialComment: bonoex, IsReceived: false);
+                        br = BookingNotEx(brta.BookingId);
 
-                    br.Comment = brta.Comment;
-                    br.IsReceived = brta.IsReceived;
-                    br.BookingId = brta.BookingId;
+                    }
+                    else {
+
+                        brta = InitializeInstances.initialize_BookingRespTA(rtr: rtr, ServiceID: ServiceID, InitialComment: InitialComment);
+                        br.Comment = brta.Comment;
+                        br.IsReceived = brta.IsReceived;
+                        br.BookingId = brta.BookingId;
+
+                        listrtrTA.Add(rtrTA);
+                    }
+                 
 
                     listbrTA.Add(brta);
-                    listrtrTA.Add(rtrTA);
+                   
                 }
 
                 listbr.Add(br);
@@ -860,6 +931,7 @@ namespace TravelService
                 brta.Requ = requ;
                 brta.Date_ = defaultDate; // Convert.ToDateTime(Globals.DefaultDate);
                 brta.ServiceID = ServiceID;
+                brta.Seen = false;
 
                 listbrTA.Add(brta);
             }

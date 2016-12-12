@@ -42,10 +42,28 @@ namespace TestingWCF
             var rezult = tn.synchronize(new WebServiceConsumerRequest()
 
             {
-                SessionId = 22091982,
+                SessionId = 5050,
                 Username = "Offen",
                 Password = "R6pRDrQ0pLgZ9Ms",
 
+                //UpdateFlightDataResponses= new BookingResponse[3] {
+                //    new BookingResponse {
+                //        BookingId=148,
+                //        Comment="Test 148!",
+                //        IsReceived = true
+                //    },
+                //     new BookingResponse {
+                //         BookingId=156,
+                //        Comment="Test 156!",
+                //        IsReceived = true
+                //     },
+                //      new BookingResponse {
+                //          BookingId=122,
+                //        Comment="Test 122!",
+                //        IsReceived = true
+                //      }
+
+                //},
                 //SendBookingRequirementRequests =
                 //    new SendBookingRequirementRequest[3]
 
@@ -58,7 +76,9 @@ namespace TestingWCF
 
                 //             {
 
-                //                 FirstName = "Peter",                           
+                //                 FirstName = "Peter", 
+                //                 MiddleName = "Zvonko"
+
 
                 //                 //Some other properties for person
 
@@ -135,42 +155,42 @@ namespace TestingWCF
 
                 //    },
 
-                AcceptBookingRequests = new AcceptBookingRequest[8] {
+                //AcceptBookingRequests = new AcceptBookingRequest[8] {
 
-                        new AcceptBookingRequest {
-                            BookingId=14
-                        },
-                       new AcceptBookingRequest {
-                            BookingId=17
-                           
-                        },
-                       new AcceptBookingRequest {
-                            BookingId=19,
-                            Comment = "so expensive!!!"
+                //        new AcceptBookingRequest {
+                //            BookingId=15016
+                //        },
+                //       new AcceptBookingRequest {
+                //            BookingId=17
+
+                //        },
+                //       new AcceptBookingRequest {
+                //            BookingId=19,
+                //            Comment = "so expensive!!!"
 
 
-                        },
-                         new AcceptBookingRequest {
-                            BookingId=29
-                           
-                        },
-                       new AcceptBookingRequest {
-                            BookingId=31
-                           
-                        },
-                       new AcceptBookingRequest {
-                            BookingId=33
-                          
-                        },
-                        new AcceptBookingRequest {
-                            BookingId=35
-                            
-                        },
-                       new AcceptBookingRequest {
-                            BookingId=37
-                          
-                        }
-                    },
+                //        },
+                //         new AcceptBookingRequest {
+                //            BookingId=15021
+
+                //        },
+                //       new AcceptBookingRequest {
+                //            BookingId=31
+
+                //        },
+                //       new AcceptBookingRequest {
+                //            BookingId=33
+
+                //        },
+                //        new AcceptBookingRequest {
+                //            BookingId=15030
+
+                //        },
+                //       new AcceptBookingRequest {
+                //            BookingId=37
+
+                //        }
+                //    },
 
                 //CancelBookingRequests = new CancelBookingRequest[4] {
 
@@ -180,28 +200,36 @@ namespace TestingWCF
                 //            BookingStatus= BookingStatus.CANCELLED
                 //        },
                 //        new CancelBookingRequest {
-                //            BookingId=523,
+                //            BookingId=15030,
                 //            Comment = "CancelBookingRequest oni šalju - response je naš",
                 //            BookingStatus= BookingStatus.CANCELLED
                 //        },
-                //         new CancelBookingRequest {                            
+                //         new CancelBookingRequest {
                 //            Comment = "no id",
                 //            BookingStatus= BookingStatus.CANCELLED
                 //        },
                 //        new CancelBookingRequest {
-                //            BookingId=525,
+                //            BookingId=15021,
                 //            Comment = "CancelBookingRequest oni šalju - response je naš",
                 //            BookingStatus= BookingStatus.CANCELLED
                 //        }
-                //    }
-                //RequireTicketsRequests = new RequireTicketsRequest[1] {
+                //    },
+                //RequireTicketsRequests = new RequireTicketsRequest[3] {
 
                 //         new RequireTicketsRequest {
-                //            BookingId=555,
-                //            Comment = "RequireTicketsRequest oni šalju - response je naš"
+                //            BookingId=15038,
+                //            Comment = "Zadnji comment u comment logu 15038"
+                //        },
+                //          new RequireTicketsRequest {
+                //            BookingId=15030,
+                //            Comment = "Zadnji comment u comment logu 15030"
+                //        },
+                //        new RequireTicketsRequest {
+                //            BookingId=15021,
+                //            Comment = "Zadnji comment u comment logu 15021"
                 //        }
 
-                //    },
+                //    }
                 //CancelBookingResponses = new BookingResponse[2] {
                 //          new BookingResponse {
                 //            BookingId=517,
