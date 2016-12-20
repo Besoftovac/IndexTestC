@@ -321,8 +321,8 @@ namespace TravelService
 
                     eticket.ETicketNumber = (drChild["ETicketNumber"] == DBNull.Value) ? ""
                     : (drChild["ETicketNumber"]).ToString();
-                    eticket.FlightId = (drChild["Flight_Id"] == DBNull.Value) ? "-1"
-                    : (drChild["Flight_Id"]).ToString();
+                    eticket.FlightId = (drChild["PRIMARID"] == DBNull.Value) ? "-1"
+                    : (drChild["PRIMARID"]).ToString();
 
                     listEticket.Add(eticket);
                 }//foreach (DataRow drChild in dr.GetChildRows("Eticket"))

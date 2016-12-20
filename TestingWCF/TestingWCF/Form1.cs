@@ -42,7 +42,7 @@ namespace TestingWCF
             var rezult = tn.synchronize(new WebServiceConsumerRequest()
 
             {
-                SessionId = 5050,
+                SessionId = 501501,
                 Username = "Offen",
                 Password = "R6pRDrQ0pLgZ9Ms",
 
