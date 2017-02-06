@@ -22,11 +22,11 @@
     <MetadataSource Address="http://localhost:8733/?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="TravelService2.wsdl" MetadataType="Wsdl" ID="07483843-841b-4eb9-a19a-3ca40427dd8e" SourceId="1" SourceUrl="http://localhost:8733/?wsdl" />
-    <MetadataFile FileName="item2.wsdl" MetadataType="Wsdl" ID="4d797554-0408-4e07-b8a9-7ee325612848" SourceId="1" SourceUrl="http://localhost:8733/?wsdl=wsdl0" />
-    <MetadataFile FileName="item6.xsd" MetadataType="Schema" ID="bd49fe1d-20e9-49b0-8f27-2051ea5f2e20" SourceId="1" SourceUrl="http://localhost:8733/?xsd=xsd0" />
-    <MetadataFile FileName="item7.xsd" MetadataType="Schema" ID="32d6f9e1-96f9-4098-802e-1b7f6f025a60" SourceId="1" SourceUrl="http://localhost:8733/?xsd=xsd1" />
-    <MetadataFile FileName="item8.xsd" MetadataType="Schema" ID="105640e9-a06d-4439-bca6-b7e3919d2ffc" SourceId="1" SourceUrl="http://localhost:8733/?xsd=xsd2" />
+    <MetadataFile FileName="TravelService2.wsdl" MetadataType="Wsdl" ID="01060749-8b95-43bb-80b4-63b154bfe475" SourceId="1" SourceUrl="http://localhost:8733/?wsdl" />
+    <MetadataFile FileName="item2.wsdl" MetadataType="Wsdl" ID="e99ecf93-5e80-48f9-9e38-5f247c55d000" SourceId="1" SourceUrl="http://localhost:8733/?wsdl=wsdl0" />
+    <MetadataFile FileName="item6.xsd" MetadataType="Schema" ID="63b6c888-5a20-401c-a14f-65f91d4de42d" SourceId="1" SourceUrl="http://localhost:8733/?xsd=xsd0" />
+    <MetadataFile FileName="item7.xsd" MetadataType="Schema" ID="befcbd52-43f8-4396-9578-542232001bc0" SourceId="1" SourceUrl="http://localhost:8733/?xsd=xsd1" />
+    <MetadataFile FileName="item8.xsd" MetadataType="Schema" ID="0fd2d453-88e0-4358-ae42-1e17621021ec" SourceId="1" SourceUrl="http://localhost:8733/?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

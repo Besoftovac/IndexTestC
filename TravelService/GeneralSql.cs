@@ -16,7 +16,7 @@ namespace TravelService
         public static SqlConnection CatchDatabase() {
            String user = "Korisnik";
             String pass = "123";
-            String konekcija = String.Format(@"Initial Catalog=MedmarService; Data Source=89.164.66.22;User Id={0};Password={1}", user, pass);
+            String konekcija = String.Format(@"Initial Catalog=MedmarServiceTestBesoft; Data Source=89.164.66.22;User Id={0};Password={1}", user, pass);
             SqlConnection conn = new SqlConnection(konekcija);
            
             return conn;
