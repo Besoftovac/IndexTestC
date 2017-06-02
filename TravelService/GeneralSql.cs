@@ -13,10 +13,23 @@ namespace TravelService
     public class GeneralSql
     {
 
-        public static SqlConnection CatchDatabase() {
-           String user = "Korisnik";
-            String pass = "123";
-            String konekcija = String.Format(@"Initial Catalog=MedmarServiceTestBesoft; Data Source=89.164.66.22;User Id={0};Password={1}", user, pass);
+        public static SqlConnection CatchDatabase(bool local = true) {
+
+            String user = "Korisnik";
+            String pass = "bEbE7112";
+
+            String konekcija = null;
+
+            if (local)
+            {
+                //Data Source=.;Initial Catalog=DATABASE_NAME;Integrated Security=True;
+                konekcija = String.Format(@"Initial Catalog=MedmarService; Data Source=.\SQLEXPRESS;Integrated Security=True;");
+
+            }
+            else {
+                konekcija = String.Format(@"Initial Catalog=MedmarService; Data Source=89.164.66.22;User Id={0};Password={1}", user, pass);
+            }           
+            
             SqlConnection conn = new SqlConnection(konekcija);
            
             return conn;

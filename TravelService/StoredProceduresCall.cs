@@ -18,7 +18,7 @@ namespace TravelService
     {
 
        
-        static SqlConnection conn = GeneralSql.CatchDatabase();
+        static SqlConnection conn = GeneralSql.CatchDatabase(false);
 
         private static SqlCommand InitSqlCommand(String strProcedureName /*SqlConnection conn*/)
         {

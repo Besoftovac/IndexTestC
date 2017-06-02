@@ -109,6 +109,8 @@ namespace TravelService
 
         public DateTime Date_ { get; set; }
 
+        public bool Seen { get; set; }
+
     }
 
     public class BookingResponseTA {

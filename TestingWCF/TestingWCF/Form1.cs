@@ -42,7 +42,7 @@ namespace TestingWCF
             var rezult = tn.synchronize(new WebServiceConsumerRequest()
 
             {
-                SessionId = 501501,
+                SessionId = 21091982,
                 Username = "Offen",
                 Password = "R6pRDrQ0pLgZ9Ms",
 
@@ -148,7 +148,7 @@ namespace TestingWCF
 
                 //            BookingRequirementId = 253,
                 //            Reason="",
-                //            Comment = "Njihov CancelBookingRequirementRequest - naš je requ response"
+                //            Comment = "310517"
 
 
                 //        }
@@ -158,7 +158,7 @@ namespace TestingWCF
                 //AcceptBookingRequests = new AcceptBookingRequest[8] {
 
                 //        new AcceptBookingRequest {
-                //            BookingId=15016
+                //            BookingId=40
                 //        },
                 //       new AcceptBookingRequest {
                 //            BookingId=17
@@ -171,7 +171,7 @@ namespace TestingWCF
 
                 //        },
                 //         new AcceptBookingRequest {
-                //            BookingId=15021
+                //            BookingId=30
 
                 //        },
                 //       new AcceptBookingRequest {
@@ -183,7 +183,7 @@ namespace TestingWCF
 
                 //        },
                 //        new AcceptBookingRequest {
-                //            BookingId=15030
+                //            BookingId=28
 
                 //        },
                 //       new AcceptBookingRequest {
@@ -195,13 +195,13 @@ namespace TestingWCF
                 //CancelBookingRequests = new CancelBookingRequest[4] {
 
                 //       new CancelBookingRequest {
-                //            BookingId=522,
-                //            Comment = "CancelBookingRequest oni šalju - response je naš",
+                //            BookingId=11,
+                //            Comment = "310517!! ",
                 //            BookingStatus= BookingStatus.CANCELLED
                 //        },
                 //        new CancelBookingRequest {
-                //            BookingId=15030,
-                //            Comment = "CancelBookingRequest oni šalju - response je naš",
+                //            BookingId=14,
+                //            Comment = "310517!!!",
                 //            BookingStatus= BookingStatus.CANCELLED
                 //        },
                 //         new CancelBookingRequest {
@@ -209,24 +209,24 @@ namespace TestingWCF
                 //            BookingStatus= BookingStatus.CANCELLED
                 //        },
                 //        new CancelBookingRequest {
-                //            BookingId=15021,
-                //            Comment = "CancelBookingRequest oni šalju - response je naš",
+                //            BookingId=17,
+                //            Comment = "310517!!",
                 //            BookingStatus= BookingStatus.CANCELLED
                 //        }
                 //    },
                 //RequireTicketsRequests = new RequireTicketsRequest[3] {
 
                 //         new RequireTicketsRequest {
-                //            BookingId=15038,
-                //            Comment = "Zadnji comment u comment logu 15038"
+                //            BookingId=33,
+                //            Comment = "test"
                 //        },
                 //          new RequireTicketsRequest {
-                //            BookingId=15030,
-                //            Comment = "Zadnji comment u comment logu 15030"
+                //            BookingId=35,
+                //            Comment = "test"
                 //        },
                 //        new RequireTicketsRequest {
-                //            BookingId=15021,
-                //            Comment = "Zadnji comment u comment logu 15021"
+                //            BookingId=36,
+                //            Comment = "test"
                 //        }
 
                 //    }
