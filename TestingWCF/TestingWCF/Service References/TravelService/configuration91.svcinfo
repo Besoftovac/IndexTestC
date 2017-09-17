@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="3le3FRP3YhqKObhQMCH50v2+etU=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="5zhB6cBX7Ly5PyRv/FchxGcsJMo=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpEndpoint">
       <properties>
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpEndpoint" contract="TravelService.ITravelService" bindingType="basicHttpBinding" address="http://www.medmar.eu/TravelService_.svc" bindingConfiguration="BasicHttpEndpoint">
+    <endpoint name="BasicHttpEndpoint" contract="TravelService.ITravelService" bindingType="basicHttpBinding" address="http://medmar.eu/TravelService_.svc" bindingConfiguration="BasicHttpEndpoint">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>http://www.medmar.eu/TravelService_.svc</serializedValue>
+          <serializedValue>http://medmar.eu/TravelService_.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

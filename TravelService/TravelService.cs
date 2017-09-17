@@ -14,12 +14,14 @@ using System.Security.Cryptography;
 using System.ServiceModel.Channels;
 using System.IO;
 using System.Xml;
+using System.ComponentModel;
 
 namespace TravelService
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "TravelService" in both code and config file together.
     [AspNetCompatibilityRequirements(RequirementsMode
     = AspNetCompatibilityRequirementsMode.Allowed)]
+
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
     public class TravelService : ITravelService
     {
@@ -85,7 +87,7 @@ namespace TravelService
                 storeInitial_requResponse(webServiceConsumerRequest, ServiceID);
                 //webServiceConsumerRequest.            
 
-                generate_xml_requ(webServiceConsumerRequest, disk, folder);
+                generate_xml_requ(webServiceConsumerRequest, disk, folder, ServiceID);
                 generate_xml_resp(WPR, disk, folder);
                 return WPR;
 
@@ -97,10 +99,12 @@ namespace TravelService
         }// public WebServiceProviderResponse synchronize(WebServiceConsumerRequest webServiceConsumerRequest)
 
         #region GENERATE XML REQU RESP
-        private void generate_xml_requ(WebServiceConsumerRequest webServiceConsumerRequest, String diskName, String folderName) {
-           
+        private void generate_xml_requ(WebServiceConsumerRequest webServiceConsumerRequest, String diskName, String folderName, Int32 ServiceID) {
+
+            String xml = null;
             DataContractSerializer dcs = new DataContractSerializer(typeof(WebServiceConsumerRequest));
             String sessionID= webServiceConsumerRequest.SessionId.ToString();
+            
 
             bool exists = System.IO.Directory.Exists(diskName + "\\" + folderName);
 
@@ -113,9 +117,12 @@ namespace TravelService
                     XmlDictionaryWriter.CreateTextWriter(stream, Encoding.UTF8))
                 {
                     writer.WriteStartDocument();
-                    dcs.WriteObject(writer, webServiceConsumerRequest);
+                    dcs.WriteObject(writer, webServiceConsumerRequest); 
+                                       
                 }
             }
+            xml = Serialize(webServiceConsumerRequest);
+            StoredProceduresCall.sp_insertXmlIntoService(xml, ServiceID);
         }
 
         private void generate_xml_resp(WebServiceProviderResponse WPR, String diskName, String folderName)
@@ -137,6 +144,18 @@ namespace TravelService
                     writer.WriteStartDocument();
                     dcs.WriteObject(writer, WPR);
                 }
+            }
+        }
+
+        public static string Serialize(object obj)
+        {
+            using (MemoryStream memoryStream = new MemoryStream())
+            using (StreamReader reader = new StreamReader(memoryStream))
+            {
+                DataContractSerializer serializer = new DataContractSerializer(obj.GetType());
+                serializer.WriteObject(memoryStream, obj);
+                memoryStream.Position = 0;
+                return reader.ReadToEnd();
             }
         }
         #endregion
@@ -246,8 +265,8 @@ namespace TravelService
                     : (BookingStatus)(drChild["BOOKINGSTATUS"]);
                     fl.Airline = (drChild["Airline"] == DBNull.Value) ? " "
                     : (drChild["Airline"]).ToString();
-                    fl.Price = (drChild["Price"] == DBNull.Value) ? " "
-                    : (drChild["Price"]).ToString();
+                    fl.Price = (drChild["Price"] == DBNull.Value) ? 0
+                    : (Decimal) (drChild["Price"]);
                     fl.Currency = (drChild["Currency"] == DBNull.Value) ? " "
                     : (drChild["Currency"]).ToString();
                     fl.FromAirport = (drChild["FromAirport"] == DBNull.Value) ? " "
@@ -262,8 +281,10 @@ namespace TravelService
                    : (drChild["FlightCode"]).ToString();
                     fl.FlightComment = (drChild["FlightComment"] == DBNull.Value) ? ""
                   : (drChild["FlightComment"]).ToString();
-                    fl.Class = (drChild["Class"] == DBNull.Value) ? ""
-                    : (drChild["Class"]).ToString();
+                    //   fl.Class = (drChild["Class"] == DBNull.Value) ? ""
+                    //: (drChild["Class"]).ToString();
+                    fl.Class = (drChild["FlightClassID"] == DBNull.Value) ? FlightClass.E
+                    : (FlightClass)(drChild["FlightClassID"]);
                     fl.TicketLocator = (drChild["TicketLocator"] == DBNull.Value) ? ""
                 : (drChild["TicketLocator"]).ToString();
                     fl.ETicketNumber = (drChild["ETicketNumber"] == DBNull.Value) ? ""
@@ -472,7 +493,7 @@ namespace TravelService
                     : (dr["BookingComment"]).ToString();
                 sabr.FromAirport = (dr["FromAirport"] == DBNull.Value) ? ""
                     : (dr["FromAirport"]).ToString();
-                sabr.FromAirport = (dr["ToAirport"] == DBNull.Value) ? ""
+                sabr.ToAirport = (dr["ToAirport"] == DBNull.Value) ? ""
                     : (dr["ToAirport"]).ToString();
                 sabr.BookingStatus = (dr["BookingStatus2"] == DBNull.Value) ? BookingStatus.WAITLISTED
                     : (BookingStatus)(dr["BookingStatus2"]);
@@ -491,8 +512,8 @@ namespace TravelService
                     : (BookingStatus)(drChild["BOOKINGSTATUS"]);
                     flight.Airline=(drChild["Airline"] == DBNull.Value) ? " "
                     : (drChild["Airline"]).ToString();
-                    flight.Price = (drChild["Price"] == DBNull.Value) ? " "
-                    : (drChild["Price"]).ToString();
+                    flight.Price = (drChild["Price"] == DBNull.Value) ? 0
+                    : (Decimal)(drChild["Price"]);
                     flight.Currency = (drChild["Currency"] == DBNull.Value) ? " "
                     : (drChild["Currency"]).ToString();
                     flight.FromAirport = (drChild["FromAirport"] == DBNull.Value) ? " "
@@ -507,8 +528,10 @@ namespace TravelService
                    : (drChild["FlightCode"]).ToString();
                     flight.FlightComment = (drChild["FlightComment"] == DBNull.Value) ? ""
                   : (drChild["FlightComment"]).ToString();
-                    flight.Class = (drChild["Class"] == DBNull.Value) ? ""
-                 : (drChild["Class"]).ToString();
+                    //   flight.Class = (drChild["Class"] == DBNull.Value) ? ""
+                    //: (drChild["Class"]).ToString();
+                    flight.Class = (drChild["FlightClassID"] == DBNull.Value) ? FlightClass.E
+                      : (FlightClass)(drChild["FlightClassID"]);
                     flight.TicketLocator = (drChild["TicketLocator"] == DBNull.Value) ? ""
                 : (drChild["TicketLocator"]).ToString();
                     flight.ETicketNumber = (drChild["ETicketNumber"] == DBNull.Value) ? ""
@@ -945,6 +968,16 @@ namespace TravelService
 
 
         #endregion
+        //public static string GetDescription(this Enum value)
+        //{
+        //    FieldInfo field = value.GetType().GetField(value.ToString());
+
+        //    DescriptionAttribute attribute
+        //            = Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute))
+        //                as DescriptionAttribute;
+
+        //    return attribute == null ? value.ToString() : attribute.Description;
+        //}
 
     }
 

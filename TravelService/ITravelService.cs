@@ -5,8 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using System.ServiceModel.Web;
-
-
+using System.ComponentModel;
 
 namespace TravelService
 
@@ -215,6 +214,14 @@ namespace TravelService
         public DateTime? DepartureDate { get; set; }
         [DataMember]
         public DateTime? ArrivalDate { get; set; }
+        [DataMember]
+        public TimeRange ArrivalTimeRange { get; set; }
+        [DataMember]
+        public TimeRange DepartureTimeRange { get; set; }
+        [DataMember]
+        public bool IsEmergencyRequest { get; set; }
+        [DataMember]
+        public FlightClass Class { get; set; }
 
         /// <summary>
         /// Comment used to hold extra info
@@ -353,8 +360,11 @@ namespace TravelService
         public string FlightId { get; set; }
         [DataMember]
         public string Airline { get; set; }
+        //[DataMember]
+        //public string Price { get; set; }
         [DataMember]
-        public string Price { get; set; }
+        public Decimal Price { get; set; }
+
         [DataMember]
         public string Currency { get; set; }
         [DataMember]
@@ -373,7 +383,7 @@ namespace TravelService
         [DataMember]
         public string FlightComment { get; set; }
         [DataMember]
-        public string Class { get; set; }
+        public FlightClass Class { get; set; }
         [DataMember]
         public string TicketLocator { get; set; }
         [DataMember]
@@ -454,5 +464,139 @@ namespace TravelService
         [EnumMember]
         CONFIRMED = 5
 
+    }
+    [DataContract(Name = "FlightClass")]
+    public enum FlightClass
+    {
+        [EnumMember]
+        NN = 1, //unknown travel class
+        [EnumMember]
+        SE = 2, //seaman economic
+        [EnumMember]
+        SB = 3, //seaman business
+        [EnumMember]
+        E = 4, //economic
+        [EnumMember]
+        B = 5 //business
+    }
+
+    [DataContract(Name = "TimeRange")]
+    public enum TimeRange
+    {
+        [EnumMember]
+        [Description("Any time")]
+        AnyTime = 1,
+
+        [EnumMember]
+        [Description("Before 8am")]
+        Before8am,
+
+        [EnumMember]
+        [Description("(8am - 12pm)")]
+        Morning, //(8am-12pm)
+
+        [EnumMember]
+        [Description("(12pm - 6pm)")]
+        Afternoon, // (12pm - 6pm)
+
+        [EnumMember]
+        [Description("(6pm - 12am)")]
+        Evening, // (6pm - 12am)
+
+        [EnumMember]
+        [Description("00:00")]
+        T0000,
+
+        [EnumMember]
+        [Description("01:00")]
+        T0100,
+
+        [EnumMember]
+        [Description("02:00")]
+        T0200,
+
+        [EnumMember]
+        [Description("03:00")]
+        T0300,
+
+        [EnumMember]
+        [Description("04:00")]
+        T0400,
+
+        [EnumMember]
+        [Description("05:00")]
+        T0500,
+
+        [EnumMember]
+        [Description("06:00")]
+        T0600,
+
+        [EnumMember]
+        [Description("07:00")]
+        T0700,
+
+        [EnumMember]
+        [Description("08:00")]
+        T0800,
+
+        [EnumMember]
+        [Description("09:00")]
+        T0900,
+
+        [EnumMember]
+        [Description("10:00")]
+        T1000,
+
+        [EnumMember]
+        [Description("11:00")]
+        T1100,
+
+        [EnumMember]
+        [Description("12:00")]
+        T1200,
+
+        [EnumMember]
+        [Description("13:00")]
+        T1300,
+
+        [EnumMember]
+        [Description("14:00")]
+        T1400,
+
+        [EnumMember]
+        [Description("15:00")]
+        T1500,
+
+        [EnumMember]
+        [Description("16:00")]
+        T1600,
+
+        [EnumMember]
+        [Description("17:00")]
+        T1700,
+
+        [EnumMember]
+        [Description("18:00")]
+        T1800,
+
+        [EnumMember]
+        [Description("19:00")]
+        T1900,
+
+        [EnumMember]
+        [Description("20:00")]
+        T2000,
+
+        [EnumMember]
+        [Description("21:00")]
+        T2100,
+
+        [EnumMember]
+        [Description("22:00")]
+        T2200,
+
+        [EnumMember]
+        [Description("23:00")]
+        T2300
     }
 }

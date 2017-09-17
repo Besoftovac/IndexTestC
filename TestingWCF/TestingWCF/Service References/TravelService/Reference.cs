@@ -648,13 +648,25 @@ namespace TestingWCF.TravelService {
         private System.Nullable<System.DateTime> ArrivalDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestingWCF.TravelService.TimeRange ArrivalTimeRangeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long BookingRequirementIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestingWCF.TravelService.FlightClass ClassField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.DateTime> DepartureDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private TestingWCF.TravelService.TimeRange DepartureTimeRangeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string FromAirportField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsEmergencyRequestField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private TestingWCF.TravelService.Person PersonField;
@@ -689,6 +701,19 @@ namespace TestingWCF.TravelService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestingWCF.TravelService.TimeRange ArrivalTimeRange {
+            get {
+                return this.ArrivalTimeRangeField;
+            }
+            set {
+                if ((this.ArrivalTimeRangeField.Equals(value) != true)) {
+                    this.ArrivalTimeRangeField = value;
+                    this.RaisePropertyChanged("ArrivalTimeRange");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public long BookingRequirementId {
             get {
                 return this.BookingRequirementIdField;
@@ -697,6 +722,19 @@ namespace TestingWCF.TravelService {
                 if ((this.BookingRequirementIdField.Equals(value) != true)) {
                     this.BookingRequirementIdField = value;
                     this.RaisePropertyChanged("BookingRequirementId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestingWCF.TravelService.FlightClass Class {
+            get {
+                return this.ClassField;
+            }
+            set {
+                if ((this.ClassField.Equals(value) != true)) {
+                    this.ClassField = value;
+                    this.RaisePropertyChanged("Class");
                 }
             }
         }
@@ -715,6 +753,19 @@ namespace TestingWCF.TravelService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public TestingWCF.TravelService.TimeRange DepartureTimeRange {
+            get {
+                return this.DepartureTimeRangeField;
+            }
+            set {
+                if ((this.DepartureTimeRangeField.Equals(value) != true)) {
+                    this.DepartureTimeRangeField = value;
+                    this.RaisePropertyChanged("DepartureTimeRange");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string FromAirport {
             get {
                 return this.FromAirportField;
@@ -723,6 +774,19 @@ namespace TestingWCF.TravelService {
                 if ((object.ReferenceEquals(this.FromAirportField, value) != true)) {
                     this.FromAirportField = value;
                     this.RaisePropertyChanged("FromAirport");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsEmergencyRequest {
+            get {
+                return this.IsEmergencyRequestField;
+            }
+            set {
+                if ((this.IsEmergencyRequestField.Equals(value) != true)) {
+                    this.IsEmergencyRequestField = value;
+                    this.RaisePropertyChanged("IsEmergencyRequest");
                 }
             }
         }
@@ -1079,6 +1143,118 @@ namespace TestingWCF.TravelService {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TimeRange", Namespace="http://schemas.datacontract.org/2004/07/TravelService")]
+    public enum TimeRange : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AnyTime = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Before8am = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Morning = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Afternoon = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Evening = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T0000 = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T0100 = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T0200 = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T0300 = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T0400 = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T0500 = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T0600 = 12,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T0700 = 13,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T0800 = 14,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T0900 = 15,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T1000 = 16,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T1100 = 17,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T1200 = 18,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T1300 = 19,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T1400 = 20,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T1500 = 21,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T1600 = 22,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T1700 = 23,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T1800 = 24,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T1900 = 25,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T2000 = 26,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T2100 = 27,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T2200 = 28,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        T2300 = 29,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="FlightClass", Namespace="http://schemas.datacontract.org/2004/07/TravelService")]
+    public enum FlightClass : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NN = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SE = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SB = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        E = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        B = 5,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2004,7 +2180,7 @@ namespace TestingWCF.TravelService {
         private System.DateTime ArrivalDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ClassField;
+        private TestingWCF.TravelService.FlightClass ClassField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string CurrencyField;
@@ -2031,7 +2207,7 @@ namespace TestingWCF.TravelService {
         private string FromAirportField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PriceField;
+        private decimal PriceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string TicketLocatorField;
@@ -2076,12 +2252,12 @@ namespace TestingWCF.TravelService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Class {
+        public TestingWCF.TravelService.FlightClass Class {
             get {
                 return this.ClassField;
             }
             set {
-                if ((object.ReferenceEquals(this.ClassField, value) != true)) {
+                if ((this.ClassField.Equals(value) != true)) {
                     this.ClassField = value;
                     this.RaisePropertyChanged("Class");
                 }
@@ -2193,12 +2369,12 @@ namespace TestingWCF.TravelService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Price {
+        public decimal Price {
             get {
                 return this.PriceField;
             }
             set {
-                if ((object.ReferenceEquals(this.PriceField, value) != true)) {
+                if ((this.PriceField.Equals(value) != true)) {
                     this.PriceField = value;
                     this.RaisePropertyChanged("Price");
                 }

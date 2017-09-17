@@ -107,10 +107,17 @@
     <None Include="Service References\TravelService\TravelService_1.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\TravelService\TravelService_10.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TravelService\TravelService_11.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\TravelService\TravelService_2.wsdl" />
     <None Include="Service References\TravelService\TravelService_2.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\TravelService\TravelService_3.wsdl" />
     <None Include="Service References\TravelService\TravelService_3.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -127,6 +134,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\TravelService\TravelService_8.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TravelService\TravelService_9.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -150,6 +160,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TravelService\TravelService_.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

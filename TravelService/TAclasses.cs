@@ -69,6 +69,14 @@ namespace TravelService
         public DateTime Date_ { get; set; }
 
         public Int32 Status { get; set; }
+
+        public Int32 ArrivalTimeRange { get; set; }
+       
+        public Int32 DepartureTimeRange { get; set; }
+        
+        public bool IsEmergencyRequest { get; set; }
+        
+        public Int32 Class { get; set; }
     }
 
     public class TestRequest {

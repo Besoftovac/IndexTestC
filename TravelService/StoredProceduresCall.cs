@@ -41,6 +41,21 @@ namespace TravelService
             if (bCloseConn) conn.Close();
         }//private static void Execute(SqlCommand cmd, bool bCloseConn = true)
 
+        public static void sp_insertXmlIntoService(String xml = null, Int32 ServiceID=-1) {
+
+            try {
+                SqlCommand cmd = InitSqlCommand("sp_insertXmlIntoService");
+                cmd.Parameters.Add("@Xml_s", SqlDbType.VarChar).Value = xml;
+                cmd.Parameters.Add("@ServiceID", SqlDbType.Int).Value = ServiceID;
+
+                Execute(cmd);
+
+            }
+            catch (Exception m) {
+                throw m;
+            }
+        }
+
         public static bool check_if_booking_exists(Int32 BookingID) {
 
             bool exists = false;

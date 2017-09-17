@@ -61,6 +61,10 @@ namespace TravelService
             sbrrTA.Person_Id = 0;
             sbrrTA.Date_ = defaultDate;
             sbrrTA.Status = Convert.ToInt32(ServiceStatus.Initial);
+            sbrrTA.ArrivalTimeRange = (Int32)sbrr.ArrivalTimeRange;
+            sbrrTA.DepartureTimeRange = (Int32)sbrr.DepartureTimeRange;
+            sbrrTA.IsEmergencyRequest = sbrr.IsEmergencyRequest;
+            sbrrTA.Class = (Int32)sbrr.Class;
 
             return sbrrTA;
 

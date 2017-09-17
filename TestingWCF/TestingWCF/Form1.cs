@@ -42,7 +42,7 @@ namespace TestingWCF
             var rezult = tn.synchronize(new WebServiceConsumerRequest()
 
             {
-                SessionId = 21091982,
+                SessionId = 777778,
                 Username = "Offen",
                 Password = "R6pRDrQ0pLgZ9Ms",
 
@@ -64,43 +64,54 @@ namespace TestingWCF
                 //      }
 
                 //},
-                //SendBookingRequirementRequests =
-                //    new SendBookingRequirementRequest[3]
+                SendBookingRequirementRequests =
+                    new SendBookingRequirementRequest[1]
 
-                //    {
-                //        new SendBookingRequirementRequest
-                //        {
+                    {
+                        new SendBookingRequirementRequest
+                        {
 
-                //            BookingRequirementId = 100,
-                //             Person = new Person()
+                            BookingRequirementId = 335668,
+                             Person = new Person()
 
-                //             {
+                             {
 
-                //                 FirstName = "Peter", 
-                //                 MiddleName = "Zvonko"
-
-
-                //                 //Some other properties for person
-
+                                 FirstName = "Marinko",
+                                 MiddleName = "Zvonko",
+                                 LastName = "Perić",
+                                // Birthday = new DateTime (1990,02,23)
 
 
-                //             },
+                                 //Some other properties for person
 
-                //             FromAirport = "HAM",
-                //             ToAirport = "CPT",
-                //             ArrivalDate = new DateTime(2016,12,12),
-                //             RequestBookingComment = "Test comment 100"
 
-                //        },
+
+                             },
+
+                             FromAirport = "HAM",
+                             ToAirport = "CPT",
+                             ArrivalDate = new DateTime(2017,08,15),
+                             RequestBookingComment = "Besoft n-to testiranje servisa koji radi cijelo vrijeme!!!! ",
+                             ArrivalTimeRange = TimeRange.AnyTime,
+                             DepartureTimeRange = TimeRange.Before8am,
+                             IsEmergencyRequest = true,
+                             Class = FlightClass.SB
+
+                        } }
+
                 //         new SendBookingRequirementRequest
                 //        {
 
-                //           // BookingRequirementId = 106,
+                //            BookingRequirementId = 335667,
                 //             Person = new Person()
 
                 //             {
 
-                //                 FirstName = "No id",                           
+                //                 FirstName = "Ivica",
+                //                //MiddleName = "Zvonko",
+                //                 LastName = "Ivaniš",
+                //                 Birthday = new DateTime (1990,02,23)
+
 
                 //                 //Some other properties for person
 
@@ -110,34 +121,16 @@ namespace TestingWCF
 
                 //             FromAirport = "HAM",
                 //             ToAirport = "CPT",
-                //             ArrivalDate = new DateTime(2016, 12,11),
-                //             RequestBookingComment = "no id test"
-
-                //        },
-                //          new SendBookingRequirementRequest
-                //        {
-
-                //            BookingRequirementId = 101,
-                //             Person = new Person()
-
-                //             {
-
-                //                 FirstName = "Marinko",                           
-
-                //                 //Some other properties for person
-
-
-
-                //             },
-
-                //             FromAirport = "HAM---",
-                //             ToAirport = "CPT",
-                //             ArrivalDate = new DateTime(2016, 12,11),
-                //             RequestBookingComment = "Test comment 101"
+                //             ArrivalDate = new DateTime(2017,08,15),
+                //             RequestBookingComment = "Besoft - testiranje, ignorirajte ",
+                //             ArrivalTimeRange = TimeRange.AnyTime,
+                //             DepartureTimeRange = TimeRange.Before8am,
+                //             IsEmergencyRequest = true,
+                //             Class = FlightClass.SB
 
                 //        }
 
-                //    }
+                //    },
 
                 //CancelBookingRequirementRequests =
                 //    new CancelBookingRequirementRequest[1]
@@ -146,8 +139,8 @@ namespace TestingWCF
                 //        new CancelBookingRequirementRequest
                 //        {
 
-                //            BookingRequirementId = 253,
-                //            Reason="",
+                //            BookingRequirementId = 11614,
+                //            Reason="Besoft testiranje - već je otkazan",
                 //            Comment = "310517"
 
 
@@ -155,65 +148,27 @@ namespace TestingWCF
 
                 //    },
 
-                //AcceptBookingRequests = new AcceptBookingRequest[8] {
+                //AcceptBookingRequests = new AcceptBookingRequest[1] {
 
-                //        new AcceptBookingRequest {
-                //            BookingId=40
+                //            new AcceptBookingRequest {
+                //                BookingId=127
+                //            }
                 //        },
-                //       new AcceptBookingRequest {
-                //            BookingId=17
 
+                //CancelBookingRequests = new CancelBookingRequest[2] {
+
+                //           new CancelBookingRequest {
+                //                BookingId=118,
+                //                Comment = "Another booking is choosen ",
+                //                BookingStatus= BookingStatus.CANCELLED
+                //            },
+                //            new CancelBookingRequest {
+                //                BookingId=119,
+                //                Comment = "Rebooking",
+                //                BookingStatus= BookingStatus.CANCELLED
+                //            }
                 //        },
-                //       new AcceptBookingRequest {
-                //            BookingId=19,
-                //            Comment = "so expensive!!!"
 
-
-                //        },
-                //         new AcceptBookingRequest {
-                //            BookingId=30
-
-                //        },
-                //       new AcceptBookingRequest {
-                //            BookingId=31
-
-                //        },
-                //       new AcceptBookingRequest {
-                //            BookingId=33
-
-                //        },
-                //        new AcceptBookingRequest {
-                //            BookingId=28
-
-                //        },
-                //       new AcceptBookingRequest {
-                //            BookingId=37
-
-                //        }
-                //    },
-
-                //CancelBookingRequests = new CancelBookingRequest[4] {
-
-                //       new CancelBookingRequest {
-                //            BookingId=11,
-                //            Comment = "310517!! ",
-                //            BookingStatus= BookingStatus.CANCELLED
-                //        },
-                //        new CancelBookingRequest {
-                //            BookingId=14,
-                //            Comment = "310517!!!",
-                //            BookingStatus= BookingStatus.CANCELLED
-                //        },
-                //         new CancelBookingRequest {
-                //            Comment = "no id",
-                //            BookingStatus= BookingStatus.CANCELLED
-                //        },
-                //        new CancelBookingRequest {
-                //            BookingId=17,
-                //            Comment = "310517!!",
-                //            BookingStatus= BookingStatus.CANCELLED
-                //        }
-                //    },
                 //RequireTicketsRequests = new RequireTicketsRequest[3] {
 
                 //         new RequireTicketsRequest {
